@@ -1,2 +1,3 @@
-# ENVS543
-Classwork repository
+# ENVS 543
+
+My classwork repository for fall '24.
