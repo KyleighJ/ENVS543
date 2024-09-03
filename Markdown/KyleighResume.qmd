@@ -1,0 +1,27 @@
+---
+title: "KyleighResume"
+subtitle: Looking for work...
+format: html
+editor: visual
+date: 2024-09-03
+---
+
+## Kyleigh Johnson Resume
+
+*Education*
+
+-   Virginia Commonwealth University, M.S. Biology 2026
+
+-   Old Dominion University, B.S. Marine Biology 2024
+
+*Work Experience*
+
+-   Graduate Teaching Assistant
+
+-   Resident Assistant
+
+-   Lab/Field Technician
+
+-   Intern
+
+-   Administrative Assistant
