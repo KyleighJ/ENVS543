@@ -1,13 +1,31 @@
 ---
-title: "InterestinES"
+title: "Interests in Environmental Studies"
 format: revealjs
 editor: visual
+date: 2024-09-03
+author: Kyleigh Johnson
 ---
 
-## Kyleigh Johnson
+## Who am I?
 
--   I love environmental science woooo!
+- My name is Kyleigh and I am a master's student in the biology program
+- I went to ODU for my undergrad
+- I love environmental science woooo!!!
 
 ## Bivalves FTW
 
--   I worked with oysters in undergrad.
+- I worked with oysters in my undergrad summers
+- Now interested in ***all bivalves***
+- Fingers crossed I get to study freshwater mussels and nutrient cycling here at VCU
+
+## Broader Interests
+- Wetland/riverine ecology
+- Water quality
+- Climate change
+- Marine science
+
+## Pictures
+![Elephant](elephant.png)
+
+
+
