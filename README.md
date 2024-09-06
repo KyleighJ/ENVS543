@@ -6,5 +6,6 @@ New stuff in R
 
 
 
-/;lknj;knlknlknm
-making sure i know how to do this one more time
+Documents:
+
+ - [Lecture 4 Doc](https://kyleighj.github.io/ENVS543/Lecture4Doc.html)
