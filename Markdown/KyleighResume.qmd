@@ -1,5 +1,6 @@
 ---
-title: "KyleighResume"
+title: "Kyleigh's Abbreviated Resume"
+author: Kyleigh Johnson
 subtitle: Looking for work...
 format: html
 editor: visual
