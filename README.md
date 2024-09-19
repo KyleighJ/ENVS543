@@ -12,3 +12,4 @@ Documents in Repository:
  - [Resume](https://kyleighj.github.io/ENVS543/Markdown/KyleighResume.html)
  - [Presentation](https://kyleighj.github.io/ENVS543/Markdown/KyleighPresentation1.html)
  - [9/10 In Class Assignment](https://kyleighj.github.io/ENVS543/Markdown/in-class_data_types.html)
+ - [9/19 In Class Exercise on Tables](https://kyleighj.github.io/ENVS543/Markdown/in_class_9_19.html)
