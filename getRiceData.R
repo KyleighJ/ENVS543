@@ -1,6 +1,7 @@
 
 getRiceData <- function(){
   
+#load in libraries
   library(tidyverse)
   library(lubridate)
   
@@ -17,7 +18,7 @@ getRiceData <- function(){
                            label = TRUE,
                            abbr = FALSE ),
             Day = day( Date ))|>
-#converting F to C
+#converting to metric
     mutate( AirTempC = 1.8 * (AirTempF - 32) ) |>
     mutate( Depth_m = Depth_ft / 3.281) |>
     mutate( WindSpeed_kph = WindSpeed_mph * 1.609) |>
