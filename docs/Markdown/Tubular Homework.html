@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Kyleigh Johnson">
+
+<title>Lake Anna Water Data for Tabular Homework</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Tubular Homework_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Tubular Homework_files/libs/quarto-html/quarto.js"></script>
+<script src="Tubular Homework_files/libs/quarto-html/popper.min.js"></script>
+<script src="Tubular Homework_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Tubular Homework_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Tubular Homework_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Tubular Homework_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Tubular Homework_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Tubular Homework_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Tubular Homework_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="Tubular Homework_files/libs/kePrint-0.0.1/kePrint.js"></script>
+
+<link href="Tubular Homework_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lake Anna Water Data for Tabular Homework</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Kyleigh Johnson </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="abstract" class="level2">
+<h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
+<section id="a-summary-of-what-is-in-this-document." class="level5">
+<h5 class="anchored" data-anchor-id="a-summary-of-what-is-in-this-document.">A summary of what is in this document.</h5>
+<p>This is a short analysis of the average data taken from the Virginia Department of Environmental Quality regarding Lake Anna water quality data for sampled dates in the year 2023.</p>
+</section>
+</section>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<section id="a-summary-of-the-data-where-it-was-collected-from-and-what-kind-of-data-are-being-used." class="level5">
+<h5 class="anchored" data-anchor-id="a-summary-of-the-data-where-it-was-collected-from-and-what-kind-of-data-are-being-used.">A summary of the data, where it was collected from, and what kind of data are being used.</h5>
+<p>The data being showcased here includes data on water depth, water temperature, water clarity, dissolved oxygen, pH, and E. coli. The months included are April, June, August, and October. The data was collected from Lake Anna by the Lake Anna Civic Community. Overall, each variable fluctuated throughout the year.</p>
+</section>
+</section>
+<section id="methods" class="level2">
+<h2 class="anchored" data-anchor-id="methods">Methods</h2>
+<section id="a-short-overview-of-what-was-used-to-produce-the-summaries." class="level5">
+<h5 class="anchored" data-anchor-id="a-short-overview-of-what-was-used-to-produce-the-summaries.">A short overview of what was used to produce the summaries.</h5>
+<p>I created this table by first loading in the appropriate libraries. This includes <code>tidyverse</code>, <code>lubridate</code>, <code>knitr</code>, and <code>kableExtra</code>. Each has their own purpose for the data manipulation. I then pulled the data in as a csv file and extracted the names of each of the columns of the data. In order to make working with this data easier, I mutated the names to simpler versions and piped each command together. I then grouped the data by <code>Date</code> and extracted/summarized the mean of the specific variables I wanted to include. I made sure to remove any missing data from the table using the <code>na.rm = TRUE</code> function. After that, I created the table which shows the average of the different water parameters on the days that all six parameters were documented.</p>
+</section>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<section id="an-output-of-the-data-as-tabular-summaries-of-the-data." class="level5">
+<h5 class="anchored" data-anchor-id="an-output-of-the-data-as-tabular-summaries-of-the-data.">An output of the data as tabular summaries of the data.</h5>
+<p>Here is a tabular output of the water quality data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>echo <span class="ot">=</span> <span class="cn">FALSE</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( tidyverse )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( lubridate )</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( knitr )</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( kableExtra )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'kableExtra'
+
+The following object is masked from 'package:dplyr':
+
+    group_rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://docs.google.com/spreadsheets/d/e/2PACX-1vQPEnhZlFs5dr48nepSsJF4iC4v3Ty2-vmt6e35dl9UagzcoxtYqGTe2CenfoNMDUxw225BS832FyHX/pub?output=csv"</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>( url )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 501 Columns: 67
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (22): Date, StationName, StationCode, GroupCode, Bacteria (E.Coli) (ECO...
+dbl  (17): Latitude, Longitude, SampleId, SampleDepth, Bacteria (E.Coli) (EC...
+lgl  (26): Bacteria (E.Coli) (ECOLI.4) Problem, Dissolved oxygen (DO.2) Prob...
+dttm  (1): ModifiedDate
+time  (1): Time
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 501 × 67
+   Date      Time  StationName StationCode Latitude Longitude GroupCode SampleId
+   &lt;chr&gt;     &lt;tim&gt; &lt;chr&gt;       &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;
+ 1 04/03/20… 13:20 EX-11       LACA.EX-11      38.2     -77.9 LACA             1
+ 2 04/03/20… 13:20 EX-11       LACA.EX-11      38.2     -77.9 LACA             2
+ 3 04/03/20… 13:20 EX-11       LACA.EX-11      38.2     -77.9 LACA             2
+ 4 04/03/20… 13:20 EX-11       LACA.EX-11      38.2     -77.9 LACA             2
+ 5 04/03/20… 13:20 EX-11       LACA.EX-11      38.2     -77.9 LACA             2
+ 6 04/03/20… 14:15 EX-20       LACA.EX-20      38.2     -78.0 LACA             1
+ 7 04/03/20… 14:15 EX-20       LACA.EX-20      38.2     -78.0 LACA             2
+ 8 04/03/20… 14:45 EX-100      LACA.EX-100     38.2     -78.0 LACA             1
+ 9 04/03/20… 14:45 EX-100      LACA.EX-100     38.2     -78.0 LACA             2
+10 04/03/20… 15:15 EX-5        LACA.EX-5       38.1     -78.0 LACA             1
+# ℹ 491 more rows
+# ℹ 59 more variables: SampleDepth &lt;dbl&gt;, `Bacteria (E.Coli) (ECOLI.4)` &lt;dbl&gt;,
+#   `Bacteria (E.Coli) (ECOLI.4) Code` &lt;chr&gt;,
+#   `Bacteria (E.Coli) (ECOLI.4) Problem` &lt;lgl&gt;,
+#   `Bacteria (E.Coli) (ECOLI.4) Qualifier` &lt;chr&gt;,
+#   `Bacteria (E.Coli) (ECOLI.4) Tier` &lt;dbl&gt;,
+#   `Bacteria (E.Coli) (ECOLI.4) Units` &lt;chr&gt;, …</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>lakedata <span class="ot">&lt;-</span> <span class="fu">read_csv</span>( url )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 501 Columns: 67
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (22): Date, StationName, StationCode, GroupCode, Bacteria (E.Coli) (ECO...
+dbl  (17): Latitude, Longitude, SampleId, SampleDepth, Bacteria (E.Coli) (EC...
+lgl  (26): Bacteria (E.Coli) (ECOLI.4) Problem, Dissolved oxygen (DO.2) Prob...
+dttm  (1): ModifiedDate
+time  (1): Time
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>echo <span class="ot">=</span> <span class="cn">FALSE</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>( lakedata )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Date"                                     
+ [2] "Time"                                     
+ [3] "StationName"                              
+ [4] "StationCode"                              
+ [5] "Latitude"                                 
+ [6] "Longitude"                                
+ [7] "GroupCode"                                
+ [8] "SampleId"                                 
+ [9] "SampleDepth"                              
+[10] "Bacteria (E.Coli) (ECOLI.4)"              
+[11] "Bacteria (E.Coli) (ECOLI.4) Code"         
+[12] "Bacteria (E.Coli) (ECOLI.4) Problem"      
+[13] "Bacteria (E.Coli) (ECOLI.4) Qualifier"    
+[14] "Bacteria (E.Coli) (ECOLI.4) Tier"         
+[15] "Bacteria (E.Coli) (ECOLI.4) Units"        
+[16] "Dissolved oxygen (DO.2)"                  
+[17] "Dissolved oxygen (DO.2) Code"             
+[18] "Dissolved oxygen (DO.2) Problem"          
+[19] "Dissolved oxygen (DO.2) Qualifier"        
+[20] "Dissolved oxygen (DO.2) Tier"             
+[21] "Dissolved oxygen (DO.2) Units"            
+[22] "pH (PH.4)"                                
+[23] "pH (PH.4) Code"                           
+[24] "pH (PH.4) Problem"                        
+[25] "pH (PH.4) Qualifier"                      
+[26] "pH (PH.4) Tier"                           
+[27] "pH (PH.4) Units"                          
+[28] "Total Depth (TD.1)"                       
+[29] "Total Depth (TD.1) Code"                  
+[30] "Total Depth (TD.1) Problem"               
+[31] "Total Depth (TD.1) Qualifier"             
+[32] "Total Depth (TD.1) Tier"                  
+[33] "Total Depth (TD.1) Units"                 
+[34] "Water Clarity (WC.1)"                     
+[35] "Water Clarity (WC.1) Code"                
+[36] "Water Clarity (WC.1) Problem"             
+[37] "Water Clarity (WC.1) Qualifier"           
+[38] "Water Clarity (WC.1) Tier"                
+[39] "Water Clarity (WC.1) Units"               
+[40] "Water temperature (WT.3)"                 
+[41] "Water temperature (WT.3) Code"            
+[42] "Water temperature (WT.3) Problem"         
+[43] "Water temperature (WT.3) Qualifier"       
+[44] "Water temperature (WT.3) Tier"            
+[45] "Water temperature (WT.3) Units"           
+[46] "Cloud Cover"                              
+[47] "Other Comments"                           
+[48] "Other Conditions"                         
+[49] "Rainfall Within 24 Hours"                 
+[50] "Rainfall Within 48 Hours"                 
+[51] "Rainfall Within Last 48 Hours Description"
+[52] "Rainfall"                                 
+[53] "Sea State"                                
+[54] "Stream Flow"                              
+[55] "Tidal Stage"                              
+[56] "Water Color Description"                  
+[57] "Water Color"                              
+[58] "Water Odor Description"                   
+[59] "Water Odor"                               
+[60] "Water Surfaces"                           
+[61] "Weather Conditions Day Before Yesterday"  
+[62] "Weather Conditions Today"                 
+[63] "Weather Conditions Yesterday"             
+[64] "Wind Direction"                           
+[65] "Wind Speed"                               
+[66] "ModifiedDate"                             
+[67] "Comments"                                 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>echo <span class="ot">=</span> <span class="cn">FALSE</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>lakedata<span class="sc">|&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">Date =</span> <span class="st">`</span><span class="at">Date</span><span class="st">`</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">Total_Depth =</span> <span class="st">`</span><span class="at">Total Depth (TD.1)</span><span class="st">`</span> ) <span class="sc">|&gt;</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">Water_Temp =</span> <span class="st">`</span><span class="at">Water temperature (WT.3)</span><span class="st">`</span> ) <span class="sc">|&gt;</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">Water_Clar =</span> <span class="st">`</span><span class="at">Water Clarity (WC.1)</span><span class="st">`</span> ) <span class="sc">|&gt;</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">DO =</span> <span class="st">`</span><span class="at">Dissolved oxygen (DO.2)</span><span class="st">`</span> ) <span class="sc">|&gt;</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">pH =</span> <span class="st">`</span><span class="at">pH (PH.4)</span><span class="st">`</span> ) <span class="sc">|&gt;</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">ecoli =</span> <span class="st">`</span><span class="at">Bacteria (E.Coli) (ECOLI.4)</span><span class="st">`</span> ) <span class="sc">|&gt;</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>( Date ) <span class="sc">|&gt;</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>( <span class="st">`</span><span class="at">Depth (m)</span><span class="st">`</span><span class="ot">=</span> <span class="fu">mean</span>( Total_Depth, <span class="at">na.rm =</span> <span class="cn">TRUE</span> ),</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>             <span class="st">`</span><span class="at">Water Temp (C)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">mean</span>( Water_Temp, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>             <span class="st">`</span><span class="at">pH (SU)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">mean</span>( pH, <span class="at">na.rm =</span> <span class="cn">TRUE</span> ),</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>             <span class="st">`</span><span class="at">Water Clarity (m)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">mean</span>( Water_Clar, <span class="at">na.rm =</span> <span class="cn">TRUE</span> ),</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>             <span class="st">`</span><span class="at">Dissolved Oxygen (mg/L)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">mean</span>( DO, <span class="at">na.rm =</span> <span class="cn">TRUE</span> ),</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>             <span class="st">`</span><span class="at">E.coli (MPN)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">mean</span>( ecoli,<span class="at">na.rm =</span> <span class="cn">TRUE</span> )</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>             )<span class="sc">|&gt;</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()<span class="sc">|&gt;</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_paper</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="lightable-paper caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Date</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Depth (m)</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Water Temp (C)</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">pH (SU)</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Water Clarity (m)</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Dissolved Oxygen (mg/L)</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">E.coli (MPN)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">04/03/2023</td>
+<td style="text-align: right;">0.930000</td>
+<td style="text-align: right;">13.62500</td>
+<td style="text-align: right;">7.501250</td>
+<td style="text-align: right;">0.480000</td>
+<td style="text-align: right;">10.471250</td>
+<td style="text-align: right;">45.10000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">04/04/2023</td>
+<td style="text-align: right;">6.442000</td>
+<td style="text-align: right;">14.85471</td>
+<td style="text-align: right;">7.036260</td>
+<td style="text-align: right;">1.692000</td>
+<td style="text-align: right;">9.598260</td>
+<td style="text-align: right;">6.64000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">06/06/2023</td>
+<td style="text-align: right;">5.538064</td>
+<td style="text-align: right;">24.66866</td>
+<td style="text-align: right;">7.549242</td>
+<td style="text-align: right;">1.283871</td>
+<td style="text-align: right;">8.337091</td>
+<td style="text-align: right;">43.83871</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">08/15/2023</td>
+<td style="text-align: right;">3.575484</td>
+<td style="text-align: right;">30.19690</td>
+<td style="text-align: right;">7.522691</td>
+<td style="text-align: right;">1.280645</td>
+<td style="text-align: right;">6.973557</td>
+<td style="text-align: right;">61.96774</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">10/10/2023</td>
+<td style="text-align: right;">3.812387</td>
+<td style="text-align: right;">20.78639</td>
+<td style="text-align: right;">5.112268</td>
+<td style="text-align: right;">1.234839</td>
+<td style="text-align: right;">7.463608</td>
+<td style="text-align: right;">36.66129</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

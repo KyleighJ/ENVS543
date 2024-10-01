@@ -1,0 +1,78 @@
+---
+title: "Lake Anna 2023 Water Data"
+format: 
+  html:
+    echo: false
+    warning: false
+    message: false
+    error: false
+author: Kyleigh Johnson
+date: 10/1/24
+editor: visual
+---
+
+## Abstract
+
+##### A summary of what is in this document.
+
+This is a short analysis of the average data taken from the Virginia Department of Environmental Quality regarding Lake Anna water quality data for sampled dates in the year 2023.
+
+## Introduction
+
+##### A summary of the data, where it was collected from, and what kind of data is being used.
+
+The data being showcased here includes data on **water depth, water temperature, water clarity, dissolved oxygen, pH, and E. coli**. The months included are April, June, August, and October. The data was collected from Lake Anna by the Lake Anna Civic Community. Overall, each variable fluctuated throughout the year.
+
+## Methods
+
+##### A short overview of what was used to produce the summaries.
+
+I created this table by first loading in the appropriate libraries. This includes `tidyverse`, `lubridate`, `knitr`, and `kableExtra`. Each has their own purpose for the data manipulation. I then pulled the data in as a csv file that has been published to the web in Google Sheets and extracted the names of each of the columns of the data. In order to make working with this data easier, I mutated the names to simpler versions and piped each command together. I then grouped the data by `Date` and extracted/summarized the mean of the specific variables I wanted to include. I made sure to remove any missing data from the table using the `na.rm = TRUE` function. After that, I created the table which shows the average of the different water parameters on the days that all six parameters were documented.
+
+## Results
+
+##### An output of the data as tabular summaries of the data.
+
+Here is a tabular output of the water quality data.
+
+```{r}
+
+library( tidyverse )
+library( lubridate )
+library( knitr )
+library( kableExtra )
+
+url <- "https://docs.google.com/spreadsheets/d/e/2PACX-1vQPEnhZlFs5dr48nepSsJF4iC4v3Ty2-vmt6e35dl9UagzcoxtYqGTe2CenfoNMDUxw225BS832FyHX/pub?output=csv"
+
+read_csv( url )
+
+lakedata <- read_csv( url )
+
+suppressMessages( library( tidyverse ))
+
+```
+
+
+```{r}
+suppressPackageStartupMessages( library( tidyverse ))
+
+lakedata|>
+  mutate( Date = `Date`) |>
+  mutate( Total_Depth = `Total Depth (TD.1)` ) |>
+  mutate( Water_Temp = `Water temperature (WT.3)` ) |>
+  mutate( Water_Clar = `Water Clarity (WC.1)` ) |>
+  mutate( DO = `Dissolved oxygen (DO.2)` ) |>
+  mutate( pH = `pH (PH.4)` ) |>
+  mutate( ecoli = `Bacteria (E.Coli) (ECOLI.4)` ) |>
+  group_by( Date ) |>
+  summarize( `Depth (m)`= mean( Total_Depth, na.rm = TRUE ),
+             `Water Temp (C)` = mean( Water_Temp, na.rm = TRUE),
+             `pH (SU)` = mean( pH, na.rm = TRUE ),
+             `Water Clarity (m)` = mean( Water_Clar, na.rm = TRUE ),
+             `Dissolved Oxygen (mg/L)` = mean( DO, na.rm = TRUE ),
+             `E.coli (MPN)` = mean( ecoli,na.rm = TRUE )
+             )|>
+  kable()|>
+  kable_paper()
+```
+
