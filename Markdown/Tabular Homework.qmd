@@ -36,7 +36,9 @@ I created this table by first loading in the appropriate libraries. This include
 Here is a tabular output of the water quality data.
 
 ```{r}
-
+#| message: false
+#| warning: false 
+#| 
 library( tidyverse )
 library( lubridate )
 library( knitr )
@@ -44,11 +46,9 @@ library( kableExtra )
 
 url <- "https://docs.google.com/spreadsheets/d/e/2PACX-1vQPEnhZlFs5dr48nepSsJF4iC4v3Ty2-vmt6e35dl9UagzcoxtYqGTe2CenfoNMDUxw225BS832FyHX/pub?output=csv"
 
-read_csv( url )
 
 lakedata <- read_csv( url )
 
-suppressMessages( library( tidyverse ))
 
 ```
 
