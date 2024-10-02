@@ -52,7 +52,6 @@ lakedata <- read_csv( url )
 
 ```
 
-
 ```{r}
 suppressPackageStartupMessages( library( tidyverse ))
 
@@ -75,4 +74,3 @@ lakedata|>
   kable()|>
   kable_paper()
 ```
-
