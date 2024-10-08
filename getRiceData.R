@@ -22,9 +22,10 @@ getRiceData <- function(){
     mutate( AirTempC = 1.8 * (AirTempF - 32) ) |>
     mutate( Depth_m = Depth_ft / 3.281) |>
     mutate( WindSpeed_kph = WindSpeed_mph * 1.609) |>
+    mutate( Rain_cm = Rain_in * 2.54) |>
     select( Date, Month, Day, Weekday, 
             H2O_TempC, ODO_sat, Depth_m, Turbidity_ntu, PH, Salinity_ppt,
-            AirTempC, Rain_in, WindSpeed_kph, WindDir ) -> RICE
+            AirTempC, Rain_cm, WindSpeed_kph, WindDir ) -> RICE
 
   return(RICE)
 }
