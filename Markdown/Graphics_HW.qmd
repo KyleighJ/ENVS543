@@ -1,0 +1,34 @@
+---
+title: "Graphics_HW"
+format: html
+editor: visual
+---
+
+```{r}
+source("getRiceData.R")
+
+rice <- getRiceData()
+```
+```{r}
+names(rice)
+```
+```{r}
+
+rice |>
+  filter( Month == "January") |>
+  group_by( Weekday ) |>
+  summarize( Rain_cm = sum( Rain_cm ) ) -> df
+
+barplot( df$Rain_cm,
+         names.arg = df$Weekday, ylab = "Rain (cm)", xlab = "Weekday", cex.names = 0.7, main = "Rain on Weekdays")
+
+```
+```{r}
+library( ggplot2 )
+
+ggplot( rice, aes( x = Weekday, Rain_cm) ) + 
+  geom_col() +
+  labs( title = "Rain on Weekdays")
+
+```
+
