@@ -20,15 +20,123 @@ rice |>
   summarize( Rain_cm = sum( Rain_cm ) ) -> df
 
 barplot( df$Rain_cm,
-         names.arg = df$Weekday, ylab = "Rain (cm)", xlab = "Weekday", cex.names = 0.7, main = "Rain on Weekdays")
+         names.arg = df$Weekday,
+         ylab = "Rain (cm)",
+         xlab = "Weekday",
+         cex.names = 0.7,
+         main = "Rain on Weekdays in January")
 
 ```
 ```{r}
 library( ggplot2 )
 
+rice |>
+  filter( Month == "January") |>
+  group_by( Weekday ) |>
+  summarize( Rain_cm = sum( Rain_cm ) )
+
 ggplot( rice, aes( x = Weekday, Rain_cm) ) + 
   geom_col() +
-  labs( title = "Rain on Weekdays")
+  labs( title = "Rain on Weekdays in January")
 
 ```
+
+```{r}
+
+rice |>
+  filter( Month == "February") |>
+  group_by( Weekday ) |>
+  summarize( temps = mean( AirTempC ) ) -> df
+
+barplot( df$temps,
+      names.arg = df$Weekday,
+      ylab = "Air Temp (C)",
+      xlab = "Weekday",
+      cex.names = 0.7,
+      main = "Average Air Temp on Weekdays in February")
+
+```
+
+```{r}
+++++++++++++++++++++++++++++++++++++++++++++
+rice |>
+  filter( Month == "February") |>
+  group_by( Weekday ) |>
+  summarize( temps = mean( AirTempC ) )
+
+ggplot( df, aes( x = Weekday, y = temps) ) + 
+  geom_col() +
+  labs( title = "Average Air Temp on Weekdays in February")
+
+```
+
+```{r}
+rice |>
+  filter( Month == "February",
+          Day == "14") |>
+  group_by( Date, Weekday ) |>
+  summarize( depth = ( Depth_m ) )  -> df
+
+plot( df$depth,
+      type = "l",
+      ylab = "Depth",
+      xlab = "Time",
+      main = "Water Depth on Valentine's Day")
+
+```
+
+```{r}
+rice |>
+  filter( Month == "February",
+          Day == "14") |>
+  group_by( Date, Weekday ) |>
+  summarize( depth = ( Depth_m ) )  -> df
+
+ggplot( df, aes( x = Date, y = depth) ) + 
+  geom_line(color = "blue", size = 1.2) +         
+  labs(title = "Water Depth on Valentine's Day",    
+       x = "Time",                                
+       y = "Depth (m)") +                        
+  theme_minimal()   
+```
+
+```{r}
+rice |>
+  group_by( Date ) |>
+  summarize( temp = median( AirTempC, na.rm = TRUE ),
+             rain = sum( Rain_cm, na.rm = TRUE )) -> df
+
+centroids <- df |>
+  group_by( Month ) |>
+  summarize( 
+    mean_rain = mean( temp ),
+    mean_temp = mean( rain )
+    )
+
+plot(df$temp, df$rain, 
+     main = "Temp vs Rainfall",
+     xlab = "Median Air Temp (C)",
+     ylab = "Total Rainfall (cm)",
+     pch = 19,
+     frame = FALSE,
+     ylim = c( 0, max( df$rain ) * 1.5))
+
+points( centroids$mean_temp, centroids$mean_rain )
+```
+
+```{r}
+rice |>
+  group_by( Date ) |>
+  summarize( temp = median( AirTempC, na.rm = TRUE ),
+             rain = sum( Rain_cm, na.rm = TRUE )) -> df
+
+ggplot( df, aes( x = temp, y = rain)) +
+  geom_point() +
+  labs( title = "Temp vs Rainfall",
+        x = "Median Air Temp (C)",
+        y = "Total Rainfall (cm) ))
+
+
+```
+
 

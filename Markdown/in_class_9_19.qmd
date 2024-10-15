@@ -17,9 +17,11 @@ read_csv(url)
 rice <- read_csv(url)
 
 ```
+
 ```{r}
 names(rice)
 ```
+
 ```{r}
 rice |>
   mutate( H2O_Temp = 1.8 * H2O_TempC + 32 ) |>
@@ -40,4 +42,3 @@ rice |>
 
 
 ```
-
