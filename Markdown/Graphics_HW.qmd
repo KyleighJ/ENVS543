@@ -2,16 +2,21 @@
 title: "Graphics_HW"
 format: html
 editor: visual
+author: Kyleigh Johnson
+date: 10/15/24
 ---
+This is a quick demonstration of data manipulation and the creation of different graphs and charts using basic R plots and the ggplot2 package.
+
+# Load in Data
 
 ```{r}
-source("getRiceData.R")
+source( "GetRiceData.R" )
 
 rice <- getRiceData()
 ```
-```{r}
-names(rice)
-```
+
+# Create a Bar Graph for Rain on Weekdays in January Using Basic Plots
+
 ```{r}
 
 rice |>
@@ -27,6 +32,9 @@ barplot( df$Rain_cm,
          main = "Rain on Weekdays in January")
 
 ```
+
+# Create a Bar Graph for Rain on Weekdays in January Using ggplot2
+
 ```{r}
 library( ggplot2 )
 
@@ -37,9 +45,12 @@ rice |>
 
 ggplot( rice, aes( x = Weekday, Rain_cm) ) + 
   geom_col() +
-  labs( title = "Rain on Weekdays in January")
+  labs( title = "Rain on Weekdays in January") +
+  theme(plot.title = element_text(hjust = 0.5))
 
 ```
+
+# Create a Bar Graph for Temp on Weekdays in February Using Basic Plots
 
 ```{r}
 
@@ -57,8 +68,9 @@ barplot( df$temps,
 
 ```
 
+# Create a Bar Graph for Temp on Weekdays in February Using ggplot2
+
 ```{r}
-++++++++++++++++++++++++++++++++++++++++++++
 rice |>
   filter( Month == "February") |>
   group_by( Weekday ) |>
@@ -66,39 +78,48 @@ rice |>
 
 ggplot( df, aes( x = Weekday, y = temps) ) + 
   geom_col() +
-  labs( title = "Average Air Temp on Weekdays in February")
+  labs( title = "Average Air Temp on Weekdays in February") +
+  theme(plot.title = element_text(hjust = 0.5))
 
 ```
+
+# Create a Line Graph for Water Depth on Valentine's Day Using Basic Plots
 
 ```{r}
 rice |>
   filter( Month == "February",
           Day == "14") |>
-  group_by( Date, Weekday ) |>
-  summarize( depth = ( Depth_m ) )  -> df
+  group_by( Date ) |>
+  summarize( depth = mean( Depth_m ),
+             date = Date )  -> df
 
-plot( df$depth,
+plot( df$date, df$depth,
       type = "l",
-      ylab = "Depth",
+      ylab = "Depth (m)",
       xlab = "Time",
       main = "Water Depth on Valentine's Day")
 
 ```
 
+# Create a Line Graph for Water Depth on Valentine's Day Using ggplot2
+
 ```{r}
 rice |>
   filter( Month == "February",
           Day == "14") |>
-  group_by( Date, Weekday ) |>
-  summarize( depth = ( Depth_m ) )  -> df
+  group_by( Date ) |>
+  summarize( depth = mean( Depth_m ) )  -> df
 
 ggplot( df, aes( x = Date, y = depth) ) + 
-  geom_line(color = "blue", size = 1.2) +         
+  geom_line(color = "blue", linewidth = 1.2) +         
   labs(title = "Water Depth on Valentine's Day",    
        x = "Time",                                
        y = "Depth (m)") +                        
-  theme_minimal()   
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
 ```
+
+# Create a Scatter Plot for Air Temp vs Rainfall Using Basic Plots
 
 ```{r}
 rice |>
@@ -106,23 +127,26 @@ rice |>
   summarize( temp = median( AirTempC, na.rm = TRUE ),
              rain = sum( Rain_cm, na.rm = TRUE )) -> df
 
-centroids <- df |>
-  group_by( Month ) |>
-  summarize( 
-    mean_rain = mean( temp ),
-    mean_temp = mean( rain )
-    )
+df |>
+  group_by(Month = lubridate::month(Date, label = TRUE)) |>
+  summarize(mean_temp = mean(temp, na.rm = TRUE),
+            mean_rain = mean(rain, na.rm = TRUE)) -> centroids
 
 plot(df$temp, df$rain, 
-     main = "Temp vs Rainfall",
+     main = "Median Temp vs Total Rainfall",
      xlab = "Median Air Temp (C)",
      ylab = "Total Rainfall (cm)",
      pch = 19,
      frame = FALSE,
      ylim = c( 0, max( df$rain ) * 1.5))
 
-points( centroids$mean_temp, centroids$mean_rain )
+points(centroids$mean_temp, centroids$mean_rain, 
+       col = "red",                 
+       pch = 17,                   
+       cex = 1)
 ```
+
+# Create a Scatter Plot for Air Temp vs Rainfall Using ggplot2
 
 ```{r}
 rice |>
@@ -130,13 +154,71 @@ rice |>
   summarize( temp = median( AirTempC, na.rm = TRUE ),
              rain = sum( Rain_cm, na.rm = TRUE )) -> df
 
+df |>
+  group_by(Month = lubridate::month(Date, label = TRUE)) |>
+  summarize(mean_temp = mean(temp, na.rm = TRUE),
+            mean_rain = mean(rain, na.rm = TRUE)) -> centroids
+
 ggplot( df, aes( x = temp, y = rain)) +
   geom_point() +
-  labs( title = "Temp vs Rainfall",
+  geom_point( data = centroids, aes(x = mean_temp, y = mean_rain),
+              color = "red", size = 2, shape = 16) +
+  labs( title = "Median Temp vs Total Rainfall",
         x = "Median Air Temp (C)",
-        y = "Total Rainfall (cm) ))
+        y = "Total Rainfall (cm)") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
 
 
 ```
 
+# Create a Pie Chart for Wind Direction (Week of Jan 8) Using Basic Plots
 
+```{r}
+
+rice |>
+   filter(month( Date ) == 1 & day( Date ) >= 7 & day( Date ) <= 13 ) |>
+  group_by(Date) |>
+  summarize(wind_direction = mean(WindDir, na.rm = TRUE)) -> df
+  
+breaks <- seq(0, 360, by = 45)  
+df$wind_direction_category <- cut(df$wind_direction, breaks = breaks, right = FALSE)
+
+category_counts <- table(df$wind_direction_category)
+
+
+pie(category_counts, 
+    main = "Wind Direction Distribution During the Week of January 8th",
+    col = rainbow(length(category_counts)),
+    labels = paste0(names(category_counts), ": ", category_counts))
+
+
+```
+
+# Create a Pie Chart for Wind Direction (Week of Jan 8) Using ggplot2
+
+```{r}
+
+rice |>
+   filter(month( Date ) == 1 & day( Date ) >= 7 & day( Date ) <= 13 ) |>
+  group_by(Date) |>
+  summarize(wind_direction = mean(WindDir, na.rm = TRUE)) -> df
+  
+breaks <- seq(0, 360, by = 45)  
+df$wind_direction_category <- cut(df$wind_direction, breaks = breaks, right = FALSE)
+
+category_counts <- df |>
+  group_by(wind_direction_category) |>
+  summarize(count = n())
+
+ggplot(category_counts, aes(x = "", y = count, fill = wind_direction_category)) +
+  geom_bar(stat = "identity", width = 1) +  
+  coord_polar("y") + 
+  labs(title = "Wind Direction Distribution During the Week of January 8th",
+       fill = "Wind Direction (Degrees)") +  
+  theme_minimal()
+  scale_fill_brewer(palette = "Set2")  
+
+
+
+```
