@@ -1,5 +1,5 @@
 ---
-title: "Graphics_HW"
+title: "Graphics Homework ENVS 543"
 format: html
 editor: visual
 author: Kyleigh Johnson
