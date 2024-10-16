@@ -217,7 +217,6 @@ ggplot(category_counts, aes(x = "", y = count, fill = wind_direction_category)) 
   labs(title = "Wind Direction Distribution During the Week of January 8th",
        fill = "Wind Direction (Degrees)") +  
   theme_minimal()
-  scale_fill_brewer(palette = "Set2")  
 
 
 
