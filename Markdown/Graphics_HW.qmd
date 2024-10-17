@@ -5,6 +5,7 @@ editor: visual
 author: Kyleigh Johnson
 date: 10/15/24
 ---
+
 This is a quick demonstration of data manipulation and the creation of different graphs and charts using basic R plots and the ggplot2 package.
 
 # Load in Data
@@ -29,7 +30,7 @@ barplot( df$Rain_cm,
          ylab = "Rain (cm)",
          xlab = "Weekday",
          cex.names = 0.7,
-         main = "Rain on Weekdays in January")
+         main = "Rain on Weekdays in January" )
 
 ```
 
@@ -39,14 +40,14 @@ barplot( df$Rain_cm,
 library( ggplot2 )
 
 rice |>
-  filter( Month == "January") |>
+  filter( Month == "January" ) |>
   group_by( Weekday ) |>
   summarize( Rain_cm = sum( Rain_cm ) )
 
 ggplot( rice, aes( x = Weekday, Rain_cm) ) + 
   geom_col() +
-  labs( title = "Rain on Weekdays in January") +
-  theme(plot.title = element_text(hjust = 0.5))
+  labs( title = "Rain on Weekdays in January" ) +
+  theme( plot.title = element_text(hjust = 0.5 ) )
 
 ```
 
@@ -55,7 +56,7 @@ ggplot( rice, aes( x = Weekday, Rain_cm) ) +
 ```{r}
 
 rice |>
-  filter( Month == "February") |>
+  filter( Month == "February" ) |>
   group_by( Weekday ) |>
   summarize( temps = mean( AirTempC ) ) -> df
 
@@ -64,7 +65,7 @@ barplot( df$temps,
       ylab = "Air Temp (C)",
       xlab = "Weekday",
       cex.names = 0.7,
-      main = "Average Air Temp on Weekdays in February")
+      main = "Average Air Temp on Weekdays in February" )
 
 ```
 
@@ -72,14 +73,14 @@ barplot( df$temps,
 
 ```{r}
 rice |>
-  filter( Month == "February") |>
+  filter( Month == "February" ) |>
   group_by( Weekday ) |>
   summarize( temps = mean( AirTempC ) )
 
 ggplot( df, aes( x = Weekday, y = temps) ) + 
   geom_col() +
-  labs( title = "Average Air Temp on Weekdays in February") +
-  theme(plot.title = element_text(hjust = 0.5))
+  labs( title = "Average Air Temp on Weekdays in February" ) +
+  theme( plot.title = element_text( hjust = 0.5 ) )
 
 ```
 
@@ -97,7 +98,7 @@ plot( df$date, df$depth,
       type = "l",
       ylab = "Depth (m)",
       xlab = "Time",
-      main = "Water Depth on Valentine's Day")
+      main = "Water Depth on Valentine's Day" )
 
 ```
 
@@ -106,17 +107,17 @@ plot( df$date, df$depth,
 ```{r}
 rice |>
   filter( Month == "February",
-          Day == "14") |>
+          Day == "14" ) |>
   group_by( Date ) |>
   summarize( depth = mean( Depth_m ) )  -> df
 
 ggplot( df, aes( x = Date, y = depth) ) + 
-  geom_line(color = "blue", linewidth = 1.2) +         
+  geom_line( color = "blue", linewidth = 1.2 ) +         
   labs(title = "Water Depth on Valentine's Day",    
        x = "Time",                                
-       y = "Depth (m)") +                        
+       y = "Depth (m)" ) +                        
   theme_minimal() +
-  theme(plot.title = element_text(hjust = 0.5))
+  theme( plot.title = element_text( hjust = 0.5 ) )
 ```
 
 # Create a Scatter Plot for Air Temp vs Rainfall Using Basic Plots
@@ -128,22 +129,22 @@ rice |>
              rain = sum( Rain_cm, na.rm = TRUE )) -> df
 
 df |>
-  group_by(Month = lubridate::month(Date, label = TRUE)) |>
-  summarize(mean_temp = mean(temp, na.rm = TRUE),
-            mean_rain = mean(rain, na.rm = TRUE)) -> centroids
+  group_by( Month = lubridate::month( Date, label = TRUE ) ) |>
+  summarize( mean_temp = mean( temp, na.rm = TRUE ),
+            mean_rain = mean( rain, na.rm = TRUE ) ) -> centroids
 
-plot(df$temp, df$rain, 
+plot( df$temp, df$rain, 
      main = "Median Temp vs Total Rainfall",
      xlab = "Median Air Temp (C)",
      ylab = "Total Rainfall (cm)",
      pch = 19,
      frame = FALSE,
-     ylim = c( 0, max( df$rain ) * 1.5))
+     ylim = c( 0, max( df$rain ) * 1.5 ) )
 
-points(centroids$mean_temp, centroids$mean_rain, 
+points( centroids$mean_temp, centroids$mean_rain, 
        col = "red",                 
        pch = 17,                   
-       cex = 1)
+       cex = 1 )
 ```
 
 # Create a Scatter Plot for Air Temp vs Rainfall Using ggplot2
@@ -152,22 +153,22 @@ points(centroids$mean_temp, centroids$mean_rain,
 rice |>
   group_by( Date ) |>
   summarize( temp = median( AirTempC, na.rm = TRUE ),
-             rain = sum( Rain_cm, na.rm = TRUE )) -> df
+             rain = sum( Rain_cm, na.rm = TRUE ) ) -> df
 
 df |>
-  group_by(Month = lubridate::month(Date, label = TRUE)) |>
-  summarize(mean_temp = mean(temp, na.rm = TRUE),
-            mean_rain = mean(rain, na.rm = TRUE)) -> centroids
+  group_by( Month = lubridate::month(Date, label = TRUE ) ) |>
+  summarize(mean_temp = mean( temp, na.rm = TRUE ),
+            mean_rain = mean( rain, na.rm = TRUE ) ) -> centroids
 
-ggplot( df, aes( x = temp, y = rain)) +
+ggplot( df, aes( x = temp, y = rain ) ) +
   geom_point() +
-  geom_point( data = centroids, aes(x = mean_temp, y = mean_rain),
-              color = "red", size = 2, shape = 16) +
+  geom_point( data = centroids, aes( x = mean_temp, y = mean_rain ),
+              color = "red", size = 2, shape = 16 ) +
   labs( title = "Median Temp vs Total Rainfall",
         x = "Median Air Temp (C)",
         y = "Total Rainfall (cm)") +
   theme_minimal() +
-  theme(plot.title = element_text(hjust = 0.5))
+  theme( plot.title = element_text( hjust = 0.5 ) )
 
 
 ```
@@ -177,20 +178,20 @@ ggplot( df, aes( x = temp, y = rain)) +
 ```{r}
 
 rice |>
-   filter(month( Date ) == 1 & day( Date ) >= 7 & day( Date ) <= 13 ) |>
-  group_by(Date) |>
-  summarize(wind_direction = mean(WindDir, na.rm = TRUE)) -> df
+   filter( month( Date ) == 1 & day( Date ) >= 7 & day( Date ) <= 13 ) |>
+  group_by( Date ) |>
+  summarize( wind_direction = mean(WindDir, na.rm = TRUE ) ) -> df
   
-breaks <- seq(0, 360, by = 45)  
-df$wind_direction_category <- cut(df$wind_direction, breaks = breaks, right = FALSE)
+breaks <- seq( 0, 360, by = 45 )  
+df$wind_direction_category <- cut( df$wind_direction, breaks = breaks, right = FALSE )
 
-category_counts <- table(df$wind_direction_category)
+category_counts <- table( df$wind_direction_category )
 
 
-pie(category_counts, 
+pie( category_counts, 
     main = "Wind Direction Distribution During the Week of January 8th",
-    col = rainbow(length(category_counts)),
-    labels = paste0(names(category_counts), ": ", category_counts))
+    col = rainbow( length(category_counts ) ),
+    labels = paste0( names( category_counts ), ": ", category_counts ) )
 
 
 ```
@@ -200,22 +201,22 @@ pie(category_counts,
 ```{r}
 
 rice |>
-   filter(month( Date ) == 1 & day( Date ) >= 7 & day( Date ) <= 13 ) |>
-  group_by(Date) |>
-  summarize(wind_direction = mean(WindDir, na.rm = TRUE)) -> df
+   filter( month( Date ) == 1 & day( Date ) >= 7 & day( Date ) <= 13 ) |>
+  group_by( Date ) |>
+  summarize( wind_direction = mean(WindDir, na.rm = TRUE ) ) -> df
   
-breaks <- seq(0, 360, by = 45)  
-df$wind_direction_category <- cut(df$wind_direction, breaks = breaks, right = FALSE)
+breaks <- seq( 0, 360, by = 45 )  
+df$wind_direction_category <- cut( df$wind_direction, breaks = breaks, right = FALSE )
 
 category_counts <- df |>
-  group_by(wind_direction_category) |>
-  summarize(count = n())
+  group_by( wind_direction_category ) |>
+  summarize( count = n() )
 
-ggplot(category_counts, aes(x = "", y = count, fill = wind_direction_category)) +
-  geom_bar(stat = "identity", width = 1) +  
-  coord_polar("y") + 
-  labs(title = "Wind Direction Distribution During the Week of January 8th",
-       fill = "Wind Direction (Degrees)") +  
+ggplot( category_counts, aes(x = "", y = count, fill = wind_direction_category ) ) +
+  geom_bar( stat = "identity", width = 1 ) +  
+  coord_polar( "y" ) + 
+  labs( title = "Wind Direction Distribution During the Week of January 8th",
+       fill = "Wind Direction (Degrees)" ) +  
   theme_minimal()
 
 

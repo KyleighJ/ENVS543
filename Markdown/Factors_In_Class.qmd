@@ -1,0 +1,14 @@
+---
+title: "Factors"
+format: html
+editor: visual
+---
+
+```{r}
+source( "GetRiceData.R" )
+
+library( forcats )
+
+
+```
+
