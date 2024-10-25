@@ -101,7 +101,7 @@ ggplot(data, aes( x = Suitability, y = MFRatio ) ) +
   labs( title = "Correlation of Habitat Suitability and Sex Ratio",
         x = "Habitat Suitability",
         y = "Sex Ratio M/F" ) +
-  theme_minimal()
+  theme_minimal() +
   theme( plot.title = element_text( hjust = 0.5 ) )
 
 ```
