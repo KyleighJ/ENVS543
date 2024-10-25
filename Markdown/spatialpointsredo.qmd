@@ -1,0 +1,45 @@
+---
+title: "Spatial Points In Class"
+format: html
+editor: visual
+---
+
+<center>
+
+![*Araptus attenuatus* the enigmatic Sonoran Desert Bark Beetle.](https://live.staticflickr.com/65535/50441339417_74e04216fa_w_d.jpg)
+
+</center>
+
+This homework is a bit quick but is designed to make sure that:
+
+1.  To make sure everyone can get their computer up-to-date with the proper set of libraries so that we can work with geospatial data, and
+2.  Give you some practice turning normal numerical data into geospatial coordinates and performing basic operations.
+
+## Spatial Libraries
+
+The following code defines the set of necessary libraries for the next few weeks and then figures out which (potential) subset you need to install. It then installs them all in one call. It will not load them into your session, you'll have to do that later in your code chunks.
+
+```{r}
+library( tidyverse )
+```
+
+
+## The Data - Preprocessing
+
+The data for this is some site-level data from the Sonoran Desert bark beetle. The URL is in the next chunk, and is currently being hosted on my class [Github repository](https://github.com/dyerlab/ENVS-Lectures). Load it in.
+```{r}
+
+url <- "https://raw.githubusercontent.com/dyerlab/ENVS-Lectures/master/data/Araptus_Disperal_Bias.csv"
+
+read_csv( url ) %>%
+  select( Site, Longitude, Latitude, everything() ) %>%
+  arrange( Latitude ) -> data 
+
+```
+
+### Interactive Map
+
+Use the `leaflet` library and make an interactive map. If you can, add a label to each marker with the ID of the site. You can look at the provider tiles [here](https://leaflet-extras.github.io/leaflet-providers/preview/) and use on in the `addProviderTiles()` function.
+
+There is a great tutorial [here](https://rstudio.github.io/leaflet/map_widget.html) on how to customize the leaflet display. You may want to go look at it and see what you can use to make a better display.
+

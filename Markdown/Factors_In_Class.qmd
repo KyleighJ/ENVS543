@@ -2,13 +2,65 @@
 title: "Factors"
 format: html
 editor: visual
+author: Kyleigh Johnson
+date: 10/24/24
 ---
+This is an example of using the `forcats` library to manipulate categorical data.
 
+## 1.Change the order of the weekdays to start with Monday.
+First, I load in the proper libraries, my rice data function, and assign the `rice` variable.
 ```{r}
+#| message: false
+#| warning: false 
+
 source( "GetRiceData.R" )
+
+rice <- getRiceData()
 
 library( forcats )
 
+library( knitr )
 
+library( kableExtra )
+
+```
+Next, I use the `forcats` library to reorder the data weekdays to begin with Monday.
+
+```{r}
+weekdays <- c("Monday","Tuesday","Wednesday",
+              "Thursday","Friday","Saturday", 
+              "Sunday")
+class( weekdays )
+
+data <- sample( weekdays, size=40, replace=TRUE)
+data
+
+days <- factor( data )
+is.factor( days )
+
+data <- factor( days, ordered=TRUE, levels = weekdays )
+data
+
+sort( data )
+
+```
+## 2.Add two additional factor columns: Weekday/Weekend based on the day of the week and create a column based on the *four primary lunar phases* for the data collected.
+
+Here I added a factor column for the Weekday/Weekend.
+
+```{r}
+wkdy_wknd <- function( day ) { if
+  ( day %in% c( "Saturday", "Sunday" ) ) {
+    return( "Weekend" )
+  } else {
+    return( "Weekday" )
+  }
+}
+
+wkdy_O_wknd <- factor( sapply ( days, wkdy_wknd ),
+                       levels = c( "Weekday", "Weekend" ) )
+data.frame(Days = days, Weekday_Weekend = wkdy_O_wknd) -> df
+
+kable_minimal()
 ```
 
