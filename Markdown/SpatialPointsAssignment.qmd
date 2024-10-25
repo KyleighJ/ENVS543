@@ -5,6 +5,10 @@ editor: visual
 author: Kyleigh Johnson
 date: 10/24/24
 ---
+This is my completion of the spatial data assignment.
+
+___________________________________________________________
+
 
 <center>
 
@@ -153,4 +157,3 @@ ggplot() +
 
 
 ```
-
