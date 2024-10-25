@@ -5,15 +5,18 @@ editor: visual
 author: Kyleigh Johnson
 date: 10/24/24
 ---
+
 This is an example of using the `forcats` library to manipulate categorical data.
 
-## 1.Change the order of the weekdays to start with Monday.
+## 1. Change the order of the weekdays to start with Monday.
+
 First, I load in the proper libraries, my rice data function, and assign the `rice` variable.
+
 ```{r}
 #| message: false
 #| warning: false 
 
-source( "GetRiceData.R" )
+source( "getRiceData.R" )
 
 rice <- getRiceData()
 
@@ -23,44 +26,88 @@ library( knitr )
 
 library( kableExtra )
 
+library( lunar )
+
 ```
+
 Next, I use the `forcats` library to reorder the data weekdays to begin with Monday.
 
 ```{r}
-weekdays <- c("Monday","Tuesday","Wednesday",
-              "Thursday","Friday","Saturday", 
-              "Sunday")
-class( weekdays )
+rice$Weekday <- factor( rice$Weekday )
 
-data <- sample( weekdays, size=40, replace=TRUE)
-data
-
-days <- factor( data )
-is.factor( days )
-
-data <- factor( days, ordered=TRUE, levels = weekdays )
-data
-
-sort( data )
+rice <- rice |>
+  mutate( Weekday = fct_relevel( Weekday,
+                                 c( "Monday", "Tuesday", "Wednesday", "Thursday", 
+                                   "Friday", "Saturday", "Sunday" )))
+levels( rice$Weekday )
 
 ```
-## 2.Add two additional factor columns: Weekday/Weekend based on the day of the week and create a column based on the *four primary lunar phases* for the data collected.
+
+## 2. Add two additional factor columns: Weekday/Weekend based on the day of the week and create a column based on the *four primary lunar phases* for the data collected.
 
 Here I added a factor column for the Weekday/Weekend.
 
 ```{r}
-wkdy_wknd <- function( day ) { if
-  ( day %in% c( "Saturday", "Sunday" ) ) {
+wkdy_wknd <- function( day ) {
+  if (day %in% c( "Saturday", "Sunday" ) ) {
     return( "Weekend" )
   } else {
     return( "Weekday" )
   }
 }
 
-wkdy_O_wknd <- factor( sapply ( days, wkdy_wknd ),
-                       levels = c( "Weekday", "Weekend" ) )
-data.frame(Days = days, Weekday_Weekend = wkdy_O_wknd) -> df
+df <- rice |>
+  mutate(Type_Of_Day = ifelse( Weekday %in% c("Saturday", "Sunday"), "Weekend", "Weekday" ) )
 
-kable_minimal()
+df |>
+  head() |>
+  kable() |>
+  kable_minimal()
 ```
 
+
+
+Next, I add in a column stating the lunar phase.
+
+```{r}
+df |>
+  mutate( Lunar_Phase = lunar.phase( Date, shift = 0, name = 4)) -> df2
+
+
+df2 |>
+  head() |>
+  kable() |>
+  kable_minimal()
+
+  
+```
+
+## 3. [Superstar Question] Create a column that indicates whether the tide is coming in (Incoming) or going out (Outgoing).
+
+
+
+Last, I added a column to show whether the tide was incoming or outgoing.
+
+```{r}
+df2 |>
+  mutate( diff_depth = Depth_m - lag( Depth_m ) ) |>
+  mutate( Tide = if_else( diff_depth > 0, "Incoming", "Outgoing")) |>
+  select( -diff_depth )-> df3
+
+
+df3 |>
+  head() |>
+  kable() |>
+  kable_minimal()
+```
+
+I then reordered the table so that the three added columns were not at the end to show for the purpose of this activity.
+
+```{r}
+df3 |>
+  select( Date, Month, Day, Weekday, Type_Of_Day, Lunar_Phase, Tide, everything() ) |>
+  head() |>
+  kable() |>
+  kable_minimal()
+
+```

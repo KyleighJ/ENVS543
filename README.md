@@ -16,3 +16,4 @@ Documents in Repository:
  - [Tabular Homework](https://kyleighj.github.io/ENVS543/Markdown/Tabular_Homework.html) 
  - [Graphics Homework](https://kyleighj.github.io/ENVS543/Markdown/Graphics_HW.html)
  - [Spatial Data Homework](https://kyleighj.github.io/ENVS543/Markdown/SpatialPointsAssignment.html)
+ - [Factors In Class](https://kyleighj.github.io/ENVS543/Markdown/Factors_In_Class.html)

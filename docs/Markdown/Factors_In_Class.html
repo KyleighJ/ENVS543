@@ -69,6 +69,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="Factors_In_Class_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="Factors_In_Class_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="Factors_In_Class_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="Factors_In_Class_files/libs/kePrint-0.0.1/kePrint.js"></script>
+
+<link href="Factors_In_Class_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
 
 
 </head>
@@ -112,66 +116,642 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>This is an example of using the <code>forcats</code> library to manipulate categorical data.</p>
 <section id="change-the-order-of-the-weekdays-to-start-with-monday." class="level2">
-<h2 class="anchored" data-anchor-id="change-the-order-of-the-weekdays-to-start-with-monday.">1.Change the order of the weekdays to start with Monday.</h2>
+<h2 class="anchored" data-anchor-id="change-the-order-of-the-weekdays-to-start-with-monday.">1. Change the order of the weekdays to start with Monday.</h2>
 <p>First, I load in the proper libraries, my rice data function, and assign the <code>rice</code> variable.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>( <span class="st">"GetRiceData.R"</span> )</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>( <span class="st">"getRiceData.R"</span> )</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>rice <span class="ot">&lt;-</span> <span class="fu">getRiceData</span>()</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( forcats )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( forcats )</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( knitr )</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( kableExtra )</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( lunar )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Next, I use the <code>forcats</code> library to reorder the data weekdays to begin with Monday.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>weekdays <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Monday"</span>,<span class="st">"Tuesday"</span>,<span class="st">"Wednesday"</span>,</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Thursday"</span>,<span class="st">"Friday"</span>,<span class="st">"Saturday"</span>, </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Sunday"</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>( weekdays )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>rice<span class="sc">$</span>Weekday <span class="ot">&lt;-</span> <span class="fu">factor</span>( rice<span class="sc">$</span>Weekday )</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>rice <span class="ot">&lt;-</span> rice <span class="sc">|&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">Weekday =</span> <span class="fu">fct_relevel</span>( Weekday,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">c</span>( <span class="st">"Monday"</span>, <span class="st">"Tuesday"</span>, <span class="st">"Wednesday"</span>, <span class="st">"Thursday"</span>, </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"Friday"</span>, <span class="st">"Saturday"</span>, <span class="st">"Sunday"</span> )))</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>( rice<span class="sc">$</span>Weekday )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "character"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">sample</span>( weekdays, <span class="at">size=</span><span class="dv">40</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] "Friday"    "Saturday"  "Monday"    "Thursday"  "Thursday"  "Saturday" 
- [7] "Tuesday"   "Saturday"  "Thursday"  "Sunday"    "Friday"    "Monday"   
-[13] "Sunday"    "Thursday"  "Wednesday" "Thursday"  "Wednesday" "Sunday"   
-[19] "Wednesday" "Monday"    "Tuesday"   "Friday"    "Saturday"  "Sunday"   
-[25] "Saturday"  "Thursday"  "Wednesday" "Monday"    "Tuesday"   "Wednesday"
-[31] "Monday"    "Tuesday"   "Monday"    "Monday"    "Thursday"  "Wednesday"
-[37] "Wednesday" "Saturday"  "Wednesday" "Friday"   </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>days <span class="ot">&lt;-</span> <span class="fu">factor</span>( data )</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">is.factor</span>( days )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">factor</span>( days, <span class="at">ordered=</span><span class="cn">TRUE</span>, <span class="at">levels =</span> weekdays )</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] Friday    Saturday  Monday    Thursday  Thursday  Saturday  Tuesday  
- [8] Saturday  Thursday  Sunday    Friday    Monday    Sunday    Thursday 
-[15] Wednesday Thursday  Wednesday Sunday    Wednesday Monday    Tuesday  
-[22] Friday    Saturday  Sunday    Saturday  Thursday  Wednesday Monday   
-[29] Tuesday   Wednesday Monday    Tuesday   Monday    Monday    Thursday 
-[36] Wednesday Wednesday Saturday  Wednesday Friday   
-7 Levels: Monday &lt; Tuesday &lt; Wednesday &lt; Thursday &lt; Friday &lt; ... &lt; Sunday</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>( data )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] Monday    Monday    Monday    Monday    Monday    Monday    Monday   
- [8] Tuesday   Tuesday   Tuesday   Tuesday   Wednesday Wednesday Wednesday
-[15] Wednesday Wednesday Wednesday Wednesday Wednesday Thursday  Thursday 
-[22] Thursday  Thursday  Thursday  Thursday  Thursday  Friday    Friday   
-[29] Friday    Friday    Saturday  Saturday  Saturday  Saturday  Saturday 
-[36] Saturday  Sunday    Sunday    Sunday    Sunday   
-7 Levels: Monday &lt; Tuesday &lt; Wednesday &lt; Thursday &lt; Friday &lt; ... &lt; Sunday</code></pre>
+<pre><code>[1] "Monday"    "Tuesday"   "Wednesday" "Thursday"  "Friday"    "Saturday" 
+[7] "Sunday"   </code></pre>
 </div>
 </div>
 </section>
 <section id="add-two-additional-factor-columns-weekdayweekend-based-on-the-day-of-the-week-and-create-a-column-based-on-the-four-primary-lunar-phases-for-the-data-collected." class="level2">
-<h2 class="anchored" data-anchor-id="add-two-additional-factor-columns-weekdayweekend-based-on-the-day-of-the-week-and-create-a-column-based-on-the-four-primary-lunar-phases-for-the-data-collected.">2.Add two additional factor columns: Weekday/Weekend based on the day of the week and create a column based on the <em>four primary lunar phases</em> for the data collected.</h2>
-<p>First, I load in the proper libraries, my rice data function, and assign the <code>rice</code> variable.</p>
+<h2 class="anchored" data-anchor-id="add-two-additional-factor-columns-weekdayweekend-based-on-the-day-of-the-week-and-create-a-column-based-on-the-four-primary-lunar-phases-for-the-data-collected.">2. Add two additional factor columns: Weekday/Weekend based on the day of the week and create a column based on the <em>four primary lunar phases</em> for the data collected.</h2>
+<p>Here I added a factor column for the Weekday/Weekend.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>wkdy_wknd <span class="ot">&lt;-</span> <span class="cf">function</span>( day ) {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (day <span class="sc">%in%</span> <span class="fu">c</span>( <span class="st">"Saturday"</span>, <span class="st">"Sunday"</span> ) ) {</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>( <span class="st">"Weekend"</span> )</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>( <span class="st">"Weekday"</span> )</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> rice <span class="sc">|&gt;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Type_Of_Day =</span> <span class="fu">ifelse</span>( Weekday <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Saturday"</span>, <span class="st">"Sunday"</span>), <span class="st">"Weekend"</span>, <span class="st">"Weekday"</span> ) )</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">|&gt;</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>() <span class="sc">|&gt;</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="lightable-minimal caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Date</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Month</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Day</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Weekday</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">H2O_TempC</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">ODO_sat</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Depth_m</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Turbidity_ntu</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">PH</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Salinity_ppt</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">AirTempC</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Rain_cm</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">WindSpeed_kph</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">WindDir</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Type_Of_Day</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">2014-01-01 00:00:00</td>
+<td style="text-align: left;">January</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Wednesday</td>
+<td style="text-align: right;">6.44</td>
+<td style="text-align: right;">96.3</td>
+<td style="text-align: right;">4.670527</td>
+<td style="text-align: right;">20.3</td>
+<td style="text-align: right;">7.22</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">-1.818</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">6.226830</td>
+<td style="text-align: right;">14.58</td>
+<td style="text-align: left;">Weekday</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2014-01-01 00:15:00</td>
+<td style="text-align: left;">January</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Wednesday</td>
+<td style="text-align: right;">6.49</td>
+<td style="text-align: right;">99.9</td>
+<td style="text-align: right;">4.727827</td>
+<td style="text-align: right;">21.8</td>
+<td style="text-align: right;">7.52</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">-2.304</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">7.702283</td>
+<td style="text-align: right;">18.53</td>
+<td style="text-align: left;">Weekday</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2014-01-01 00:30:00</td>
+<td style="text-align: left;">January</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Wednesday</td>
+<td style="text-align: right;">6.38</td>
+<td style="text-align: right;">100.6</td>
+<td style="text-align: right;">4.783603</td>
+<td style="text-align: right;">21.8</td>
+<td style="text-align: right;">7.53</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">-1.404</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5.814926</td>
+<td style="text-align: right;">16.16</td>
+<td style="text-align: left;">Weekday</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2014-01-01 00:45:00</td>
+<td style="text-align: left;">January</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Wednesday</td>
+<td style="text-align: right;">6.42</td>
+<td style="text-align: right;">100.3</td>
+<td style="text-align: right;">4.829015</td>
+<td style="text-align: right;">21.4</td>
+<td style="text-align: right;">7.53</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">-2.628</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">4.804474</td>
+<td style="text-align: right;">11.47</td>
+<td style="text-align: left;">Weekday</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2014-01-01 01:00:00</td>
+<td style="text-align: left;">January</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Wednesday</td>
+<td style="text-align: right;">6.35</td>
+<td style="text-align: right;">101.4</td>
+<td style="text-align: right;">4.870771</td>
+<td style="text-align: right;">22.0</td>
+<td style="text-align: right;">7.55</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">-1.926</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5.666898</td>
+<td style="text-align: right;">11.31</td>
+<td style="text-align: left;">Weekday</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2014-01-01 01:15:00</td>
+<td style="text-align: left;">January</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Wednesday</td>
+<td style="text-align: right;">6.31</td>
+<td style="text-align: right;">102.1</td>
+<td style="text-align: right;">4.906736</td>
+<td style="text-align: right;">21.9</td>
+<td style="text-align: right;">7.56</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">-2.502</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">6.157643</td>
+<td style="text-align: right;">20.02</td>
+<td style="text-align: left;">Weekday</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>Next, I add in a column stating the lunar phase.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">Lunar_Phase =</span> <span class="fu">lunar.phase</span>( Date, <span class="at">shift =</span> <span class="dv">0</span>, <span class="at">name =</span> <span class="dv">4</span>)) <span class="ot">-&gt;</span> df2</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>df2 <span class="sc">|&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">|&gt;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>() <span class="sc">|&gt;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="lightable-minimal caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Date</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Month</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Day</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Weekday</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">H2O_TempC</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">ODO_sat</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Depth_m</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Turbidity_ntu</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">PH</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Salinity_ppt</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">AirTempC</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Rain_cm</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">WindSpeed_kph</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">WindDir</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Type_Of_Day</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Lunar_Phase</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">2014-01-01 00:00:00</td>
+<td style="text-align: left;">January</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Wednesday</td>
+<td style="text-align: right;">6.44</td>
+<td style="text-align: right;">96.3</td>
+<td style="text-align: right;">4.670527</td>
+<td style="text-align: right;">20.3</td>
+<td style="text-align: right;">7.22</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">-1.818</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">6.226830</td>
+<td style="text-align: right;">14.58</td>
+<td style="text-align: left;">Weekday</td>
+<td style="text-align: left;">New</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2014-01-01 00:15:00</td>
+<td style="text-align: left;">January</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Wednesday</td>
+<td style="text-align: right;">6.49</td>
+<td style="text-align: right;">99.9</td>
+<td style="text-align: right;">4.727827</td>
+<td style="text-align: right;">21.8</td>
+<td style="text-align: right;">7.52</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">-2.304</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">7.702283</td>
+<td style="text-align: right;">18.53</td>
+<td style="text-align: left;">Weekday</td>
+<td style="text-align: left;">New</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2014-01-01 00:30:00</td>
+<td style="text-align: left;">January</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Wednesday</td>
+<td style="text-align: right;">6.38</td>
+<td style="text-align: right;">100.6</td>
+<td style="text-align: right;">4.783603</td>
+<td style="text-align: right;">21.8</td>
+<td style="text-align: right;">7.53</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">-1.404</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5.814926</td>
+<td style="text-align: right;">16.16</td>
+<td style="text-align: left;">Weekday</td>
+<td style="text-align: left;">New</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2014-01-01 00:45:00</td>
+<td style="text-align: left;">January</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Wednesday</td>
+<td style="text-align: right;">6.42</td>
+<td style="text-align: right;">100.3</td>
+<td style="text-align: right;">4.829015</td>
+<td style="text-align: right;">21.4</td>
+<td style="text-align: right;">7.53</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">-2.628</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">4.804474</td>
+<td style="text-align: right;">11.47</td>
+<td style="text-align: left;">Weekday</td>
+<td style="text-align: left;">New</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2014-01-01 01:00:00</td>
+<td style="text-align: left;">January</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Wednesday</td>
+<td style="text-align: right;">6.35</td>
+<td style="text-align: right;">101.4</td>
+<td style="text-align: right;">4.870771</td>
+<td style="text-align: right;">22.0</td>
+<td style="text-align: right;">7.55</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">-1.926</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5.666898</td>
+<td style="text-align: right;">11.31</td>
+<td style="text-align: left;">Weekday</td>
+<td style="text-align: left;">New</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2014-01-01 01:15:00</td>
+<td style="text-align: left;">January</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Wednesday</td>
+<td style="text-align: right;">6.31</td>
+<td style="text-align: right;">102.1</td>
+<td style="text-align: right;">4.906736</td>
+<td style="text-align: right;">21.9</td>
+<td style="text-align: right;">7.56</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">-2.502</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">6.157643</td>
+<td style="text-align: right;">20.02</td>
+<td style="text-align: left;">Weekday</td>
+<td style="text-align: left;">New</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="superstar-question-create-a-column-that-indicates-whether-the-tide-is-coming-in-incoming-or-going-out-outgoing." class="level2">
+<h2 class="anchored" data-anchor-id="superstar-question-create-a-column-that-indicates-whether-the-tide-is-coming-in-incoming-or-going-out-outgoing.">3. [Superstar Question] Create a column that indicates whether the tide is coming in (Incoming) or going out (Outgoing).</h2>
+<p>Last, I added a column to show whether the tide was incoming or outgoing.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">diff_depth =</span> Depth_m <span class="sc">-</span> <span class="fu">lag</span>( Depth_m ) ) <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">Tide =</span> <span class="fu">if_else</span>( diff_depth <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">"Incoming"</span>, <span class="st">"Outgoing"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>( <span class="sc">-</span>diff_depth )<span class="ot">-&gt;</span> df3</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>df3 <span class="sc">|&gt;</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">|&gt;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>() <span class="sc">|&gt;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="lightable-minimal caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Date</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Month</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Day</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Weekday</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">H2O_TempC</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">ODO_sat</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Depth_m</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Turbidity_ntu</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">PH</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Salinity_ppt</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">AirTempC</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Rain_cm</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">WindSpeed_kph</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">WindDir</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Type_Of_Day</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Lunar_Phase</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Tide</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">2014-01-01 00:00:00</td>
+<td style="text-align: left;">January</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Wednesday</td>
+<td style="text-align: right;">6.44</td>
+<td style="text-align: right;">96.3</td>
+<td style="text-align: right;">4.670527</td>
+<td style="text-align: right;">20.3</td>
+<td style="text-align: right;">7.22</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">-1.818</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">6.226830</td>
+<td style="text-align: right;">14.58</td>
+<td style="text-align: left;">Weekday</td>
+<td style="text-align: left;">New</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2014-01-01 00:15:00</td>
+<td style="text-align: left;">January</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Wednesday</td>
+<td style="text-align: right;">6.49</td>
+<td style="text-align: right;">99.9</td>
+<td style="text-align: right;">4.727827</td>
+<td style="text-align: right;">21.8</td>
+<td style="text-align: right;">7.52</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">-2.304</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">7.702283</td>
+<td style="text-align: right;">18.53</td>
+<td style="text-align: left;">Weekday</td>
+<td style="text-align: left;">New</td>
+<td style="text-align: left;">Incoming</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2014-01-01 00:30:00</td>
+<td style="text-align: left;">January</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Wednesday</td>
+<td style="text-align: right;">6.38</td>
+<td style="text-align: right;">100.6</td>
+<td style="text-align: right;">4.783603</td>
+<td style="text-align: right;">21.8</td>
+<td style="text-align: right;">7.53</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">-1.404</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5.814926</td>
+<td style="text-align: right;">16.16</td>
+<td style="text-align: left;">Weekday</td>
+<td style="text-align: left;">New</td>
+<td style="text-align: left;">Incoming</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2014-01-01 00:45:00</td>
+<td style="text-align: left;">January</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Wednesday</td>
+<td style="text-align: right;">6.42</td>
+<td style="text-align: right;">100.3</td>
+<td style="text-align: right;">4.829015</td>
+<td style="text-align: right;">21.4</td>
+<td style="text-align: right;">7.53</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">-2.628</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">4.804474</td>
+<td style="text-align: right;">11.47</td>
+<td style="text-align: left;">Weekday</td>
+<td style="text-align: left;">New</td>
+<td style="text-align: left;">Incoming</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2014-01-01 01:00:00</td>
+<td style="text-align: left;">January</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Wednesday</td>
+<td style="text-align: right;">6.35</td>
+<td style="text-align: right;">101.4</td>
+<td style="text-align: right;">4.870771</td>
+<td style="text-align: right;">22.0</td>
+<td style="text-align: right;">7.55</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">-1.926</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5.666898</td>
+<td style="text-align: right;">11.31</td>
+<td style="text-align: left;">Weekday</td>
+<td style="text-align: left;">New</td>
+<td style="text-align: left;">Incoming</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2014-01-01 01:15:00</td>
+<td style="text-align: left;">January</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Wednesday</td>
+<td style="text-align: right;">6.31</td>
+<td style="text-align: right;">102.1</td>
+<td style="text-align: right;">4.906736</td>
+<td style="text-align: right;">21.9</td>
+<td style="text-align: right;">7.56</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">-2.502</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">6.157643</td>
+<td style="text-align: right;">20.02</td>
+<td style="text-align: left;">Weekday</td>
+<td style="text-align: left;">New</td>
+<td style="text-align: left;">Incoming</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>I then reordered the table so that the three added columns were not at the end to show for the purpose of this activity.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df3 <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>( Date, Month, Day, Weekday, Type_Of_Day, Lunar_Phase, Tide, <span class="fu">everything</span>() ) <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">|&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>() <span class="sc">|&gt;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="lightable-minimal caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Date</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Month</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Day</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Weekday</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Type_Of_Day</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Lunar_Phase</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Tide</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">H2O_TempC</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">ODO_sat</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Depth_m</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Turbidity_ntu</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">PH</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Salinity_ppt</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">AirTempC</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Rain_cm</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">WindSpeed_kph</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">WindDir</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">2014-01-01 00:00:00</td>
+<td style="text-align: left;">January</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Wednesday</td>
+<td style="text-align: left;">Weekday</td>
+<td style="text-align: left;">New</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">6.44</td>
+<td style="text-align: right;">96.3</td>
+<td style="text-align: right;">4.670527</td>
+<td style="text-align: right;">20.3</td>
+<td style="text-align: right;">7.22</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">-1.818</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">6.226830</td>
+<td style="text-align: right;">14.58</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2014-01-01 00:15:00</td>
+<td style="text-align: left;">January</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Wednesday</td>
+<td style="text-align: left;">Weekday</td>
+<td style="text-align: left;">New</td>
+<td style="text-align: left;">Incoming</td>
+<td style="text-align: right;">6.49</td>
+<td style="text-align: right;">99.9</td>
+<td style="text-align: right;">4.727827</td>
+<td style="text-align: right;">21.8</td>
+<td style="text-align: right;">7.52</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">-2.304</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">7.702283</td>
+<td style="text-align: right;">18.53</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2014-01-01 00:30:00</td>
+<td style="text-align: left;">January</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Wednesday</td>
+<td style="text-align: left;">Weekday</td>
+<td style="text-align: left;">New</td>
+<td style="text-align: left;">Incoming</td>
+<td style="text-align: right;">6.38</td>
+<td style="text-align: right;">100.6</td>
+<td style="text-align: right;">4.783603</td>
+<td style="text-align: right;">21.8</td>
+<td style="text-align: right;">7.53</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">-1.404</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5.814926</td>
+<td style="text-align: right;">16.16</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2014-01-01 00:45:00</td>
+<td style="text-align: left;">January</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Wednesday</td>
+<td style="text-align: left;">Weekday</td>
+<td style="text-align: left;">New</td>
+<td style="text-align: left;">Incoming</td>
+<td style="text-align: right;">6.42</td>
+<td style="text-align: right;">100.3</td>
+<td style="text-align: right;">4.829015</td>
+<td style="text-align: right;">21.4</td>
+<td style="text-align: right;">7.53</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">-2.628</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">4.804474</td>
+<td style="text-align: right;">11.47</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2014-01-01 01:00:00</td>
+<td style="text-align: left;">January</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Wednesday</td>
+<td style="text-align: left;">Weekday</td>
+<td style="text-align: left;">New</td>
+<td style="text-align: left;">Incoming</td>
+<td style="text-align: right;">6.35</td>
+<td style="text-align: right;">101.4</td>
+<td style="text-align: right;">4.870771</td>
+<td style="text-align: right;">22.0</td>
+<td style="text-align: right;">7.55</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">-1.926</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5.666898</td>
+<td style="text-align: right;">11.31</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2014-01-01 01:15:00</td>
+<td style="text-align: left;">January</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Wednesday</td>
+<td style="text-align: left;">Weekday</td>
+<td style="text-align: left;">New</td>
+<td style="text-align: left;">Incoming</td>
+<td style="text-align: right;">6.31</td>
+<td style="text-align: right;">102.1</td>
+<td style="text-align: right;">4.906736</td>
+<td style="text-align: right;">21.9</td>
+<td style="text-align: right;">7.56</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">-2.502</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">6.157643</td>
+<td style="text-align: right;">20.02</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
 </section>
 
 </main>
