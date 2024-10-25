@@ -15,3 +15,4 @@ Documents in Repository:
  - [9/19 In Class Exercise on Tables](https://kyleighj.github.io/ENVS543/Markdown/in_class_9_19.html)
  - [Tabular Homework](https://kyleighj.github.io/ENVS543/Markdown/Tabular_Homework.html) 
  - [Graphics Homework](https://kyleighj.github.io/ENVS543/Markdown/Graphics_HW.html)
+ - [Spatial Data Homework](https://kyleighj.github.io/ENVS543/Markdown/SpatialPointsAssignment.html)
