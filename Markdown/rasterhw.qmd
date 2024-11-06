@@ -1,0 +1,123 @@
+---
+title: "Raster Homework"
+format: html
+editor: visual
+---
+
+Rasters are spatial continuous distributions of geospatial data. We have been shown that we an work with data in raster format using either `raster` and working on object directly, or via `dplyr` and using the normal data manipulation routines that we've learned for non-spatial data. In this *in class* exercise, you may use both of these techniques to load, manipulate, and display geospatial data.
+
+## The Raw Data
+
+The data for this will be the same Baja California data we showed in the lectures on [points](https://dyerlab.github.io/ENVS-Lectures/spatial/spatial_points/slides.html#1) and [rasters](https://dyerlab.github.io/ENVS-Lectures/spatial/rasters/slides.html#1).
+
+```{r}
+raster_url <- "https://github.com/DyerlabTeaching/Raster-Data/raw/main/data/alt_22.tif"
+beetle_url <- "https://raw.githubusercontent.com/DyerlabTeaching/Raster-Data/main/data/AraptusDispersalBias.csv"
+```
+
+## The Questions
+
+1.  Load the raster and point data in and crop to an appropriate size to display the locations of the sampling plots and make a label for each site.
+
+```{r}
+library( tidyverse )
+library( raster )
+library( sf ) 
+
+elev <- raster( raster_url )
+
+read_csv( beetle_url )  %>% 
+  st_as_sf( coords = c("Longitude","Latitude"), 
+            crs = 4326 ) -> beetles 
+
+beetles
+```
+
+```{r}
+plot( elev, xlab="Longitude" )
+```
+
+```{r}
+beetles %>%
+  st_union() %>%
+  st_buffer( dist = 1 ) %>%
+  st_bbox() 
+
+baja_extent <- extent( c(-115.29354,-108,22,30))
+
+baja_elev <- crop( elev, baja_extent )
+baja_elev
+plot( baja_elev) 
+
+```
+
+```{r}
+plot( baja_elev, xlab="Longitude", ylab="Latitude")
+text( beetles, pch=15, col="red" )
+```
+
+```{r}
+library( ggrepel )
+baja_elev %>%
+  rasterToPoints() %>%
+  as.data.frame() %>% 
+  ggplot() +
+  geom_raster( aes(x,y,fill=alt_22) ) +
+  geom_sf_label( aes(label=Site), 
+                 data = beetles) +
+  coord_equal()
+```
+
+2.  Use the click() function to crop the raster and filter the sites to include only the sampling locations that are in the Cape regions (e.g., south of site labeled #75).  Plot the raster of elevation and all cape region locales with sex-ratio represented as the size of the plot symbol.
+
+```{r}
+plot( baja_elev, xlab="Longitude", ylab="Latitude")
+text( beetles, pch=16, col="red" )
+click( baja_elev, 
+       n=2 ) -> points
+
+```
+
+3.  The peninsula of Baja California is divided into the States of *Baja California Norte* and *Baja California Sur*. The border between these states is at 28° Latitude. Divide the sample locations into groups based upon which state they are located and plot the average sex ratio of the sample sites partitioned by each site.
+
+```{r}
+beetles <- beetles %>%
+  mutate( State = ifelse(st_coordinates(.)[,2] > 28, "Baja California Norte", "Baja California Sur" ) )
+
+average_sex_ratio <- beetles %>%
+  group_by( State, Site ) %>%
+  summarize( avg_sex_ratio = mean( MFRatio, na.rm = TRUE ), .groups = 'drop' )
+
+baja_elev %>%
+  rasterToPoints() %>%
+  as.data.frame() %>% 
+  ggplot() +
+  geom_raster( aes(x = x, y = y, fill = alt_22 ) ) +
+  geom_sf(data = beetles, aes( color = State, geometry = geometry ), size = 3) +
+  geom_text( data = average_sex_ratio, aes( x = st_coordinates( geometry )[,1],
+                                      y = st_coordinates( geometry )[,2],
+                                      label = round( avg_sex_ratio, 2)),
+             color = "white", size = 3) +
+  coord_sf() +
+  labs(fill = "Elevation", color = "State" ) +
+  theme_minimal()
+
+
+
+```
+
+4.  Is there a relationship between the observed sex ratio and the elevation at that site?  Plot these, and in the text, perform a correlation test (cor.test()) and report the values as if you were writing them up in a results section.
+
+```{r}
+beetles <- beetles %>%
+  mutate( Elevation = raster::extract( baja_elev, st_coordinates( beetles ) ) )
+
+correlation_test <- cor.test( beetles$MFRatio, beetles$Elevation )
+correlation_test
+
+```
+A correlation test was conducted to assess the relationship between sex ratio (MFRatio) and elevation across sample sites. The results indicated a non-significant negative correlation between sex ratio and elevation, t = -0.55949, df = 29, p-value = 0.5801, with a 95% confidence interval [-0.4415112  0.2605426], and cor = -.103
+
+This suggests that there is no statistically significant correlation between sex ratio and elevation within the sampled Baja region.
+
+
