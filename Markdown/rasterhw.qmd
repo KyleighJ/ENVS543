@@ -5,8 +5,8 @@ date: 11/5/24
 format: html
 editor: visual
 ---
-*This is my completion of the raster data homework.*
 
+*This is my completion of the raster data homework.*
 
 Rasters are spatial continuous distributions of geospatial data. We have been shown that we an work with data in raster format using either `raster` and working on object directly, or via `dplyr` and using the normal data manipulation routines that we've learned for non-spatial data. In this *in class* exercise, you may use both of these techniques to load, manipulate, and display geospatial data.
 
@@ -72,7 +72,7 @@ baja_elev %>%
   coord_equal()
 ```
 
-2.  Use the click() function to crop the raster and filter the sites to include only the sampling locations that are in the Cape regions (e.g., south of site labeled #75).  Plot the raster of elevation and all cape region locales with sex-ratio represented as the size of the plot symbol.
+2.  Use the click() function to crop the raster and filter the sites to include only the sampling locations that are in the Cape regions (e.g., south of site labeled #75). Plot the raster of elevation and all cape region locales with sex-ratio represented as the size of the plot symbol.
 
 ```{r}
 plot( baja_elev, xlab="Longitude", ylab="Latitude")
@@ -110,7 +110,7 @@ baja_elev %>%
 
 ```
 
-4.  Is there a relationship between the observed sex ratio and the elevation at that site?  Plot these, and in the text, perform a correlation test (cor.test()) and report the values as if you were writing them up in a results section.
+4.  Is there a relationship between the observed sex ratio and the elevation at that site? Plot these, and in the text, perform a correlation test (cor.test()) and report the values as if you were writing them up in a results section.
 
 ```{r}
 beetles <- beetles %>%
@@ -120,8 +120,7 @@ correlation_test <- cor.test( beetles$MFRatio, beetles$Elevation )
 correlation_test
 
 ```
-A correlation test was conducted to assess the relationship between sex ratio (MFRatio) and elevation across sample sites. The results indicated a non-significant negative correlation between sex ratio and elevation, t = -0.55949, df = 29, p-value = 0.5801, with a 95% confidence interval [-0.4415112  0.2605426], and r = -.103. The negative r value attributes to the negative correlation. Since the p value is well above .05, it is assumed to be non-significant.
+
+A correlation test was conducted to assess the relationship between sex ratio (MFRatio) and elevation across sample sites. The results indicated a non-significant negative correlation between sex ratio and elevation, t = -0.55949, df = 29, p-value = 0.5801, with a 95% confidence interval \[-0.4415112 0.2605426\], and r = -.103. The negative r value attributes to the negative correlation. Since the p value is well above .05, it is assumed to be non-significant.
 
 This suggests that there is no statistically significant correlation between sex ratio and elevation within the sampled Baja California region.
-
-
