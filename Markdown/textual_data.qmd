@@ -88,6 +88,7 @@ str_count( vec, "Johnson")
 str_locate( z, "dog")
 str_locate( vec, "a")
 ```
+
 ```{r}
 str_locate_all( vec, "a" )
 
@@ -99,6 +100,7 @@ c <- z
 str_sub(c, 24, -2) <- "hey"
 c
 ```
+
 ```{r}
 str_remove( z, "dog")
 str_remove_all( z, "a")
@@ -118,8 +120,8 @@ str_to_title(z)
 
 ## Regular Expression
 
-- Make a graphical display of the number of courses in ENVS by course level 100, 200, etc.
-- Make a wordcloud from titles
+-   Make a graphical display of the number of courses in ENVS by course level 100, 200, etc.
+-   Make a wordcloud from titles
 
 ```{r}
 url <- "https://raw.githubusercontent.com/DyerlabTeaching/Textual-Data/refs/heads/main/data/ENVSclasses.txt?token=GHSAT0AAAAAACWO27UIA46V72P7DBZEP5EKZYZFFXQ"
@@ -184,10 +186,12 @@ str_view( envs101, "[:lower:]{4} [:digit:]{3}")
 str_view( envs101, "[A-Z]{4} [0-9]{3}")
 
 ```
+
 ```{r}
 str_view( "Semester course; 3 lecture hours. 3 credits. Prerequisite: ENVS 101 or", "[A-Z]{4} [0-9]{3}")
 
 ```
+
 ```{r}
 #only match if found at beginning of line
 
@@ -202,4 +206,35 @@ str_view( envs101, "[0-9] Hour|s.$")
 str_view( envs101, "^[A-Z]{4} [0-9]{3}.+[0-9] Hour|s.$")
 
 ```
+
+```{r}
+pattern <- "^[A-Z]{4} [0-9]{3}.+[0-9] Hour[s]?\\.$"
+grepl( pattern, envs ) -> idx
+titles <- envs[idx]
+titles
+
+```
+
+```{r}
+str_split( titles, pattern = "\\.")
+str_split( titles, pattern = "\\.", simplify = TRUE ) -> raw
+raw
+
+
+data.frame( course = raw[,1],
+            title = str_trim(raw[,2]),
+            hours = str_trim(raw[,3]), "Hours" ) |>
+  mutate( hours = str_remove( hours, "Hour") ) |>
+  mutate( hours = as.numeric( str_remove( hours, "s") ) ) |>
+  mutate( program = str_split( course, " ", simplify = T)[,1]) |>
+  mutate( number = as.numeric( str_split( course, " ", simplify = T)[,2]) ) |>
+  select( program, number, title, hours )
+
+df
+
+
+```
+
+
+
 

@@ -65,8 +65,6 @@ df |>
   kable_minimal()
 ```
 
-
-
 Next, I add in a column stating the lunar phase.
 
 ```{r}
@@ -82,9 +80,7 @@ df2 |>
   
 ```
 
-## 3. [Superstar Question] Create a column that indicates whether the tide is coming in (Incoming) or going out (Outgoing).
-
-
+## 3. \[Superstar Question\] Create a column that indicates whether the tide is coming in (Incoming) or going out (Outgoing).
 
 Last, I added a column to show whether the tide was incoming or outgoing.
 
