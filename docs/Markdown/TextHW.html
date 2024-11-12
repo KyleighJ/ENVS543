@@ -69,6 +69,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="TextHW_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="TextHW_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="TextHW_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="TextHW_files/libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+
+<script src="TextHW_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+
+<link href="TextHW_files/libs/wordcloud2-0.0.1/wordcloud.css" rel="stylesheet">
+
+<script src="TextHW_files/libs/wordcloud2-0.0.1/wordcloud2-all.js"></script>
+
+<script src="TextHW_files/libs/wordcloud2-0.0.1/hover.js"></script>
+
+<script src="TextHW_files/libs/wordcloud2-binding-0.2.1/wordcloud2.js"></script>
+
 
 
 </head>
@@ -477,7 +489,7 @@ Caused by warning:
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>( course_nums,</span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">beside =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">c</span>( <span class="st">"skyblue"</span>, <span class="st">"lightgreen"</span>, <span class="st">"coral"</span>, <span class="st">"lightpink"</span> ),</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">c</span>( <span class="st">"lightblue"</span>, <span class="st">"lightgreen"</span>, <span class="st">"lightyellow"</span>, <span class="st">"lightpink"</span> ),</span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Number of Courses"</span>,</span>
 <span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"Program"</span>,</span>
 <span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend =</span> <span class="fu">rownames</span>( course_nums ),</span>
@@ -494,6 +506,662 @@ Caused by warning:
 </section>
 <section id="word-cloud" class="level2">
 <h2 class="anchored" data-anchor-id="word-cloud">Word Cloud</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wordcloud2)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="fu">grepl</span>( pattern, lfsc )</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>lfsc[idx] <span class="ot">-&gt;</span> titles</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>titles</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "BNFO 101. Introduction to Scientific Computing. 1 Hour."             
+ [2] "BNFO 125. Disease and Human Ancestry. 3 Hours."                      
+ [3] "BNFO 191. Special Topics in Bioinformatics. 1-4 Hours."              
+ [4] "BNFO 193. Special Topics in Bioinformatics. 1-4 Hours."              
+ [5] "BNFO 201. Computing Skills and Concepts for Bioinformatics. 3 Hours."
+ [6] "BNFO 251. Phage Discovery I. 2 Hours."                               
+ [7] "BNFO 252. Phage Discovery II. 2 Hours."                              
+ [8] "BNFO 291. Special Topics in Bioinformatics. 1-4 Hours."              
+ [9] "BNFO 292. Independent Study. 1-2 Hours."                             
+[10] "BNFO 293. Special Topics in Bioinformatics. 1-4 Hours."              
+[11] "BNFO 300. Molecular Biology Through Discovery. 3 Hours."             
+[12] "BNFO 301. Introduction to Bioinformatics. 3 Hours."                  
+[13] "BNFO 315. Effective Communication in the Sciences. 3 Hours."         
+[14] "BNFO 380. Introduction to Mathematical Biology. 4 Hours."            
+[15] "BNFO 391. Special Topics in Bioinformatics. 1-4 Hours."              
+[16] "BNFO 393. Special Topics in Bioinformatics. 1-4 Hours."              
+[17] "BNFO 411. Ethical Issues in Life Sciences. 2 Hours."                 
+[18] "BNFO 420. Applications in Bioinformatics. 3 Hours."                  
+[19] "BNFO 440. Computational Methods in Bioinformatics. 3 Hours."         
+[20] "BNFO 451. Genomic Medicine. 3 Hours."                                
+[21] "BNFO 491. Special Topics in Bioinformatics. 1-4 Hours."              
+[22] "BNFO 492. Independent Study. 1-4 Hours."                             
+[23] "BNFO 493. Special Topics in Bioinformatics. 1-4 Hours."              
+[24] "BNFO 497. Research and Thesis. 1-4 Hours."                           
+[25] "ENVS 101. Introduction to Environmental Studies I. 3 Hours."         
+[26] "ENVS 102. Introduction to Environmental Studies II. 3 Hours."        
+[27] "ENVS 105. Physical Geology. 3 Hours."                                
+[28] "ENVS 201. Earth System Science. 3 Hours."                            
+[29] "ENVS 222. Electronic Portfolios. 1 Hour."                            
+[30] "ENVS 260. Outdoor Leadership. 3 Hours."                              
+[31] "ENVS 265. Paths to Environmental Leadership. 2 Hours."               
+[32] "ENVS 291. Special Topics in Environmental Studies. 1-4 Hours."       
+[33] "ENVS 300. Sustainable Societies: James River Basin. 3 Hours."        
+[34] "ENVS 301. Introduction to Meteorology. 3 Hours."                     
+[35] "ENVS 310. Introduction to Oceanography. 3 Hours."                    
+[36] "ENVS 311. Politics of the Environment. 3 Hours."                     
+[37] "ENVS 315. Energy and the Environment. 3 Hours."                      
+[38] "ENVS 321. Cartography. 3 Hours."                                     
+[39] "ENVS 330. Environmental Pollution. 3 Hours."                         
+[40] "ENVS 332. Environmental Management. 3 Hours."                        
+[41] "ENVS 335. Environmental Geology. 3 Hours."                           
+[42] "ENVS 343. Data Literacy. 4 Hours."                                   
+[43] "ENVS 355. Water. 3 Hours."                                           
+[44] "ENVS 360. Outdoor Programming and Event Management. 3 Hours."        
+[45] "ENVS 361. Outdoor Team Building and Group Facilitation. 3 Hours."    
+[46] "ENVS 368. Nature Writing. 3 Hours."                                  
+[47] "ENVS 370. Applications of Conservation Science. 3 Hours."            
+[48] "ENVS 391. Special Topics in Environmental Studies. 1-4 Hours."       
+[49] "ENVS 401. Meteorology and Climatology. 3 Hours."                     
+[50] "ENVS 411. Oceanography. 3 Hours."                                    
+[51] "ENVS 421. Environmental Data Visualization. 3 Hours."                
+[52] "ENVS 430. Invasive Species Management. 3 Hours."                     
+[53] "ENVS 460. Wilderness First Responder. 3 Hours."                      
+[54] "ENVS 461. Wilderness Policy and Practice. 3 Hours."                  
+[55] "ENVS 490. Research Seminar in Environmental Studies. 3 Hours."       
+[56] "ENVS 491. Topics in Environmental Studies. 1-4 Hours."               
+[57] "ENVS 492. Independent Study. 1-3 Hours."                             
+[58] "ENVS 493. Environmental Studies Internship. 1-3 Hours."              
+[59] "ENVS 499. Environmental Studies Capstone Experience. 0 Hours."       
+[60] "ENVZ 105. Physical Geology Laboratory. 1 Hour."                      
+[61] "ENVZ 335. Environmental Geology Laboratory. 1 Hour."                 
+[62] "ENVZ 401. Meteorology and Climatology Laboratory. 1 Hour."           
+[63] "LFSC 101. Academic and Career Options in Life Sciences. 1 Hour."     
+[64] "LFSC 191. Special Topics in Integrative Life Sciences. 1-4 Hours."   
+[65] "LFSC 301. Integrative Life Sciences Research. 3 Hours."              
+[66] "LFSC 307. Community Solutions: Multiple Perspectives. 3 Hours."      
+[67] "LFSC 391. Special Topics in Integrative Life Sciences. 1-4 Hours."   
+[68] "LFSC 401. Faith and Life Sciences. 3 Hours."                         
+[69] "LFSC 491. Special Topics in Integrative Life Sciences. 1-4 Hours."   </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">str_split</span>(titles, <span class="at">pattern=</span><span class="st">"</span><span class="sc">\\</span><span class="st">."</span>, <span class="at">simplify =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(raw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 69  4</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>program <span class="ot">&lt;-</span> <span class="fu">str_split</span>( raw[,<span class="dv">1</span>], <span class="at">pattern=</span><span class="st">" "</span>, <span class="at">simplify=</span><span class="cn">TRUE</span>)[,<span class="dv">1</span>]</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="fu">str_split</span>( raw[,<span class="dv">1</span>], <span class="at">pattern=</span><span class="st">" "</span>, <span class="at">simplify=</span><span class="cn">TRUE</span>)[,<span class="dv">2</span>]</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>( code )</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>code </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 101 125 191 193 201 251 252 291 292 293 300 301 315 380 391 393 411 420 440
+[20] 451 491 492 493 497 101 102 105 201 222 260 265 291 300 301 310 311 315 321
+[39] 330 332 335 343 355 360 361 368 370 391 401 411 421 430 460 461 490 491 492
+[58] 493 499 105 335 401 101 191 301 307 391 401 491</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>title <span class="ot">&lt;-</span> raw[,<span class="dv">2</span>]</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>title</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] " Introduction to Scientific Computing"            
+ [2] " Disease and Human Ancestry"                      
+ [3] " Special Topics in Bioinformatics"                
+ [4] " Special Topics in Bioinformatics"                
+ [5] " Computing Skills and Concepts for Bioinformatics"
+ [6] " Phage Discovery I"                               
+ [7] " Phage Discovery II"                              
+ [8] " Special Topics in Bioinformatics"                
+ [9] " Independent Study"                               
+[10] " Special Topics in Bioinformatics"                
+[11] " Molecular Biology Through Discovery"             
+[12] " Introduction to Bioinformatics"                  
+[13] " Effective Communication in the Sciences"         
+[14] " Introduction to Mathematical Biology"            
+[15] " Special Topics in Bioinformatics"                
+[16] " Special Topics in Bioinformatics"                
+[17] " Ethical Issues in Life Sciences"                 
+[18] " Applications in Bioinformatics"                  
+[19] " Computational Methods in Bioinformatics"         
+[20] " Genomic Medicine"                                
+[21] " Special Topics in Bioinformatics"                
+[22] " Independent Study"                               
+[23] " Special Topics in Bioinformatics"                
+[24] " Research and Thesis"                             
+[25] " Introduction to Environmental Studies I"         
+[26] " Introduction to Environmental Studies II"        
+[27] " Physical Geology"                                
+[28] " Earth System Science"                            
+[29] " Electronic Portfolios"                           
+[30] " Outdoor Leadership"                              
+[31] " Paths to Environmental Leadership"               
+[32] " Special Topics in Environmental Studies"         
+[33] " Sustainable Societies: James River Basin"        
+[34] " Introduction to Meteorology"                     
+[35] " Introduction to Oceanography"                    
+[36] " Politics of the Environment"                     
+[37] " Energy and the Environment"                      
+[38] " Cartography"                                     
+[39] " Environmental Pollution"                         
+[40] " Environmental Management"                        
+[41] " Environmental Geology"                           
+[42] " Data Literacy"                                   
+[43] " Water"                                           
+[44] " Outdoor Programming and Event Management"        
+[45] " Outdoor Team Building and Group Facilitation"    
+[46] " Nature Writing"                                  
+[47] " Applications of Conservation Science"            
+[48] " Special Topics in Environmental Studies"         
+[49] " Meteorology and Climatology"                     
+[50] " Oceanography"                                    
+[51] " Environmental Data Visualization"                
+[52] " Invasive Species Management"                     
+[53] " Wilderness First Responder"                      
+[54] " Wilderness Policy and Practice"                  
+[55] " Research Seminar in Environmental Studies"       
+[56] " Topics in Environmental Studies"                 
+[57] " Independent Study"                               
+[58] " Environmental Studies Internship"                
+[59] " Environmental Studies Capstone Experience"       
+[60] " Physical Geology Laboratory"                     
+[61] " Environmental Geology Laboratory"                
+[62] " Meteorology and Climatology Laboratory"          
+[63] " Academic and Career Options in Life Sciences"    
+[64] " Special Topics in Integrative Life Sciences"     
+[65] " Integrative Life Sciences Research"              
+[66] " Community Solutions: Multiple Perspectives"      
+[67] " Special Topics in Integrative Life Sciences"     
+[68] " Faith and Life Sciences"                         
+[69] " Special Topics in Integrative Life Sciences"     </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_split</span>( title, <span class="st">" "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] ""             "Introduction" "to"           "Scientific"   "Computing"   
+
+[[2]]
+[1] ""         "Disease"  "and"      "Human"    "Ancestry"
+
+[[3]]
+[1] ""               "Special"        "Topics"         "in"            
+[5] "Bioinformatics"
+
+[[4]]
+[1] ""               "Special"        "Topics"         "in"            
+[5] "Bioinformatics"
+
+[[5]]
+[1] ""               "Computing"      "Skills"         "and"           
+[5] "Concepts"       "for"            "Bioinformatics"
+
+[[6]]
+[1] ""          "Phage"     "Discovery" "I"        
+
+[[7]]
+[1] ""          "Phage"     "Discovery" "II"       
+
+[[8]]
+[1] ""               "Special"        "Topics"         "in"            
+[5] "Bioinformatics"
+
+[[9]]
+[1] ""            "Independent" "Study"      
+
+[[10]]
+[1] ""               "Special"        "Topics"         "in"            
+[5] "Bioinformatics"
+
+[[11]]
+[1] ""          "Molecular" "Biology"   "Through"   "Discovery"
+
+[[12]]
+[1] ""               "Introduction"   "to"             "Bioinformatics"
+
+[[13]]
+[1] ""              "Effective"     "Communication" "in"           
+[5] "the"           "Sciences"     
+
+[[14]]
+[1] ""             "Introduction" "to"           "Mathematical" "Biology"     
+
+[[15]]
+[1] ""               "Special"        "Topics"         "in"            
+[5] "Bioinformatics"
+
+[[16]]
+[1] ""               "Special"        "Topics"         "in"            
+[5] "Bioinformatics"
+
+[[17]]
+[1] ""         "Ethical"  "Issues"   "in"       "Life"     "Sciences"
+
+[[18]]
+[1] ""               "Applications"   "in"             "Bioinformatics"
+
+[[19]]
+[1] ""               "Computational"  "Methods"        "in"            
+[5] "Bioinformatics"
+
+[[20]]
+[1] ""         "Genomic"  "Medicine"
+
+[[21]]
+[1] ""               "Special"        "Topics"         "in"            
+[5] "Bioinformatics"
+
+[[22]]
+[1] ""            "Independent" "Study"      
+
+[[23]]
+[1] ""               "Special"        "Topics"         "in"            
+[5] "Bioinformatics"
+
+[[24]]
+[1] ""         "Research" "and"      "Thesis"  
+
+[[25]]
+[1] ""              "Introduction"  "to"            "Environmental"
+[5] "Studies"       "I"            
+
+[[26]]
+[1] ""              "Introduction"  "to"            "Environmental"
+[5] "Studies"       "II"           
+
+[[27]]
+[1] ""         "Physical" "Geology" 
+
+[[28]]
+[1] ""        "Earth"   "System"  "Science"
+
+[[29]]
+[1] ""           "Electronic" "Portfolios"
+
+[[30]]
+[1] ""           "Outdoor"    "Leadership"
+
+[[31]]
+[1] ""              "Paths"         "to"            "Environmental"
+[5] "Leadership"   
+
+[[32]]
+[1] ""              "Special"       "Topics"        "in"           
+[5] "Environmental" "Studies"      
+
+[[33]]
+[1] ""            "Sustainable" "Societies:"  "James"       "River"      
+[6] "Basin"      
+
+[[34]]
+[1] ""             "Introduction" "to"           "Meteorology" 
+
+[[35]]
+[1] ""             "Introduction" "to"           "Oceanography"
+
+[[36]]
+[1] ""            "Politics"    "of"          "the"         "Environment"
+
+[[37]]
+[1] ""            "Energy"      "and"         "the"         "Environment"
+
+[[38]]
+[1] ""            "Cartography"
+
+[[39]]
+[1] ""              "Environmental" "Pollution"    
+
+[[40]]
+[1] ""              "Environmental" "Management"   
+
+[[41]]
+[1] ""              "Environmental" "Geology"      
+
+[[42]]
+[1] ""         "Data"     "Literacy"
+
+[[43]]
+[1] ""      "Water"
+
+[[44]]
+[1] ""            "Outdoor"     "Programming" "and"         "Event"      
+[6] "Management" 
+
+[[45]]
+[1] ""             "Outdoor"      "Team"         "Building"     "and"         
+[6] "Group"        "Facilitation"
+
+[[46]]
+[1] ""        "Nature"  "Writing"
+
+[[47]]
+[1] ""             "Applications" "of"           "Conservation" "Science"     
+
+[[48]]
+[1] ""              "Special"       "Topics"        "in"           
+[5] "Environmental" "Studies"      
+
+[[49]]
+[1] ""            "Meteorology" "and"         "Climatology"
+
+[[50]]
+[1] ""             "Oceanography"
+
+[[51]]
+[1] ""              "Environmental" "Data"          "Visualization"
+
+[[52]]
+[1] ""           "Invasive"   "Species"    "Management"
+
+[[53]]
+[1] ""           "Wilderness" "First"      "Responder" 
+
+[[54]]
+[1] ""           "Wilderness" "Policy"     "and"        "Practice"  
+
+[[55]]
+[1] ""              "Research"      "Seminar"       "in"           
+[5] "Environmental" "Studies"      
+
+[[56]]
+[1] ""              "Topics"        "in"            "Environmental"
+[5] "Studies"      
+
+[[57]]
+[1] ""            "Independent" "Study"      
+
+[[58]]
+[1] ""              "Environmental" "Studies"       "Internship"   
+
+[[59]]
+[1] ""              "Environmental" "Studies"       "Capstone"     
+[5] "Experience"   
+
+[[60]]
+[1] ""           "Physical"   "Geology"    "Laboratory"
+
+[[61]]
+[1] ""              "Environmental" "Geology"       "Laboratory"   
+
+[[62]]
+[1] ""            "Meteorology" "and"         "Climatology" "Laboratory" 
+
+[[63]]
+[1] ""         "Academic" "and"      "Career"   "Options"  "in"       "Life"    
+[8] "Sciences"
+
+[[64]]
+[1] ""            "Special"     "Topics"      "in"          "Integrative"
+[6] "Life"        "Sciences"   
+
+[[65]]
+[1] ""            "Integrative" "Life"        "Sciences"    "Research"   
+
+[[66]]
+[1] ""             "Community"    "Solutions:"   "Multiple"     "Perspectives"
+
+[[67]]
+[1] ""            "Special"     "Topics"      "in"          "Integrative"
+[6] "Life"        "Sciences"   
+
+[[68]]
+[1] ""         "Faith"    "and"      "Life"     "Sciences"
+
+[[69]]
+[1] ""            "Special"     "Topics"      "in"          "Integrative"
+[6] "Life"        "Sciences"   </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_split</span>( title, <span class="st">" "</span>, <span class="at">simplify=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      [,1] [,2]            [,3]            [,4]             [,5]            
+ [1,] ""   "Introduction"  "to"            "Scientific"     "Computing"     
+ [2,] ""   "Disease"       "and"           "Human"          "Ancestry"      
+ [3,] ""   "Special"       "Topics"        "in"             "Bioinformatics"
+ [4,] ""   "Special"       "Topics"        "in"             "Bioinformatics"
+ [5,] ""   "Computing"     "Skills"        "and"            "Concepts"      
+ [6,] ""   "Phage"         "Discovery"     "I"              ""              
+ [7,] ""   "Phage"         "Discovery"     "II"             ""              
+ [8,] ""   "Special"       "Topics"        "in"             "Bioinformatics"
+ [9,] ""   "Independent"   "Study"         ""               ""              
+[10,] ""   "Special"       "Topics"        "in"             "Bioinformatics"
+[11,] ""   "Molecular"     "Biology"       "Through"        "Discovery"     
+[12,] ""   "Introduction"  "to"            "Bioinformatics" ""              
+[13,] ""   "Effective"     "Communication" "in"             "the"           
+[14,] ""   "Introduction"  "to"            "Mathematical"   "Biology"       
+[15,] ""   "Special"       "Topics"        "in"             "Bioinformatics"
+[16,] ""   "Special"       "Topics"        "in"             "Bioinformatics"
+[17,] ""   "Ethical"       "Issues"        "in"             "Life"          
+[18,] ""   "Applications"  "in"            "Bioinformatics" ""              
+[19,] ""   "Computational" "Methods"       "in"             "Bioinformatics"
+[20,] ""   "Genomic"       "Medicine"      ""               ""              
+[21,] ""   "Special"       "Topics"        "in"             "Bioinformatics"
+[22,] ""   "Independent"   "Study"         ""               ""              
+[23,] ""   "Special"       "Topics"        "in"             "Bioinformatics"
+[24,] ""   "Research"      "and"           "Thesis"         ""              
+[25,] ""   "Introduction"  "to"            "Environmental"  "Studies"       
+[26,] ""   "Introduction"  "to"            "Environmental"  "Studies"       
+[27,] ""   "Physical"      "Geology"       ""               ""              
+[28,] ""   "Earth"         "System"        "Science"        ""              
+[29,] ""   "Electronic"    "Portfolios"    ""               ""              
+[30,] ""   "Outdoor"       "Leadership"    ""               ""              
+[31,] ""   "Paths"         "to"            "Environmental"  "Leadership"    
+[32,] ""   "Special"       "Topics"        "in"             "Environmental" 
+[33,] ""   "Sustainable"   "Societies:"    "James"          "River"         
+[34,] ""   "Introduction"  "to"            "Meteorology"    ""              
+[35,] ""   "Introduction"  "to"            "Oceanography"   ""              
+[36,] ""   "Politics"      "of"            "the"            "Environment"   
+[37,] ""   "Energy"        "and"           "the"            "Environment"   
+[38,] ""   "Cartography"   ""              ""               ""              
+[39,] ""   "Environmental" "Pollution"     ""               ""              
+[40,] ""   "Environmental" "Management"    ""               ""              
+[41,] ""   "Environmental" "Geology"       ""               ""              
+[42,] ""   "Data"          "Literacy"      ""               ""              
+[43,] ""   "Water"         ""              ""               ""              
+[44,] ""   "Outdoor"       "Programming"   "and"            "Event"         
+[45,] ""   "Outdoor"       "Team"          "Building"       "and"           
+[46,] ""   "Nature"        "Writing"       ""               ""              
+[47,] ""   "Applications"  "of"            "Conservation"   "Science"       
+[48,] ""   "Special"       "Topics"        "in"             "Environmental" 
+[49,] ""   "Meteorology"   "and"           "Climatology"    ""              
+[50,] ""   "Oceanography"  ""              ""               ""              
+[51,] ""   "Environmental" "Data"          "Visualization"  ""              
+[52,] ""   "Invasive"      "Species"       "Management"     ""              
+[53,] ""   "Wilderness"    "First"         "Responder"      ""              
+[54,] ""   "Wilderness"    "Policy"        "and"            "Practice"      
+[55,] ""   "Research"      "Seminar"       "in"             "Environmental" 
+[56,] ""   "Topics"        "in"            "Environmental"  "Studies"       
+[57,] ""   "Independent"   "Study"         ""               ""              
+[58,] ""   "Environmental" "Studies"       "Internship"     ""              
+[59,] ""   "Environmental" "Studies"       "Capstone"       "Experience"    
+[60,] ""   "Physical"      "Geology"       "Laboratory"     ""              
+[61,] ""   "Environmental" "Geology"       "Laboratory"     ""              
+[62,] ""   "Meteorology"   "and"           "Climatology"    "Laboratory"    
+[63,] ""   "Academic"      "and"           "Career"         "Options"       
+[64,] ""   "Special"       "Topics"        "in"             "Integrative"   
+[65,] ""   "Integrative"   "Life"          "Sciences"       "Research"      
+[66,] ""   "Community"     "Solutions:"    "Multiple"       "Perspectives"  
+[67,] ""   "Special"       "Topics"        "in"             "Integrative"   
+[68,] ""   "Faith"         "and"           "Life"           "Sciences"      
+[69,] ""   "Special"       "Topics"        "in"             "Integrative"   
+      [,6]         [,7]             [,8]      
+ [1,] ""           ""               ""        
+ [2,] ""           ""               ""        
+ [3,] ""           ""               ""        
+ [4,] ""           ""               ""        
+ [5,] "for"        "Bioinformatics" ""        
+ [6,] ""           ""               ""        
+ [7,] ""           ""               ""        
+ [8,] ""           ""               ""        
+ [9,] ""           ""               ""        
+[10,] ""           ""               ""        
+[11,] ""           ""               ""        
+[12,] ""           ""               ""        
+[13,] "Sciences"   ""               ""        
+[14,] ""           ""               ""        
+[15,] ""           ""               ""        
+[16,] ""           ""               ""        
+[17,] "Sciences"   ""               ""        
+[18,] ""           ""               ""        
+[19,] ""           ""               ""        
+[20,] ""           ""               ""        
+[21,] ""           ""               ""        
+[22,] ""           ""               ""        
+[23,] ""           ""               ""        
+[24,] ""           ""               ""        
+[25,] "I"          ""               ""        
+[26,] "II"         ""               ""        
+[27,] ""           ""               ""        
+[28,] ""           ""               ""        
+[29,] ""           ""               ""        
+[30,] ""           ""               ""        
+[31,] ""           ""               ""        
+[32,] "Studies"    ""               ""        
+[33,] "Basin"      ""               ""        
+[34,] ""           ""               ""        
+[35,] ""           ""               ""        
+[36,] ""           ""               ""        
+[37,] ""           ""               ""        
+[38,] ""           ""               ""        
+[39,] ""           ""               ""        
+[40,] ""           ""               ""        
+[41,] ""           ""               ""        
+[42,] ""           ""               ""        
+[43,] ""           ""               ""        
+[44,] "Management" ""               ""        
+[45,] "Group"      "Facilitation"   ""        
+[46,] ""           ""               ""        
+[47,] ""           ""               ""        
+[48,] "Studies"    ""               ""        
+[49,] ""           ""               ""        
+[50,] ""           ""               ""        
+[51,] ""           ""               ""        
+[52,] ""           ""               ""        
+[53,] ""           ""               ""        
+[54,] ""           ""               ""        
+[55,] "Studies"    ""               ""        
+[56,] ""           ""               ""        
+[57,] ""           ""               ""        
+[58,] ""           ""               ""        
+[59,] ""           ""               ""        
+[60,] ""           ""               ""        
+[61,] ""           ""               ""        
+[62,] ""           ""               ""        
+[63,] "in"         "Life"           "Sciences"
+[64,] "Life"       "Sciences"       ""        
+[65,] ""           ""               ""        
+[66,] ""           ""               ""        
+[67,] "Life"       "Sciences"       ""        
+[68,] ""           ""               ""        
+[69,] "Life"       "Sciences"       ""        </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.vector</span>( <span class="fu">str_split</span>( title, <span class="st">" "</span>, <span class="at">simplify=</span><span class="cn">TRUE</span>) ) <span class="ot">-&gt;</span> words</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>words <span class="ot">&lt;-</span> words[ <span class="fu">str_length</span>(words) <span class="sc">&gt;</span> <span class="dv">0</span> ]</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>words <span class="ot">&lt;-</span> <span class="fu">sort</span>( words )</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>words</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] "Academic"       "Ancestry"       "and"            "and"           
+  [5] "and"            "and"            "and"            "and"           
+  [9] "and"            "and"            "and"            "and"           
+ [13] "and"            "Applications"   "Applications"   "Basin"         
+ [17] "Bioinformatics" "Bioinformatics" "Bioinformatics" "Bioinformatics"
+ [21] "Bioinformatics" "Bioinformatics" "Bioinformatics" "Bioinformatics"
+ [25] "Bioinformatics" "Bioinformatics" "Bioinformatics" "Bioinformatics"
+ [29] "Biology"        "Biology"        "Building"       "Capstone"      
+ [33] "Career"         "Cartography"    "Climatology"    "Climatology"   
+ [37] "Communication"  "Community"      "Computational"  "Computing"     
+ [41] "Computing"      "Concepts"       "Conservation"   "Data"          
+ [45] "Data"           "Discovery"      "Discovery"      "Discovery"     
+ [49] "Disease"        "Earth"          "Effective"      "Electronic"    
+ [53] "Energy"         "Environment"    "Environment"    "Environmental" 
+ [57] "Environmental"  "Environmental"  "Environmental"  "Environmental" 
+ [61] "Environmental"  "Environmental"  "Environmental"  "Environmental" 
+ [65] "Environmental"  "Environmental"  "Environmental"  "Environmental" 
+ [69] "Environmental"  "Ethical"        "Event"          "Experience"    
+ [73] "Facilitation"   "Faith"          "First"          "for"           
+ [77] "Genomic"        "Geology"        "Geology"        "Geology"       
+ [81] "Geology"        "Group"          "Human"          "I"             
+ [85] "I"              "II"             "II"             "in"            
+ [89] "in"             "in"             "in"             "in"            
+ [93] "in"             "in"             "in"             "in"            
+ [97] "in"             "in"             "in"             "in"            
+[101] "in"             "in"             "in"             "in"            
+[105] "in"             "in"             "in"             "Independent"   
+[109] "Independent"    "Independent"    "Integrative"    "Integrative"   
+[113] "Integrative"    "Integrative"    "Internship"     "Introduction"  
+[117] "Introduction"   "Introduction"   "Introduction"   "Introduction"  
+[121] "Introduction"   "Introduction"   "Invasive"       "Issues"        
+[125] "James"          "Laboratory"     "Laboratory"     "Laboratory"    
+[129] "Leadership"     "Leadership"     "Life"           "Life"          
+[133] "Life"           "Life"           "Life"           "Life"          
+[137] "Life"           "Literacy"       "Management"     "Management"    
+[141] "Management"     "Mathematical"   "Medicine"       "Meteorology"   
+[145] "Meteorology"    "Meteorology"    "Methods"        "Molecular"     
+[149] "Multiple"       "Nature"         "Oceanography"   "Oceanography"  
+[153] "of"             "of"             "Options"        "Outdoor"       
+[157] "Outdoor"        "Outdoor"        "Paths"          "Perspectives"  
+[161] "Phage"          "Phage"          "Physical"       "Physical"      
+[165] "Policy"         "Politics"       "Pollution"      "Portfolios"    
+[169] "Practice"       "Programming"    "Research"       "Research"      
+[173] "Research"       "Responder"      "River"          "Science"       
+[177] "Science"        "Sciences"       "Sciences"       "Sciences"      
+[181] "Sciences"       "Sciences"       "Sciences"       "Sciences"      
+[185] "Sciences"       "Scientific"     "Seminar"        "Skills"        
+[189] "Societies:"     "Solutions:"     "Special"        "Special"       
+[193] "Special"        "Special"        "Special"        "Special"       
+[197] "Special"        "Special"        "Special"        "Special"       
+[201] "Special"        "Special"        "Special"        "Species"       
+[205] "Studies"        "Studies"        "Studies"        "Studies"       
+[209] "Studies"        "Studies"        "Studies"        "Studies"       
+[213] "Study"          "Study"          "Study"          "Sustainable"   
+[217] "System"         "Team"           "the"            "the"           
+[221] "the"            "Thesis"         "Through"        "to"            
+[225] "to"             "to"             "to"             "to"            
+[229] "to"             "to"             "to"             "Topics"        
+[233] "Topics"         "Topics"         "Topics"         "Topics"        
+[237] "Topics"         "Topics"         "Topics"         "Topics"        
+[241] "Topics"         "Topics"         "Topics"         "Topics"        
+[245] "Topics"         "Visualization"  "Water"          "Wilderness"    
+[249] "Wilderness"     "Writing"       </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>( words, <span class="at">count =</span> <span class="dv">1</span> ) <span class="sc">|&gt;</span> </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">word =</span> <span class="fu">factor</span>( words ) ) <span class="sc">|&gt;</span> </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>( word ) <span class="sc">|&gt;</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>( <span class="at">freq =</span> <span class="fu">sum</span>( count )) <span class="sc">|&gt;</span> </span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>( <span class="sc">-</span>freq ) <span class="ot">-&gt;</span> tdm </span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>tdm </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 100 × 2
+   word            freq
+   &lt;fct&gt;          &lt;dbl&gt;
+ 1 in                20
+ 2 Environmental     14
+ 3 Topics            14
+ 4 Special           13
+ 5 Bioinformatics    12
+ 6 and               11
+ 7 Sciences           8
+ 8 Studies            8
+ 9 to                 8
+10 Introduction       7
+# ℹ 90 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wordcloud2</span>(<span class="at">data =</span> tdm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="wordcloud2 html-widget html-fill-item" id="htmlwidget-151343d7237a33b30653" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-151343d7237a33b30653">{"x":{"word":["in","Environmental","Topics","Special","Bioinformatics","and","Sciences","Studies","to","Introduction","Life","Geology","Integrative","Discovery","Independent","Laboratory","Management","Meteorology","Outdoor","Research","Study","the","Applications","Biology","Climatology","Computing","Data","Environment","I","II","Leadership","Oceanography","of","Phage","Physical","Science","Wilderness","Academic","Ancestry","Basin","Building","Capstone","Career","Cartography","Communication","Community","Computational","Concepts","Conservation","Disease","Earth","Effective","Electronic","Energy","Ethical","Event","Experience","Facilitation","Faith","First","for","Genomic","Group","Human","Internship","Invasive","Issues","James","Literacy","Mathematical","Medicine","Methods","Molecular","Multiple","Nature","Options","Paths","Perspectives","Policy","Politics","Pollution","Portfolios","Practice","Programming","Responder","River","Scientific","Seminar","Skills","Societies:","Solutions:","Species","Sustainable","System","Team","Thesis","Through","Visualization","Water","Writing"],"freq":[20,14,14,13,12,11,8,8,8,7,7,4,4,3,3,3,3,3,3,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":0,"weightFactor":9,"backgroundColor":"white","gridSize":0,"minRotation":-0.7853981633974483,"maxRotation":0.7853981633974483,"shuffle":true,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":{"render":[{"code":"function(el,x){\n                        console.log(123);\n                        if(!iii){\n                          window.location.reload();\n                          iii = False;\n\n                        }\n  }","data":null}]}}</script>
+</div>
+</div>
 </section>
 
 </main>

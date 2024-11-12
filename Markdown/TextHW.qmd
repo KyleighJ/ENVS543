@@ -81,29 +81,58 @@ barplot( course_nums,
 ```
 
 ## Word Cloud
+
+```{r}
+library(wordcloud2)
+
+idx <- grepl( pattern, lfsc )
+lfsc[idx] -> titles
+titles
+
+```
+
+```{r}
+raw <- str_split(titles, pattern="\\.", simplify = TRUE)
+dim(raw)
+```
+
+```{r}
+program <- str_split( raw[,1], pattern=" ", simplify=TRUE)[,1]
+
+code <- str_split( raw[,1], pattern=" ", simplify=TRUE)[,2]
+code <- as.numeric( code )
+code 
+```
+
+```{r}
+title <- raw[,2]
+title
+```
+
 ```{r}
 str_split( title, " ")
-str_split( title, " ", simplify = TRUE )
-as.vector( str_split( title, " ", simplify = TRUE) ) -> words
+str_split( title, " ", simplify=TRUE)
 
-words <- words[ str_length( words ) > 0 ]
+as.vector( str_split( title, " ", simplify=TRUE) ) -> words
+
+words <- words[ str_length(words) > 0 ]
+
+words <- sort( words )
+words
 
 ```
 
 ```{r}
-data.frame( words, count = 1 ) |>
-  mutate( word = factor( words ) ) |>
+data.frame( words, count = 1 ) |> 
+  mutate( word = factor( words ) ) |> 
   group_by( word ) |>
-  summarise( freq = sum( count ) ) |>
-  arrange( -freq ) -> tdm
+  summarize( freq = sum( count )) |> 
+  arrange( -freq ) -> tdm 
 
-tdm
+tdm 
 ```
 
 ```{r}
+wordcloud2(data = tdm)
 
 ```
-
-
-
-
