@@ -286,215 +286,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pattern <span class="ot">&lt;-</span> <span class="st">"^[A-Z]{4} [0-9]{3}.+[0-9] Hour[s]?</span><span class="sc">\\</span><span class="st">.$"</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grepl</span>( pattern, lfsc ) <span class="ot">-&gt;</span> idx</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>titles <span class="ot">&lt;-</span> lfsc[ idx ]</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>titles</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] "BNFO 101. Introduction to Scientific Computing. 1 Hour."             
- [2] "BNFO 125. Disease and Human Ancestry. 3 Hours."                      
- [3] "BNFO 191. Special Topics in Bioinformatics. 1-4 Hours."              
- [4] "BNFO 193. Special Topics in Bioinformatics. 1-4 Hours."              
- [5] "BNFO 201. Computing Skills and Concepts for Bioinformatics. 3 Hours."
- [6] "BNFO 251. Phage Discovery I. 2 Hours."                               
- [7] "BNFO 252. Phage Discovery II. 2 Hours."                              
- [8] "BNFO 291. Special Topics in Bioinformatics. 1-4 Hours."              
- [9] "BNFO 292. Independent Study. 1-2 Hours."                             
-[10] "BNFO 293. Special Topics in Bioinformatics. 1-4 Hours."              
-[11] "BNFO 300. Molecular Biology Through Discovery. 3 Hours."             
-[12] "BNFO 301. Introduction to Bioinformatics. 3 Hours."                  
-[13] "BNFO 315. Effective Communication in the Sciences. 3 Hours."         
-[14] "BNFO 380. Introduction to Mathematical Biology. 4 Hours."            
-[15] "BNFO 391. Special Topics in Bioinformatics. 1-4 Hours."              
-[16] "BNFO 393. Special Topics in Bioinformatics. 1-4 Hours."              
-[17] "BNFO 411. Ethical Issues in Life Sciences. 2 Hours."                 
-[18] "BNFO 420. Applications in Bioinformatics. 3 Hours."                  
-[19] "BNFO 440. Computational Methods in Bioinformatics. 3 Hours."         
-[20] "BNFO 451. Genomic Medicine. 3 Hours."                                
-[21] "BNFO 491. Special Topics in Bioinformatics. 1-4 Hours."              
-[22] "BNFO 492. Independent Study. 1-4 Hours."                             
-[23] "BNFO 493. Special Topics in Bioinformatics. 1-4 Hours."              
-[24] "BNFO 497. Research and Thesis. 1-4 Hours."                           
-[25] "ENVS 101. Introduction to Environmental Studies I. 3 Hours."         
-[26] "ENVS 102. Introduction to Environmental Studies II. 3 Hours."        
-[27] "ENVS 105. Physical Geology. 3 Hours."                                
-[28] "ENVS 201. Earth System Science. 3 Hours."                            
-[29] "ENVS 222. Electronic Portfolios. 1 Hour."                            
-[30] "ENVS 260. Outdoor Leadership. 3 Hours."                              
-[31] "ENVS 265. Paths to Environmental Leadership. 2 Hours."               
-[32] "ENVS 291. Special Topics in Environmental Studies. 1-4 Hours."       
-[33] "ENVS 300. Sustainable Societies: James River Basin. 3 Hours."        
-[34] "ENVS 301. Introduction to Meteorology. 3 Hours."                     
-[35] "ENVS 310. Introduction to Oceanography. 3 Hours."                    
-[36] "ENVS 311. Politics of the Environment. 3 Hours."                     
-[37] "ENVS 315. Energy and the Environment. 3 Hours."                      
-[38] "ENVS 321. Cartography. 3 Hours."                                     
-[39] "ENVS 330. Environmental Pollution. 3 Hours."                         
-[40] "ENVS 332. Environmental Management. 3 Hours."                        
-[41] "ENVS 335. Environmental Geology. 3 Hours."                           
-[42] "ENVS 343. Data Literacy. 4 Hours."                                   
-[43] "ENVS 355. Water. 3 Hours."                                           
-[44] "ENVS 360. Outdoor Programming and Event Management. 3 Hours."        
-[45] "ENVS 361. Outdoor Team Building and Group Facilitation. 3 Hours."    
-[46] "ENVS 368. Nature Writing. 3 Hours."                                  
-[47] "ENVS 370. Applications of Conservation Science. 3 Hours."            
-[48] "ENVS 391. Special Topics in Environmental Studies. 1-4 Hours."       
-[49] "ENVS 401. Meteorology and Climatology. 3 Hours."                     
-[50] "ENVS 411. Oceanography. 3 Hours."                                    
-[51] "ENVS 421. Environmental Data Visualization. 3 Hours."                
-[52] "ENVS 430. Invasive Species Management. 3 Hours."                     
-[53] "ENVS 460. Wilderness First Responder. 3 Hours."                      
-[54] "ENVS 461. Wilderness Policy and Practice. 3 Hours."                  
-[55] "ENVS 490. Research Seminar in Environmental Studies. 3 Hours."       
-[56] "ENVS 491. Topics in Environmental Studies. 1-4 Hours."               
-[57] "ENVS 492. Independent Study. 1-3 Hours."                             
-[58] "ENVS 493. Environmental Studies Internship. 1-3 Hours."              
-[59] "ENVS 499. Environmental Studies Capstone Experience. 0 Hours."       
-[60] "ENVZ 105. Physical Geology Laboratory. 1 Hour."                      
-[61] "ENVZ 335. Environmental Geology Laboratory. 1 Hour."                 
-[62] "ENVZ 401. Meteorology and Climatology Laboratory. 1 Hour."           
-[63] "LFSC 101. Academic and Career Options in Life Sciences. 1 Hour."     
-[64] "LFSC 191. Special Topics in Integrative Life Sciences. 1-4 Hours."   
-[65] "LFSC 301. Integrative Life Sciences Research. 3 Hours."              
-[66] "LFSC 307. Community Solutions: Multiple Perspectives. 3 Hours."      
-[67] "LFSC 391. Special Topics in Integrative Life Sciences. 1-4 Hours."   
-[68] "LFSC 401. Faith and Life Sciences. 3 Hours."                         
-[69] "LFSC 491. Special Topics in Integrative Life Sciences. 1-4 Hours."   </code></pre>
-</div>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>titles <span class="ot">&lt;-</span> lfsc[ idx ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_split</span>( titles, <span class="at">pattern =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">."</span>, <span class="at">simplify =</span> <span class="cn">TRUE</span> ) <span class="ot">-&gt;</span> raw</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>( <span class="at">course =</span> raw[,<span class="dv">1</span>],</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="fu">str_trim</span>(raw[,<span class="dv">2</span>]),</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">hours =</span> <span class="fu">str_trim</span>(raw[,<span class="dv">3</span>]), <span class="st">"Hours"</span> ) <span class="sc">|&gt;</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">hours =</span> <span class="fu">str_remove</span>( hours, <span class="st">"Hour"</span>) ) <span class="sc">|&gt;</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">hours =</span> <span class="fu">as.numeric</span>( <span class="fu">str_remove</span>( hours, <span class="st">"s"</span>) ) ) <span class="sc">|&gt;</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">program =</span> <span class="fu">str_split</span>( course, <span class="st">" "</span>, <span class="at">simplify =</span> <span class="cn">TRUE</span>)[,<span class="dv">1</span>]) <span class="sc">|&gt;</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">number =</span> <span class="fu">as.numeric</span>( <span class="fu">str_split</span>( course, <span class="st">" "</span>, <span class="at">simplify =</span> <span class="cn">TRUE</span>)[,<span class="dv">2</span>]) ) <span class="sc">|&gt;</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>( program, number, title, hours ) <span class="ot">-&gt;</span> df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_split</span>( titles, <span class="at">pattern =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">."</span>, <span class="at">simplify =</span> <span class="cn">TRUE</span> ) <span class="ot">-&gt;</span> raw</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>( <span class="at">course =</span> raw[,<span class="dv">1</span>],</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="fu">str_trim</span>(raw[,<span class="dv">2</span>]),</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">hours =</span> <span class="fu">str_trim</span>(raw[,<span class="dv">3</span>]), <span class="st">"Hours"</span> ) <span class="sc">|&gt;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">hours =</span> <span class="fu">str_remove</span>( hours, <span class="st">"Hour"</span>) ) <span class="sc">|&gt;</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">hours =</span> <span class="fu">as.numeric</span>( <span class="fu">str_remove</span>( hours, <span class="st">"s"</span>) ) ) <span class="sc">|&gt;</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">program =</span> <span class="fu">str_split</span>( course, <span class="st">" "</span>, <span class="at">simplify =</span> <span class="cn">TRUE</span>)[,<span class="dv">1</span>]) <span class="sc">|&gt;</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">number =</span> <span class="fu">as.numeric</span>( <span class="fu">str_split</span>( course, <span class="st">" "</span>, <span class="at">simplify =</span> <span class="cn">TRUE</span>)[,<span class="dv">2</span>]) ) <span class="sc">|&gt;</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>( program, number, title, hours ) <span class="ot">-&gt;</span> df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: There was 1 warning in `mutate()`.
 ℹ In argument: `hours = as.numeric(str_remove(hours, "s"))`.
 Caused by warning:
 ! NAs introduced by coercion</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   program number                                            title hours
-1     BNFO    101             Introduction to Scientific Computing     1
-2     BNFO    125                       Disease and Human Ancestry     3
-3     BNFO    191                 Special Topics in Bioinformatics    NA
-4     BNFO    193                 Special Topics in Bioinformatics    NA
-5     BNFO    201 Computing Skills and Concepts for Bioinformatics     3
-6     BNFO    251                                Phage Discovery I     2
-7     BNFO    252                               Phage Discovery II     2
-8     BNFO    291                 Special Topics in Bioinformatics    NA
-9     BNFO    292                                Independent Study    NA
-10    BNFO    293                 Special Topics in Bioinformatics    NA
-11    BNFO    300              Molecular Biology Through Discovery     3
-12    BNFO    301                   Introduction to Bioinformatics     3
-13    BNFO    315          Effective Communication in the Sciences     3
-14    BNFO    380             Introduction to Mathematical Biology     4
-15    BNFO    391                 Special Topics in Bioinformatics    NA
-16    BNFO    393                 Special Topics in Bioinformatics    NA
-17    BNFO    411                  Ethical Issues in Life Sciences     2
-18    BNFO    420                   Applications in Bioinformatics     3
-19    BNFO    440          Computational Methods in Bioinformatics     3
-20    BNFO    451                                 Genomic Medicine     3
-21    BNFO    491                 Special Topics in Bioinformatics    NA
-22    BNFO    492                                Independent Study    NA
-23    BNFO    493                 Special Topics in Bioinformatics    NA
-24    BNFO    497                              Research and Thesis    NA
-25    ENVS    101          Introduction to Environmental Studies I     3
-26    ENVS    102         Introduction to Environmental Studies II     3
-27    ENVS    105                                 Physical Geology     3
-28    ENVS    201                             Earth System Science     3
-29    ENVS    222                            Electronic Portfolios     1
-30    ENVS    260                               Outdoor Leadership     3
-31    ENVS    265                Paths to Environmental Leadership     2
-32    ENVS    291          Special Topics in Environmental Studies    NA
-33    ENVS    300         Sustainable Societies: James River Basin     3
-34    ENVS    301                      Introduction to Meteorology     3
-35    ENVS    310                     Introduction to Oceanography     3
-36    ENVS    311                      Politics of the Environment     3
-37    ENVS    315                       Energy and the Environment     3
-38    ENVS    321                                      Cartography     3
-39    ENVS    330                          Environmental Pollution     3
-40    ENVS    332                         Environmental Management     3
-41    ENVS    335                            Environmental Geology     3
-42    ENVS    343                                    Data Literacy     4
-43    ENVS    355                                            Water     3
-44    ENVS    360         Outdoor Programming and Event Management     3
-45    ENVS    361     Outdoor Team Building and Group Facilitation     3
-46    ENVS    368                                   Nature Writing     3
-47    ENVS    370             Applications of Conservation Science     3
-48    ENVS    391          Special Topics in Environmental Studies    NA
-49    ENVS    401                      Meteorology and Climatology     3
-50    ENVS    411                                     Oceanography     3
-51    ENVS    421                 Environmental Data Visualization     3
-52    ENVS    430                      Invasive Species Management     3
-53    ENVS    460                       Wilderness First Responder     3
-54    ENVS    461                   Wilderness Policy and Practice     3
-55    ENVS    490        Research Seminar in Environmental Studies     3
-56    ENVS    491                  Topics in Environmental Studies    NA
-57    ENVS    492                                Independent Study    NA
-58    ENVS    493                 Environmental Studies Internship    NA
-59    ENVS    499        Environmental Studies Capstone Experience     0
-60    ENVZ    105                      Physical Geology Laboratory     1
-61    ENVZ    335                 Environmental Geology Laboratory     1
-62    ENVZ    401           Meteorology and Climatology Laboratory     1
-63    LFSC    101     Academic and Career Options in Life Sciences     1
-64    LFSC    191      Special Topics in Integrative Life Sciences    NA
-65    LFSC    301               Integrative Life Sciences Research     3
-66    LFSC    307       Community Solutions: Multiple Perspectives     3
-67    LFSC    391      Special Topics in Integrative Life Sciences    NA
-68    LFSC    401                          Faith and Life Sciences     3
-69    LFSC    491      Special Topics in Integrative Life Sciences    NA</code></pre>
-</div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">level =</span> <span class="fu">floor</span>(number <span class="sc">/</span> <span class="dv">100</span>) <span class="sc">*</span> <span class="dv">100</span> ) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>( level <span class="sc">%in%</span> <span class="fu">c</span>( <span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>, <span class="dv">400</span> ) ) <span class="sc">%&gt;%</span>  </span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>( program, level ) <span class="sc">%&gt;%</span>                   </span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>( <span class="at">course_count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">'drop'</span> ) <span class="ot">-&gt;</span> df_sum</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>df_sum</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 14 × 3
-   program level course_count
-   &lt;chr&gt;   &lt;dbl&gt;        &lt;int&gt;
- 1 BNFO      100            4
- 2 BNFO      200            6
- 3 BNFO      300            6
- 4 BNFO      400            8
- 5 ENVS      100            3
- 6 ENVS      200            5
- 7 ENVS      300           16
- 8 ENVS      400           11
- 9 ENVZ      100            1
-10 ENVZ      300            1
-11 ENVZ      400            1
-12 LFSC      100            2
-13 LFSC      300            3
-14 LFSC      400            2</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">level =</span> <span class="fu">floor</span>(number <span class="sc">/</span> <span class="dv">100</span>) <span class="sc">*</span> <span class="dv">100</span> ) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>( level <span class="sc">%in%</span> <span class="fu">c</span>( <span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>, <span class="dv">400</span> ) ) <span class="sc">%&gt;%</span>  </span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>( program, level ) <span class="sc">%&gt;%</span>                   </span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>( <span class="at">course_count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">'drop'</span> ) <span class="ot">-&gt;</span> df_sum</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>course_nums <span class="ot">&lt;-</span> <span class="fu">with</span>(df_sum, <span class="fu">tapply</span>(course_count, <span class="fu">list</span>(level, program), sum, <span class="at">default =</span> <span class="dv">0</span>))</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>( course_nums,</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">beside =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">c</span>( <span class="st">"lightblue"</span>, <span class="st">"lightgreen"</span>, <span class="st">"lightyellow"</span>, <span class="st">"lightpink"</span> ),</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Number of Courses"</span>,</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"Program"</span>,</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend =</span> <span class="fu">rownames</span>( course_nums ),</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.names =</span> <span class="fl">0.7</span>,</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Number of Courses at Each Level in Each Program"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>course_nums <span class="ot">&lt;-</span> <span class="fu">with</span>(df_sum, <span class="fu">tapply</span>(course_count, <span class="fu">list</span>(level, program), sum, <span class="at">default =</span> <span class="dv">0</span>))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>( course_nums,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">beside =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">c</span>( <span class="st">"lightblue"</span>, <span class="st">"lightgreen"</span>, <span class="st">"lightyellow"</span>, <span class="st">"lightpink"</span> ),</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Number of Courses"</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"Program"</span>,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend =</span> <span class="fu">rownames</span>( course_nums ),</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.names =</span> <span class="fl">0.7</span>,</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Number of Courses at Each Level in Each Program"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -507,180 +341,29 @@ Caused by warning:
 <section id="word-cloud" class="level2">
 <h2 class="anchored" data-anchor-id="word-cloud">Word Cloud</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wordcloud2)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="fu">grepl</span>( pattern, lfsc )</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>lfsc[idx] <span class="ot">-&gt;</span> titles</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>titles</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] "BNFO 101. Introduction to Scientific Computing. 1 Hour."             
- [2] "BNFO 125. Disease and Human Ancestry. 3 Hours."                      
- [3] "BNFO 191. Special Topics in Bioinformatics. 1-4 Hours."              
- [4] "BNFO 193. Special Topics in Bioinformatics. 1-4 Hours."              
- [5] "BNFO 201. Computing Skills and Concepts for Bioinformatics. 3 Hours."
- [6] "BNFO 251. Phage Discovery I. 2 Hours."                               
- [7] "BNFO 252. Phage Discovery II. 2 Hours."                              
- [8] "BNFO 291. Special Topics in Bioinformatics. 1-4 Hours."              
- [9] "BNFO 292. Independent Study. 1-2 Hours."                             
-[10] "BNFO 293. Special Topics in Bioinformatics. 1-4 Hours."              
-[11] "BNFO 300. Molecular Biology Through Discovery. 3 Hours."             
-[12] "BNFO 301. Introduction to Bioinformatics. 3 Hours."                  
-[13] "BNFO 315. Effective Communication in the Sciences. 3 Hours."         
-[14] "BNFO 380. Introduction to Mathematical Biology. 4 Hours."            
-[15] "BNFO 391. Special Topics in Bioinformatics. 1-4 Hours."              
-[16] "BNFO 393. Special Topics in Bioinformatics. 1-4 Hours."              
-[17] "BNFO 411. Ethical Issues in Life Sciences. 2 Hours."                 
-[18] "BNFO 420. Applications in Bioinformatics. 3 Hours."                  
-[19] "BNFO 440. Computational Methods in Bioinformatics. 3 Hours."         
-[20] "BNFO 451. Genomic Medicine. 3 Hours."                                
-[21] "BNFO 491. Special Topics in Bioinformatics. 1-4 Hours."              
-[22] "BNFO 492. Independent Study. 1-4 Hours."                             
-[23] "BNFO 493. Special Topics in Bioinformatics. 1-4 Hours."              
-[24] "BNFO 497. Research and Thesis. 1-4 Hours."                           
-[25] "ENVS 101. Introduction to Environmental Studies I. 3 Hours."         
-[26] "ENVS 102. Introduction to Environmental Studies II. 3 Hours."        
-[27] "ENVS 105. Physical Geology. 3 Hours."                                
-[28] "ENVS 201. Earth System Science. 3 Hours."                            
-[29] "ENVS 222. Electronic Portfolios. 1 Hour."                            
-[30] "ENVS 260. Outdoor Leadership. 3 Hours."                              
-[31] "ENVS 265. Paths to Environmental Leadership. 2 Hours."               
-[32] "ENVS 291. Special Topics in Environmental Studies. 1-4 Hours."       
-[33] "ENVS 300. Sustainable Societies: James River Basin. 3 Hours."        
-[34] "ENVS 301. Introduction to Meteorology. 3 Hours."                     
-[35] "ENVS 310. Introduction to Oceanography. 3 Hours."                    
-[36] "ENVS 311. Politics of the Environment. 3 Hours."                     
-[37] "ENVS 315. Energy and the Environment. 3 Hours."                      
-[38] "ENVS 321. Cartography. 3 Hours."                                     
-[39] "ENVS 330. Environmental Pollution. 3 Hours."                         
-[40] "ENVS 332. Environmental Management. 3 Hours."                        
-[41] "ENVS 335. Environmental Geology. 3 Hours."                           
-[42] "ENVS 343. Data Literacy. 4 Hours."                                   
-[43] "ENVS 355. Water. 3 Hours."                                           
-[44] "ENVS 360. Outdoor Programming and Event Management. 3 Hours."        
-[45] "ENVS 361. Outdoor Team Building and Group Facilitation. 3 Hours."    
-[46] "ENVS 368. Nature Writing. 3 Hours."                                  
-[47] "ENVS 370. Applications of Conservation Science. 3 Hours."            
-[48] "ENVS 391. Special Topics in Environmental Studies. 1-4 Hours."       
-[49] "ENVS 401. Meteorology and Climatology. 3 Hours."                     
-[50] "ENVS 411. Oceanography. 3 Hours."                                    
-[51] "ENVS 421. Environmental Data Visualization. 3 Hours."                
-[52] "ENVS 430. Invasive Species Management. 3 Hours."                     
-[53] "ENVS 460. Wilderness First Responder. 3 Hours."                      
-[54] "ENVS 461. Wilderness Policy and Practice. 3 Hours."                  
-[55] "ENVS 490. Research Seminar in Environmental Studies. 3 Hours."       
-[56] "ENVS 491. Topics in Environmental Studies. 1-4 Hours."               
-[57] "ENVS 492. Independent Study. 1-3 Hours."                             
-[58] "ENVS 493. Environmental Studies Internship. 1-3 Hours."              
-[59] "ENVS 499. Environmental Studies Capstone Experience. 0 Hours."       
-[60] "ENVZ 105. Physical Geology Laboratory. 1 Hour."                      
-[61] "ENVZ 335. Environmental Geology Laboratory. 1 Hour."                 
-[62] "ENVZ 401. Meteorology and Climatology Laboratory. 1 Hour."           
-[63] "LFSC 101. Academic and Career Options in Life Sciences. 1 Hour."     
-[64] "LFSC 191. Special Topics in Integrative Life Sciences. 1-4 Hours."   
-[65] "LFSC 301. Integrative Life Sciences Research. 3 Hours."              
-[66] "LFSC 307. Community Solutions: Multiple Perspectives. 3 Hours."      
-[67] "LFSC 391. Special Topics in Integrative Life Sciences. 1-4 Hours."   
-[68] "LFSC 401. Faith and Life Sciences. 3 Hours."                         
-[69] "LFSC 491. Special Topics in Integrative Life Sciences. 1-4 Hours."   </code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wordcloud2)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="fu">grepl</span>( pattern, lfsc )</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>lfsc[idx] <span class="ot">-&gt;</span> titles</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">str_split</span>(titles, <span class="at">pattern=</span><span class="st">"</span><span class="sc">\\</span><span class="st">."</span>, <span class="at">simplify =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(raw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">str_split</span>(titles, <span class="at">pattern=</span><span class="st">"</span><span class="sc">\\</span><span class="st">."</span>, <span class="at">simplify =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(raw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 69  4</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>program <span class="ot">&lt;-</span> <span class="fu">str_split</span>( raw[,<span class="dv">1</span>], <span class="at">pattern=</span><span class="st">" "</span>, <span class="at">simplify=</span><span class="cn">TRUE</span>)[,<span class="dv">1</span>]</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="fu">str_split</span>( raw[,<span class="dv">1</span>], <span class="at">pattern=</span><span class="st">" "</span>, <span class="at">simplify=</span><span class="cn">TRUE</span>)[,<span class="dv">2</span>]</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>( code )</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>code </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] 101 125 191 193 201 251 252 291 292 293 300 301 315 380 391 393 411 420 440
-[20] 451 491 492 493 497 101 102 105 201 222 260 265 291 300 301 310 311 315 321
-[39] 330 332 335 343 355 360 361 368 370 391 401 411 421 430 460 461 490 491 492
-[58] 493 499 105 335 401 101 191 301 307 391 401 491</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>program <span class="ot">&lt;-</span> <span class="fu">str_split</span>( raw[,<span class="dv">1</span>], <span class="at">pattern=</span><span class="st">" "</span>, <span class="at">simplify=</span><span class="cn">TRUE</span>)[,<span class="dv">1</span>]</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="fu">str_split</span>( raw[,<span class="dv">1</span>], <span class="at">pattern=</span><span class="st">" "</span>, <span class="at">simplify=</span><span class="cn">TRUE</span>)[,<span class="dv">2</span>]</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>( code )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>title <span class="ot">&lt;-</span> raw[,<span class="dv">2</span>]</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>title</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] " Introduction to Scientific Computing"            
- [2] " Disease and Human Ancestry"                      
- [3] " Special Topics in Bioinformatics"                
- [4] " Special Topics in Bioinformatics"                
- [5] " Computing Skills and Concepts for Bioinformatics"
- [6] " Phage Discovery I"                               
- [7] " Phage Discovery II"                              
- [8] " Special Topics in Bioinformatics"                
- [9] " Independent Study"                               
-[10] " Special Topics in Bioinformatics"                
-[11] " Molecular Biology Through Discovery"             
-[12] " Introduction to Bioinformatics"                  
-[13] " Effective Communication in the Sciences"         
-[14] " Introduction to Mathematical Biology"            
-[15] " Special Topics in Bioinformatics"                
-[16] " Special Topics in Bioinformatics"                
-[17] " Ethical Issues in Life Sciences"                 
-[18] " Applications in Bioinformatics"                  
-[19] " Computational Methods in Bioinformatics"         
-[20] " Genomic Medicine"                                
-[21] " Special Topics in Bioinformatics"                
-[22] " Independent Study"                               
-[23] " Special Topics in Bioinformatics"                
-[24] " Research and Thesis"                             
-[25] " Introduction to Environmental Studies I"         
-[26] " Introduction to Environmental Studies II"        
-[27] " Physical Geology"                                
-[28] " Earth System Science"                            
-[29] " Electronic Portfolios"                           
-[30] " Outdoor Leadership"                              
-[31] " Paths to Environmental Leadership"               
-[32] " Special Topics in Environmental Studies"         
-[33] " Sustainable Societies: James River Basin"        
-[34] " Introduction to Meteorology"                     
-[35] " Introduction to Oceanography"                    
-[36] " Politics of the Environment"                     
-[37] " Energy and the Environment"                      
-[38] " Cartography"                                     
-[39] " Environmental Pollution"                         
-[40] " Environmental Management"                        
-[41] " Environmental Geology"                           
-[42] " Data Literacy"                                   
-[43] " Water"                                           
-[44] " Outdoor Programming and Event Management"        
-[45] " Outdoor Team Building and Group Facilitation"    
-[46] " Nature Writing"                                  
-[47] " Applications of Conservation Science"            
-[48] " Special Topics in Environmental Studies"         
-[49] " Meteorology and Climatology"                     
-[50] " Oceanography"                                    
-[51] " Environmental Data Visualization"                
-[52] " Invasive Species Management"                     
-[53] " Wilderness First Responder"                      
-[54] " Wilderness Policy and Practice"                  
-[55] " Research Seminar in Environmental Studies"       
-[56] " Topics in Environmental Studies"                 
-[57] " Independent Study"                               
-[58] " Environmental Studies Internship"                
-[59] " Environmental Studies Capstone Experience"       
-[60] " Physical Geology Laboratory"                     
-[61] " Environmental Geology Laboratory"                
-[62] " Meteorology and Climatology Laboratory"          
-[63] " Academic and Career Options in Life Sciences"    
-[64] " Special Topics in Integrative Life Sciences"     
-[65] " Integrative Life Sciences Research"              
-[66] " Community Solutions: Multiple Perspectives"      
-[67] " Special Topics in Integrative Life Sciences"     
-[68] " Faith and Life Sciences"                         
-[69] " Special Topics in Integrative Life Sciences"     </code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>title <span class="ot">&lt;-</span> raw[,<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_split</span>( title, <span class="st">" "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_split</span>( title, <span class="st">" "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
 [1] ""             "Introduction" "to"           "Scientific"   "Computing"   
@@ -915,7 +598,7 @@ Caused by warning:
 [1] ""            "Special"     "Topics"      "in"          "Integrative"
 [6] "Life"        "Sciences"   </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_split</span>( title, <span class="st">" "</span>, <span class="at">simplify=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_split</span>( title, <span class="st">" "</span>, <span class="at">simplify=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      [,1] [,2]            [,3]            [,4]             [,5]            
  [1,] ""   "Introduction"  "to"            "Scientific"     "Computing"     
@@ -1058,108 +741,24 @@ Caused by warning:
 [68,] ""           ""               ""        
 [69,] "Life"       "Sciences"       ""        </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.vector</span>( <span class="fu">str_split</span>( title, <span class="st">" "</span>, <span class="at">simplify=</span><span class="cn">TRUE</span>) ) <span class="ot">-&gt;</span> words</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>words <span class="ot">&lt;-</span> words[ <span class="fu">str_length</span>(words) <span class="sc">&gt;</span> <span class="dv">0</span> ]</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>words <span class="ot">&lt;-</span> <span class="fu">sort</span>( words )</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>words</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  [1] "Academic"       "Ancestry"       "and"            "and"           
-  [5] "and"            "and"            "and"            "and"           
-  [9] "and"            "and"            "and"            "and"           
- [13] "and"            "Applications"   "Applications"   "Basin"         
- [17] "Bioinformatics" "Bioinformatics" "Bioinformatics" "Bioinformatics"
- [21] "Bioinformatics" "Bioinformatics" "Bioinformatics" "Bioinformatics"
- [25] "Bioinformatics" "Bioinformatics" "Bioinformatics" "Bioinformatics"
- [29] "Biology"        "Biology"        "Building"       "Capstone"      
- [33] "Career"         "Cartography"    "Climatology"    "Climatology"   
- [37] "Communication"  "Community"      "Computational"  "Computing"     
- [41] "Computing"      "Concepts"       "Conservation"   "Data"          
- [45] "Data"           "Discovery"      "Discovery"      "Discovery"     
- [49] "Disease"        "Earth"          "Effective"      "Electronic"    
- [53] "Energy"         "Environment"    "Environment"    "Environmental" 
- [57] "Environmental"  "Environmental"  "Environmental"  "Environmental" 
- [61] "Environmental"  "Environmental"  "Environmental"  "Environmental" 
- [65] "Environmental"  "Environmental"  "Environmental"  "Environmental" 
- [69] "Environmental"  "Ethical"        "Event"          "Experience"    
- [73] "Facilitation"   "Faith"          "First"          "for"           
- [77] "Genomic"        "Geology"        "Geology"        "Geology"       
- [81] "Geology"        "Group"          "Human"          "I"             
- [85] "I"              "II"             "II"             "in"            
- [89] "in"             "in"             "in"             "in"            
- [93] "in"             "in"             "in"             "in"            
- [97] "in"             "in"             "in"             "in"            
-[101] "in"             "in"             "in"             "in"            
-[105] "in"             "in"             "in"             "Independent"   
-[109] "Independent"    "Independent"    "Integrative"    "Integrative"   
-[113] "Integrative"    "Integrative"    "Internship"     "Introduction"  
-[117] "Introduction"   "Introduction"   "Introduction"   "Introduction"  
-[121] "Introduction"   "Introduction"   "Invasive"       "Issues"        
-[125] "James"          "Laboratory"     "Laboratory"     "Laboratory"    
-[129] "Leadership"     "Leadership"     "Life"           "Life"          
-[133] "Life"           "Life"           "Life"           "Life"          
-[137] "Life"           "Literacy"       "Management"     "Management"    
-[141] "Management"     "Mathematical"   "Medicine"       "Meteorology"   
-[145] "Meteorology"    "Meteorology"    "Methods"        "Molecular"     
-[149] "Multiple"       "Nature"         "Oceanography"   "Oceanography"  
-[153] "of"             "of"             "Options"        "Outdoor"       
-[157] "Outdoor"        "Outdoor"        "Paths"          "Perspectives"  
-[161] "Phage"          "Phage"          "Physical"       "Physical"      
-[165] "Policy"         "Politics"       "Pollution"      "Portfolios"    
-[169] "Practice"       "Programming"    "Research"       "Research"      
-[173] "Research"       "Responder"      "River"          "Science"       
-[177] "Science"        "Sciences"       "Sciences"       "Sciences"      
-[181] "Sciences"       "Sciences"       "Sciences"       "Sciences"      
-[185] "Sciences"       "Scientific"     "Seminar"        "Skills"        
-[189] "Societies:"     "Solutions:"     "Special"        "Special"       
-[193] "Special"        "Special"        "Special"        "Special"       
-[197] "Special"        "Special"        "Special"        "Special"       
-[201] "Special"        "Special"        "Special"        "Species"       
-[205] "Studies"        "Studies"        "Studies"        "Studies"       
-[209] "Studies"        "Studies"        "Studies"        "Studies"       
-[213] "Study"          "Study"          "Study"          "Sustainable"   
-[217] "System"         "Team"           "the"            "the"           
-[221] "the"            "Thesis"         "Through"        "to"            
-[225] "to"             "to"             "to"             "to"            
-[229] "to"             "to"             "to"             "Topics"        
-[233] "Topics"         "Topics"         "Topics"         "Topics"        
-[237] "Topics"         "Topics"         "Topics"         "Topics"        
-[241] "Topics"         "Topics"         "Topics"         "Topics"        
-[245] "Topics"         "Visualization"  "Water"          "Wilderness"    
-[249] "Wilderness"     "Writing"       </code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.vector</span>( <span class="fu">str_split</span>( title, <span class="st">" "</span>, <span class="at">simplify=</span><span class="cn">TRUE</span>) ) <span class="ot">-&gt;</span> words</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>words <span class="ot">&lt;-</span> words[ <span class="fu">str_length</span>(words) <span class="sc">&gt;</span> <span class="dv">0</span> ]</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>words <span class="ot">&lt;-</span> <span class="fu">sort</span>( words )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>( words, <span class="at">count =</span> <span class="dv">1</span> ) <span class="sc">|&gt;</span> </span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">word =</span> <span class="fu">factor</span>( words ) ) <span class="sc">|&gt;</span> </span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>( word ) <span class="sc">|&gt;</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>( <span class="at">freq =</span> <span class="fu">sum</span>( count )) <span class="sc">|&gt;</span> </span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>( <span class="sc">-</span>freq ) <span class="ot">-&gt;</span> tdm </span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>tdm </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 100 × 2
-   word            freq
-   &lt;fct&gt;          &lt;dbl&gt;
- 1 in                20
- 2 Environmental     14
- 3 Topics            14
- 4 Special           13
- 5 Bioinformatics    12
- 6 and               11
- 7 Sciences           8
- 8 Studies            8
- 9 to                 8
-10 Introduction       7
-# ℹ 90 more rows</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>( words, <span class="at">count =</span> <span class="dv">1</span> ) <span class="sc">|&gt;</span> </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">word =</span> <span class="fu">factor</span>( words ) ) <span class="sc">|&gt;</span> </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>( word ) <span class="sc">|&gt;</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>( <span class="at">freq =</span> <span class="fu">sum</span>( count )) <span class="sc">|&gt;</span> </span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>( <span class="sc">-</span>freq ) <span class="ot">-&gt;</span> tdm </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wordcloud2</span>(<span class="at">data =</span> tdm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wordcloud2</span>(<span class="at">data =</span> tdm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="wordcloud2 html-widget html-fill-item" id="htmlwidget-f5ce8f89993dc5470d53" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-f5ce8f89993dc5470d53">{"x":{"word":["in","Environmental","Topics","Special","Bioinformatics","and","Sciences","Studies","to","Introduction","Life","Geology","Integrative","Discovery","Independent","Laboratory","Management","Meteorology","Outdoor","Research","Study","the","Applications","Biology","Climatology","Computing","Data","Environment","I","II","Leadership","Oceanography","of","Phage","Physical","Science","Wilderness","Academic","Ancestry","Basin","Building","Capstone","Career","Cartography","Communication","Community","Computational","Concepts","Conservation","Disease","Earth","Effective","Electronic","Energy","Ethical","Event","Experience","Facilitation","Faith","First","for","Genomic","Group","Human","Internship","Invasive","Issues","James","Literacy","Mathematical","Medicine","Methods","Molecular","Multiple","Nature","Options","Paths","Perspectives","Policy","Politics","Pollution","Portfolios","Practice","Programming","Responder","River","Scientific","Seminar","Skills","Societies:","Solutions:","Species","Sustainable","System","Team","Thesis","Through","Visualization","Water","Writing"],"freq":[20,14,14,13,12,11,8,8,8,7,7,4,4,3,3,3,3,3,3,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":0,"weightFactor":9,"backgroundColor":"white","gridSize":0,"minRotation":-0.7853981633974483,"maxRotation":0.7853981633974483,"shuffle":true,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":{"render":[{"code":"function(el,x){\n                        console.log(123);\n                        if(!iii){\n                          window.location.reload();\n                          iii = False;\n\n                        }\n  }","data":null}]}}</script>
+<div class="wordcloud2 html-widget html-fill-item" id="htmlwidget-daa4bb6527f5bce758ca" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-daa4bb6527f5bce758ca">{"x":{"word":["in","Environmental","Topics","Special","Bioinformatics","and","Sciences","Studies","to","Introduction","Life","Geology","Integrative","Discovery","Independent","Laboratory","Management","Meteorology","Outdoor","Research","Study","the","Applications","Biology","Climatology","Computing","Data","Environment","I","II","Leadership","Oceanography","of","Phage","Physical","Science","Wilderness","Academic","Ancestry","Basin","Building","Capstone","Career","Cartography","Communication","Community","Computational","Concepts","Conservation","Disease","Earth","Effective","Electronic","Energy","Ethical","Event","Experience","Facilitation","Faith","First","for","Genomic","Group","Human","Internship","Invasive","Issues","James","Literacy","Mathematical","Medicine","Methods","Molecular","Multiple","Nature","Options","Paths","Perspectives","Policy","Politics","Pollution","Portfolios","Practice","Programming","Responder","River","Scientific","Seminar","Skills","Societies:","Solutions:","Species","Sustainable","System","Team","Thesis","Through","Visualization","Water","Writing"],"freq":[20,14,14,13,12,11,8,8,8,7,7,4,4,3,3,3,3,3,3,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":0,"weightFactor":9,"backgroundColor":"white","gridSize":0,"minRotation":-0.7853981633974483,"maxRotation":0.7853981633974483,"shuffle":true,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":{"render":[{"code":"function(el,x){\n                        console.log(123);\n                        if(!iii){\n                          window.location.reload();\n                          iii = False;\n\n                        }\n  }","data":null}]}}</script>
 </div>
 </div>
 </section>

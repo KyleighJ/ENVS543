@@ -31,7 +31,6 @@ lfsc[ idx ]
 pattern <- "^[A-Z]{4} [0-9]{3}.+[0-9] Hour[s]?\\.$"
 grepl( pattern, lfsc ) -> idx
 titles <- lfsc[ idx ]
-titles
 ```
 
 ```{r}
@@ -48,7 +47,6 @@ data.frame( course = raw[,1],
   mutate( number = as.numeric( str_split( course, " ", simplify = TRUE)[,2]) ) |>
   select( program, number, title, hours ) -> df
 
-df
 ```
 
 ```{r}
@@ -59,8 +57,6 @@ df %>%
   filter( level %in% c( 100, 200, 300, 400 ) ) %>%  
   group_by( program, level ) %>%                   
   summarise( course_count = n(), .groups = 'drop' ) -> df_sum
-
-df_sum
 
 
 ```
@@ -87,7 +83,6 @@ library(wordcloud2)
 
 idx <- grepl( pattern, lfsc )
 lfsc[idx] -> titles
-titles
 
 ```
 
@@ -101,12 +96,10 @@ program <- str_split( raw[,1], pattern=" ", simplify=TRUE)[,1]
 
 code <- str_split( raw[,1], pattern=" ", simplify=TRUE)[,2]
 code <- as.numeric( code )
-code 
 ```
 
 ```{r}
 title <- raw[,2]
-title
 ```
 
 ```{r}
@@ -118,7 +111,6 @@ as.vector( str_split( title, " ", simplify=TRUE) ) -> words
 words <- words[ str_length(words) > 0 ]
 
 words <- sort( words )
-words
 
 ```
 
@@ -129,7 +121,6 @@ data.frame( words, count = 1 ) |>
   summarize( freq = sum( count )) |> 
   arrange( -freq ) -> tdm 
 
-tdm 
 ```
 
 ```{r}
