@@ -25,7 +25,7 @@ getRiceData <- function(){
     mutate( Rain_cm = Rain_in * 2.54) |>
     select( Date, Month, Day, Weekday, 
             H2O_TempC, ODO_sat, Depth_m, Turbidity_ntu, PH, Salinity_ppt,
-            AirTempC, Rain_cm, WindSpeed_kph, WindDir ) -> RICE
+            AirTempC, Rain_cm, WindSpeed_kph, WindDir, RelHumidity, BP_HG ) -> RICE
 
   return(RICE)
 }

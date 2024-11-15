@@ -1,0 +1,125 @@
+---
+title: "Correlation Homework"
+author: "Kyleigh Johnson"
+date: 11/14/24
+format: html
+editor: visual
+---
+
+*This is my completion of the correlation homework using Rice Rivers Center water quality data.*
+
+## Look up the library GGally; it has a function named ggpairs(). Use that function to plot the atmospheric data from the Rice Rivers Center for the samples collected from 10 February to 15 February.
+
+```{r}
+source( "getRiceData.R" )
+rice <- getRiceData()
+
+library( GGally )
+
+```
+
+```{r}
+rice |>
+  filter( Month == "February",
+          Day >= 10, 
+          Day <= 15)  |>
+  reframe( AirTempC, WindSpeed_kph, WindDir, RelHumidity, BP_HG )  -> df
+
+ggpairs( df )
+
+```
+
+## For those atmospheric data, which pair of variables has the strongest correlation? What is the 95% confidence interval on that correlation coefficient?
+
+Barometric Pressure and Air Temperature seem to have the strongest (negative) correlation with a r number of -0.712.
+
+```{r}
+
+cor_test_result <- cor.test( rice$AirTempC, rice$BP_HG )
+
+cor_test_result
+```
+
+The 95% confidence interval is -0.5495821 and -0.5186443.
+
+## Using the first 40 observations in air temperature and barometric pressure from the Rice Center data set, determine if they are individually distributed as normal random variables.
+
+**Barometric Pressure**
+
+```{r}
+qqnorm( rice$BP_HG[1:40] )
+qqline( rice$BP_HG[1:40], col="red")
+```
+
+```{r}
+shapiro.test( rice$BP_HG[1:40] )
+```
+
+This data does not appear to be normal (we reject the null hypothesis).
+
+**Air Temperature**
+
+```{r}
+qqnorm( rice$AirTempC[1:40] )
+qqline( rice$AirTempC[1:40], col="red")
+```
+
+```{r}
+shapiro.test( rice$AirTempC[1:40] )
+```
+
+This data appears to be normal (we fail to reject the null hypothesis).
+
+## Given your findings in the last question, what kind of correlation statistic would be most appropriate for estimating the correlation between this subset of data?
+
+Since one of the correlations is non-normal, I would think to use the Spearman's Rho coefficient.
+
+```{r}
+cor.test( rice$AirTempC, rice$BP_HG, 
+                            method = "spearman" )
+```
+
+
+
+## Look at a qqnorm() plot of the barometric pressure data you used in the previous example. Is there something that "looks" odd with these data? Explain why those data are the way they are.
+
+This plot appears to be staggered, giving it a stair-like appearance, rather than a more "normal" straight line. This is probably because environmental data is unpredictable and is constantly fluctuating.
+
+
+## Using a permutation approach, define the distribution of correlation values between the variables in #3, assuming that the NULL hypothesis is true. Plot these as a histogram and include the observed correlation.
+
+```{r}
+cor.test( rice$AirTempC[1:40], rice$BP_HG[1:40], 
+                            method = "spearman" )
+```
+
+
+```{r}
+df <- data.frame( Estimate = factor( c( "Original",
+                                        rep("Permuted", 999))), 
+                  rho =  c( cor.test( rice$AirTempC[1:40], rice$BP_HG[1:40] )$estimate,
+                            rep(NA, 999)) )
+
+summary( df )
+```
+
+```{r}
+for( i in 2:1000) {
+  yhat <- sample( rice$BP_HG,
+                  size = length(rice$BP_HG[1:40]), 
+                  replace = FALSE)
+  model <- cor.test( rice$AirTempC[1:40], yhat )
+  df$rho[i] <- model$estimate 
+}
+```
+
+```{r}
+ggplot( df ) + 
+  geom_histogram( aes(rho, fill=Estimate ) )+
+  labs( title = "Permutation Distribution",
+        x = "Spearman",
+        y = "Frequency")
+```
+
+The original value is smaller than most of the permuted values.
+
