@@ -8,7 +8,7 @@ editor: visual
 
 *This is my completion of the correlation homework using Rice Rivers Center water quality data.*
 
-## Look up the library GGally; it has a function named ggpairs(). Use that function to plot the atmospheric data from the Rice Rivers Center for the samples collected from 10 February to 15 February.
+## Look up the library GGall1y; it has a function named ggpairs(). Use that function to plot the atmospheric data from the Rice Rivers Center for the samples collected from 10 February to 15 February.
 
 ```{r}
 source( "getRiceData.R" )
