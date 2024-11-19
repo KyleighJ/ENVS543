@@ -79,12 +79,9 @@ cor.test( rice$AirTempC, rice$BP_HG,
                             method = "spearman" )
 ```
 
-
-
 ## Look at a qqnorm() plot of the barometric pressure data you used in the previous example. Is there something that "looks" odd with these data? Explain why those data are the way they are.
 
-This plot appears to be staggered, giving it a stair-like appearance, rather than a more "normal" straight line. This is probably because environmental data is unpredictable and is constantly fluctuating.
-
+This plot appears to be staggered, giving it a stair-like appearance, rather than a more "normal" straight line. This is probably because of limitations of the instruments used and environmental data is unpredictable.
 
 ## Using a permutation approach, define the distribution of correlation values between the variables in #3, assuming that the NULL hypothesis is true. Plot these as a histogram and include the observed correlation.
 
@@ -92,7 +89,6 @@ This plot appears to be staggered, giving it a stair-like appearance, rather tha
 cor.test( rice$AirTempC[1:40], rice$BP_HG[1:40], 
                             method = "spearman" )
 ```
-
 
 ```{r}
 df <- data.frame( Estimate = factor( c( "Original",
@@ -122,4 +118,3 @@ ggplot( df ) +
 ```
 
 The original value is smaller than most of the permuted values.
-
