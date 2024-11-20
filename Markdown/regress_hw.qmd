@@ -69,75 +69,142 @@ What features of this data set may impact the departure delay for flights coming
 
 `Departure Delay` and `Departure Time`
 ```{r}
-model <- lm( formula = `Departure Delay` ~ `Departure Time`, data = df)
+model1 <- lm( formula = `Departure Delay` ~ `Departure Time`, data = df)
 
-c( `Regression R^2` = summary( model )$r.squared,
+c( `Regression R^2` = summary( model1 )$r.squared,
    `Squared Correlation` = as.numeric( cor.test( df$`Departure Delay`, df$`Departure Time` )$estimate^2 ) )
 
 ```
+```{r}
+aic_value <- AIC( model1 )
+
+cat( "AIC Value: ", aic_value )
+
+```
+
 `Departure Delay` and `temp`
 ```{r}
-model <- lm( formula = `Departure Delay` ~ temp, data = df)
+model2 <- lm( formula = `Departure Delay` ~ temp, data = df)
 
-c( `Regression R^2` = summary( model )$r.squared,
+c( `Regression R^2` = summary( model2 )$r.squared,
    `Squared Correlation` = as.numeric( cor.test( df$`Departure Delay`, df$temp )$estimate^2 ) )
 ```
+```{r}
+aic_value <- AIC( model2 )
+
+cat( "AIC Value: ", aic_value )
+```
+
 `Departure Delay` and `dewp`
 ```{r}
-model <- lm( formula = `Departure Delay` ~ dewp, data = df)
+model3 <- lm( formula = `Departure Delay` ~ dewp, data = df)
 
-c( `Regression R^2` = summary( model )$r.squared,
+c( `Regression R^2` = summary( model3 )$r.squared,
    `Squared Correlation` = as.numeric( cor.test( df$`Departure Delay`, df$dewp )$estimate^2 ) )
 ```
+
+```{r}
+aic_value <- AIC( model3 )
+
+cat("AIC Value: ", aic_value )
+```
+
 `Departure Delay` and `humid`
 ```{r}
-model <- lm( formula = `Departure Delay` ~ humid, data = df)
+model4 <- lm( formula = `Departure Delay` ~ humid, data = df)
 
-c( `Regression R^2` = summary( model )$r.squared,
+c( `Regression R^2` = summary( model4 )$r.squared,
    `Squared Correlation` = as.numeric( cor.test( df$`Departure Delay`, df$humid )$estimate^2 ) )
 ```
+```{r}
+aic_value <- AIC( model4 )
+
+cat( "AIC Value: ", aic_value )
+```
+
 `Departure Delay` and `wind_dir`
 ```{r}
-model <- lm( formula = `Departure Delay` ~ wind_dir, data = df)
+model5 <- lm( formula = `Departure Delay` ~ wind_dir, data = df)
 
-c( `Regression R^2` = summary( model )$r.squared,
+c( `Regression R^2` = summary( model5 )$r.squared,
    `Squared Correlation` = as.numeric( cor.test( df$`Departure Delay`, df$wind_dir )$estimate^2 ) )
 ```
+```{r}
+aic_value <- AIC( model5 )
+
+cat( "AIC Value: ", aic_value )
+```
+
 `Departure Delay` and `wind_speed`
 ```{r}
-model <- lm( formula = `Departure Delay` ~ wind_speed, data = df)
+model6 <- lm( formula = `Departure Delay` ~ wind_speed, data = df)
 
-c( `Regression R^2` = summary( model )$r.squared,
+c( `Regression R^2` = summary( model6 )$r.squared,
    `Squared Correlation` = as.numeric( cor.test( df$`Departure Delay`, df$wind_speed )$estimate^2 ) )
 ```
+```{r}
+aic_value <- AIC( model6 )
+
+cat( "AIC Value: ", aic_value )
+```
+
 `Departure Delay` and `wind_gust`
 ```{r}
-model <- lm( formula = `Departure Delay` ~ wind_gust, data = df)
+model7 <- lm( formula = `Departure Delay` ~ wind_gust, data = df)
 
-c( `Regression R^2` = summary( model )$r.squared,
+c( `Regression R^2` = summary( model7 )$r.squared,
    `Squared Correlation` = as.numeric( cor.test( df$`Departure Delay`, df$wind_gust )$estimate^2 ) )
 ```
+```{r}
+aic_value <- AIC( model7 )
+
+cat( "AIC Value: ", aic_value )
+```
+
 `Departure Delay` and `precip`
 ```{r}
-model <- lm( formula = `Departure Delay` ~ precip, data = df)
+model8 <- lm( formula = `Departure Delay` ~ precip, data = df)
 
-c( `Regression R^2` = summary( model )$r.squared,
+c( `Regression R^2` = summary( model8 )$r.squared,
    `Squared Correlation` = as.numeric( cor.test( df$`Departure Delay`, df$precip )$estimate^2 ) )
 ```
+```{r}
+aic_value <- AIC( model8 )
+
+cat( "AIC Value: ", aic_value )
+```
+
 `Departure Delay` and `pressure`
 ```{r}
-model <- lm( formula = `Departure Delay` ~ pressure, data = df)
+model9 <- lm( formula = `Departure Delay` ~ pressure, data = df)
 
-c( `Regression R^2` = summary( model )$r.squared,
+c( `Regression R^2` = summary( model9 )$r.squared,
    `Squared Correlation` = as.numeric( cor.test( df$`Departure Delay`, df$pressure )$estimate^2 ) )
 ```
+```{r}
+aic_value <- AIC( model9 )
+
+cat( "AIC Value: ", aic_value )
+```
+
 `Departure Delay` and `visib`
 ```{r}
-model <- lm( formula = `Departure Delay` ~ visib, data = df)
+model10 <- lm( formula = `Departure Delay` ~ visib, data = df)
 
-c( `Regression R^2` = summary( model )$r.squared,
+c( `Regression R^2` = summary( model10 )$r.squared,
    `Squared Correlation` = as.numeric( cor.test( df$`Departure Delay`, df$visib )$estimate^2 ) )
 ```
+```{r}
+aic_value <- AIC( model10 )
+
+cat( "AIC Value: ", aic_value )
+```
+
+
+According to the AIC values, `wind_gust` is by far the best predictor with an AIC value of 2670.604. This is followed by `pressure` which has an AIC value of 13008.06.
+
+
+If you were to look only at R2 and Squared Correlation Values:
 
 `Departure Time` followed by `visib` (visibility) seem to be the greatest predictors of `Departure Delay`.
 

@@ -290,114 +290,196 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>What features of this data set may impact the departure delay for flights coming out of JFK on <em>ExpressJet</em> Airlines?</p>
 <p><code>Departure Delay</code> and <code>Departure Time</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>( <span class="at">formula =</span> <span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span> <span class="sc">~</span> <span class="st">`</span><span class="at">Departure Time</span><span class="st">`</span>, <span class="at">data =</span> df)</span>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>( <span class="at">formula =</span> <span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span> <span class="sc">~</span> <span class="st">`</span><span class="at">Departure Time</span><span class="st">`</span>, <span class="at">data =</span> df)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>( <span class="st">`</span><span class="at">Regression R^2</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">summary</span>( model )<span class="sc">$</span>r.squared,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>( <span class="st">`</span><span class="at">Regression R^2</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">summary</span>( model1 )<span class="sc">$</span>r.squared,</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>   <span class="st">`</span><span class="at">Squared Correlation</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>( <span class="fu">cor.test</span>( df<span class="sc">$</span><span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span>, df<span class="sc">$</span><span class="st">`</span><span class="at">Departure Time</span><span class="st">`</span> )<span class="sc">$</span>estimate<span class="sc">^</span><span class="dv">2</span> ) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     Regression R^2 Squared Correlation 
          0.03404234          0.03404234 </code></pre>
 </div>
 </div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>aic_value <span class="ot">&lt;-</span> <span class="fu">AIC</span>( model1 )</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>( <span class="st">"AIC Value: "</span>, aic_value )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>AIC Value:  14389.66</code></pre>
+</div>
+</div>
 <p><code>Departure Delay</code> and <code>temp</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>( <span class="at">formula =</span> <span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span> <span class="sc">~</span> temp, <span class="at">data =</span> df)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>( <span class="st">`</span><span class="at">Regression R^2</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">summary</span>( model )<span class="sc">$</span>r.squared,</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>   <span class="st">`</span><span class="at">Squared Correlation</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>( <span class="fu">cor.test</span>( df<span class="sc">$</span><span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span>, df<span class="sc">$</span>temp )<span class="sc">$</span>estimate<span class="sc">^</span><span class="dv">2</span> ) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>( <span class="at">formula =</span> <span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span> <span class="sc">~</span> temp, <span class="at">data =</span> df)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>( <span class="st">`</span><span class="at">Regression R^2</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">summary</span>( model2 )<span class="sc">$</span>r.squared,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>   <span class="st">`</span><span class="at">Squared Correlation</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>( <span class="fu">cor.test</span>( df<span class="sc">$</span><span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span>, df<span class="sc">$</span>temp )<span class="sc">$</span>estimate<span class="sc">^</span><span class="dv">2</span> ) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     Regression R^2 Squared Correlation 
         0.000510548         0.000510548 </code></pre>
 </div>
 </div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>aic_value <span class="ot">&lt;-</span> <span class="fu">AIC</span>( model2 )</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>( <span class="st">"AIC Value: "</span>, aic_value )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>AIC Value:  14434.87</code></pre>
+</div>
+</div>
 <p><code>Departure Delay</code> and <code>dewp</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>( <span class="at">formula =</span> <span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span> <span class="sc">~</span> dewp, <span class="at">data =</span> df)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>( <span class="st">`</span><span class="at">Regression R^2</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">summary</span>( model )<span class="sc">$</span>r.squared,</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>   <span class="st">`</span><span class="at">Squared Correlation</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>( <span class="fu">cor.test</span>( df<span class="sc">$</span><span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span>, df<span class="sc">$</span>dewp )<span class="sc">$</span>estimate<span class="sc">^</span><span class="dv">2</span> ) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>( <span class="at">formula =</span> <span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span> <span class="sc">~</span> dewp, <span class="at">data =</span> df)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>( <span class="st">`</span><span class="at">Regression R^2</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">summary</span>( model3 )<span class="sc">$</span>r.squared,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>   <span class="st">`</span><span class="at">Squared Correlation</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>( <span class="fu">cor.test</span>( df<span class="sc">$</span><span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span>, df<span class="sc">$</span>dewp )<span class="sc">$</span>estimate<span class="sc">^</span><span class="dv">2</span> ) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     Regression R^2 Squared Correlation 
         0.005598665         0.005598665 </code></pre>
 </div>
 </div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>aic_value <span class="ot">&lt;-</span> <span class="fu">AIC</span>( model3 )</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"AIC Value: "</span>, aic_value )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>AIC Value:  14428.11</code></pre>
+</div>
+</div>
 <p><code>Departure Delay</code> and <code>humid</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>( <span class="at">formula =</span> <span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span> <span class="sc">~</span> humid, <span class="at">data =</span> df)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>( <span class="st">`</span><span class="at">Regression R^2</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">summary</span>( model )<span class="sc">$</span>r.squared,</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>   <span class="st">`</span><span class="at">Squared Correlation</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>( <span class="fu">cor.test</span>( df<span class="sc">$</span><span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span>, df<span class="sc">$</span>humid )<span class="sc">$</span>estimate<span class="sc">^</span><span class="dv">2</span> ) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>model4 <span class="ot">&lt;-</span> <span class="fu">lm</span>( <span class="at">formula =</span> <span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span> <span class="sc">~</span> humid, <span class="at">data =</span> df)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>( <span class="st">`</span><span class="at">Regression R^2</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">summary</span>( model4 )<span class="sc">$</span>r.squared,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>   <span class="st">`</span><span class="at">Squared Correlation</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>( <span class="fu">cor.test</span>( df<span class="sc">$</span><span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span>, df<span class="sc">$</span>humid )<span class="sc">$</span>estimate<span class="sc">^</span><span class="dv">2</span> ) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     Regression R^2 Squared Correlation 
          0.01878053          0.01878053 </code></pre>
 </div>
 </div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>aic_value <span class="ot">&lt;-</span> <span class="fu">AIC</span>( model4 )</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>( <span class="st">"AIC Value: "</span>, aic_value )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>AIC Value:  14410.43</code></pre>
+</div>
+</div>
 <p><code>Departure Delay</code> and <code>wind_dir</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>( <span class="at">formula =</span> <span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span> <span class="sc">~</span> wind_dir, <span class="at">data =</span> df)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>( <span class="st">`</span><span class="at">Regression R^2</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">summary</span>( model )<span class="sc">$</span>r.squared,</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>   <span class="st">`</span><span class="at">Squared Correlation</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>( <span class="fu">cor.test</span>( df<span class="sc">$</span><span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span>, df<span class="sc">$</span>wind_dir )<span class="sc">$</span>estimate<span class="sc">^</span><span class="dv">2</span> ) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>model5 <span class="ot">&lt;-</span> <span class="fu">lm</span>( <span class="at">formula =</span> <span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span> <span class="sc">~</span> wind_dir, <span class="at">data =</span> df)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>( <span class="st">`</span><span class="at">Regression R^2</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">summary</span>( model5 )<span class="sc">$</span>r.squared,</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>   <span class="st">`</span><span class="at">Squared Correlation</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>( <span class="fu">cor.test</span>( df<span class="sc">$</span><span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span>, df<span class="sc">$</span>wind_dir )<span class="sc">$</span>estimate<span class="sc">^</span><span class="dv">2</span> ) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     Regression R^2 Squared Correlation 
         0.006157862         0.006157862 </code></pre>
 </div>
 </div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>aic_value <span class="ot">&lt;-</span> <span class="fu">AIC</span>( model5 )</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>( <span class="st">"AIC Value: "</span>, aic_value )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>AIC Value:  14302.17</code></pre>
+</div>
+</div>
 <p><code>Departure Delay</code> and <code>wind_speed</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>( <span class="at">formula =</span> <span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span> <span class="sc">~</span> wind_speed, <span class="at">data =</span> df)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>( <span class="st">`</span><span class="at">Regression R^2</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">summary</span>( model )<span class="sc">$</span>r.squared,</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>   <span class="st">`</span><span class="at">Squared Correlation</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>( <span class="fu">cor.test</span>( df<span class="sc">$</span><span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span>, df<span class="sc">$</span>wind_speed )<span class="sc">$</span>estimate<span class="sc">^</span><span class="dv">2</span> ) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>model6 <span class="ot">&lt;-</span> <span class="fu">lm</span>( <span class="at">formula =</span> <span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span> <span class="sc">~</span> wind_speed, <span class="at">data =</span> df)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>( <span class="st">`</span><span class="at">Regression R^2</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">summary</span>( model6 )<span class="sc">$</span>r.squared,</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>   <span class="st">`</span><span class="at">Squared Correlation</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>( <span class="fu">cor.test</span>( df<span class="sc">$</span><span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span>, df<span class="sc">$</span>wind_speed )<span class="sc">$</span>estimate<span class="sc">^</span><span class="dv">2</span> ) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     Regression R^2 Squared Correlation 
         0.004520256         0.004520256 </code></pre>
 </div>
 </div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>aic_value <span class="ot">&lt;-</span> <span class="fu">AIC</span>( model6 )</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>( <span class="st">"AIC Value: "</span>, aic_value )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>AIC Value:  14409.34</code></pre>
+</div>
+</div>
 <p><code>Departure Delay</code> and <code>wind_gust</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>( <span class="at">formula =</span> <span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span> <span class="sc">~</span> wind_gust, <span class="at">data =</span> df)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>( <span class="st">`</span><span class="at">Regression R^2</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">summary</span>( model )<span class="sc">$</span>r.squared,</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>   <span class="st">`</span><span class="at">Squared Correlation</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>( <span class="fu">cor.test</span>( df<span class="sc">$</span><span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span>, df<span class="sc">$</span>wind_gust )<span class="sc">$</span>estimate<span class="sc">^</span><span class="dv">2</span> ) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>model7 <span class="ot">&lt;-</span> <span class="fu">lm</span>( <span class="at">formula =</span> <span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span> <span class="sc">~</span> wind_gust, <span class="at">data =</span> df)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>( <span class="st">`</span><span class="at">Regression R^2</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">summary</span>( model7 )<span class="sc">$</span>r.squared,</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>   <span class="st">`</span><span class="at">Squared Correlation</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>( <span class="fu">cor.test</span>( df<span class="sc">$</span><span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span>, df<span class="sc">$</span>wind_gust )<span class="sc">$</span>estimate<span class="sc">^</span><span class="dv">2</span> ) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     Regression R^2 Squared Correlation 
         0.001530262         0.001530262 </code></pre>
 </div>
 </div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>aic_value <span class="ot">&lt;-</span> <span class="fu">AIC</span>( model7 )</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>( <span class="st">"AIC Value: "</span>, aic_value )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>AIC Value:  2670.604</code></pre>
+</div>
+</div>
 <p><code>Departure Delay</code> and <code>precip</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>( <span class="at">formula =</span> <span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span> <span class="sc">~</span> precip, <span class="at">data =</span> df)</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>( <span class="st">`</span><span class="at">Regression R^2</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">summary</span>( model )<span class="sc">$</span>r.squared,</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>   <span class="st">`</span><span class="at">Squared Correlation</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>( <span class="fu">cor.test</span>( df<span class="sc">$</span><span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span>, df<span class="sc">$</span>precip )<span class="sc">$</span>estimate<span class="sc">^</span><span class="dv">2</span> ) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>model8 <span class="ot">&lt;-</span> <span class="fu">lm</span>( <span class="at">formula =</span> <span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span> <span class="sc">~</span> precip, <span class="at">data =</span> df)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>( <span class="st">`</span><span class="at">Regression R^2</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">summary</span>( model8 )<span class="sc">$</span>r.squared,</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>   <span class="st">`</span><span class="at">Squared Correlation</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>( <span class="fu">cor.test</span>( df<span class="sc">$</span><span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span>, df<span class="sc">$</span>precip )<span class="sc">$</span>estimate<span class="sc">^</span><span class="dv">2</span> ) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     Regression R^2 Squared Correlation 
          0.01242931          0.01242931 </code></pre>
 </div>
 </div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>aic_value <span class="ot">&lt;-</span> <span class="fu">AIC</span>( model8 )</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>( <span class="st">"AIC Value: "</span>, aic_value )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>AIC Value:  14418.98</code></pre>
+</div>
+</div>
 <p><code>Departure Delay</code> and <code>pressure</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>( <span class="at">formula =</span> <span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span> <span class="sc">~</span> pressure, <span class="at">data =</span> df)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>( <span class="st">`</span><span class="at">Regression R^2</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">summary</span>( model )<span class="sc">$</span>r.squared,</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>   <span class="st">`</span><span class="at">Squared Correlation</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>( <span class="fu">cor.test</span>( df<span class="sc">$</span><span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span>, df<span class="sc">$</span>pressure )<span class="sc">$</span>estimate<span class="sc">^</span><span class="dv">2</span> ) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>model9 <span class="ot">&lt;-</span> <span class="fu">lm</span>( <span class="at">formula =</span> <span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span> <span class="sc">~</span> pressure, <span class="at">data =</span> df)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>( <span class="st">`</span><span class="at">Regression R^2</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">summary</span>( model9 )<span class="sc">$</span>r.squared,</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>   <span class="st">`</span><span class="at">Squared Correlation</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>( <span class="fu">cor.test</span>( df<span class="sc">$</span><span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span>, df<span class="sc">$</span>pressure )<span class="sc">$</span>estimate<span class="sc">^</span><span class="dv">2</span> ) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     Regression R^2 Squared Correlation 
         0.008040984         0.008040984 </code></pre>
 </div>
 </div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>aic_value <span class="ot">&lt;-</span> <span class="fu">AIC</span>( model9 )</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>( <span class="st">"AIC Value: "</span>, aic_value )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>AIC Value:  13008.06</code></pre>
+</div>
+</div>
 <p><code>Departure Delay</code> and <code>visib</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>( <span class="at">formula =</span> <span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span> <span class="sc">~</span> visib, <span class="at">data =</span> df)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>( <span class="st">`</span><span class="at">Regression R^2</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">summary</span>( model )<span class="sc">$</span>r.squared,</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>   <span class="st">`</span><span class="at">Squared Correlation</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>( <span class="fu">cor.test</span>( df<span class="sc">$</span><span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span>, df<span class="sc">$</span>visib )<span class="sc">$</span>estimate<span class="sc">^</span><span class="dv">2</span> ) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>model10 <span class="ot">&lt;-</span> <span class="fu">lm</span>( <span class="at">formula =</span> <span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span> <span class="sc">~</span> visib, <span class="at">data =</span> df)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>( <span class="st">`</span><span class="at">Regression R^2</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">summary</span>( model10 )<span class="sc">$</span>r.squared,</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>   <span class="st">`</span><span class="at">Squared Correlation</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>( <span class="fu">cor.test</span>( df<span class="sc">$</span><span class="st">`</span><span class="at">Departure Delay</span><span class="st">`</span>, df<span class="sc">$</span>visib )<span class="sc">$</span>estimate<span class="sc">^</span><span class="dv">2</span> ) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     Regression R^2 Squared Correlation 
          0.02657483          0.02657483 </code></pre>
 </div>
 </div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>aic_value <span class="ot">&lt;-</span> <span class="fu">AIC</span>( model10 )</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>( <span class="st">"AIC Value: "</span>, aic_value )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>AIC Value:  14399.86</code></pre>
+</div>
+</div>
+<p>According to the AIC values, <code>wind_gust</code> is by far the best predictor with an AIC value of 2670.604. This is followed by <code>pressure</code> which has an AIC value of 13008.06.</p>
+<p>If you were to look only at R2 and Squared Correlation Values:</p>
 <p><code>Departure Time</code> followed by <code>visib</code> (visibility) seem to be the greatest predictors of <code>Departure Delay</code>.</p>
 <p><code>Departure Time</code> has the highest R squared value indicating that about 3.4% of the variability in <code>Departure Delay</code> can be explained by <code>Departure Time</code> and <code>visib</code> indicates about 2.7%.</p>
 <p>Since the R squared and Squared Correlation values are the same for all variables this means that there is a confirmed linear relationship.</p>
