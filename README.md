@@ -20,3 +20,4 @@ Documents in Repository:
  - [Raster Homework](https://kyleighj.github.io/ENVS543/Markdown/rasterhw.html)
  - [Text Data Homework](https://kyleighj.github.io/ENVS543/Markdown/TextHW.html)
  - [Correlation Homework](https://kyleighj.github.io/ENVS543/Markdown/corrhw.html)
+ - [Regression Homework](https://kyleighj.github.io/ENVS543/Markdown/regress_hw.html)
