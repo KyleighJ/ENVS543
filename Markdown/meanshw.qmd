@@ -1,0 +1,211 @@
+---
+title: "Analysis of Means Homework"
+author: "Kyleigh Johnson"
+date: 11/21/24
+format: html
+editor: visual
+---
+
+*This is my completion of the analysis of means homework*
+
+Here is some new data to play with a bit to explore one-way and two-way analysis of variance models. These data represent weight data associated with three different diet types. There are 76 observations of individuals with the following characteristics:
+
+-   Gender (0/1)
+-   Age (earth years. 🤓)
+-   Height (cm)
+-   Pre.weight & weight6weeks (kg)
+-   Diet (1,2,3)
+
+The data are located as a CSV file named `DietData.csv` linked from the Canvas page. Load the data in and format things so they look correctly to you.
+
+```{r}
+dietdata <- read.csv( "DietData.csv" )
+
+```
+
+## Exploratory Data Analysis
+
+One of the first things to do is to look at the data and see if there are any obvious things. Go ahead and explore these data visually. What do you see?
+
+```{r}
+hist( dietdata$pre.weight,
+     xlab = "PreWeight",
+     main = "Distribution of PreWeight" )
+
+```
+
+```{r}
+hist( dietdata$Age,
+     xlab = "Height",
+     main = "Distribution of Age" )
+
+```
+
+```{r}
+hist( dietdata$weight6weeks,
+     xlab = "Weight At 6 Weeks",
+     main = "Distribution of Weight At 6 Weeks" )
+```
+
+**All data looks mostly normal with `Age` looking the most normal.**
+
+## Estimating Mean Values
+
+Make a table of Weight Loss by gender and diet.
+
+```{r}
+library( tidyverse )
+library( knitr )
+library( kableExtra )
+
+
+
+dietdata <- dietdata|>
+  mutate( WeightLoss = pre.weight - weight6weeks ) |>
+  group_by( Diet ) |>
+  select ( WeightLoss, gender, Diet)
+
+head( dietdata )
+```
+
+## 1-Way Analysis of Variance
+
+*Diet Issues:*
+
+The underlying linear model.
+
+$$
+y_{ij} = \mu + \tau_{Diet, i} + \epsilon_j
+$$
+
+Test the null hypothesis, $H_O:$ *There is no effect of diet on weight loss* (e.g., $\tau_{Diet-1} = \tau_{Diet-2} = \tau_{Diet-3} = 0.0$). Is there evidence for one diet producing more weight loss than the others? Create an `aov` analysis and assign it to the variable `fit.diet` and examine its contents.
+
+```{r}
+dietdata$Diet <- as.factor( dietdata$Diet )
+```
+
+```{r}
+fit.diet <- aov( WeightLoss ~ Diet, data = dietdata )
+
+anova( fit.diet )
+```
+
+**Here we would reject the null hypothesis because the p value of 0.006596 is less than the implied alpha value of 0.05.**
+
+Are they all significantly different? Try the `TukeyHSD()` Interpret the results.
+
+```{r}
+tukey <- TukeyHSD( fit.diet )
+tukey
+```
+**2-1 is not significant.**
+**3-1 is significant.**
+**3-2 is significant.**
+
+How much of the variation is explained? If you notice when you do a summary from a `lm()` (regression) model, it gives you the $R^2$ values directly (remember $R^2 = \frac{SS_{model}}{SS_{Error}}$). Does `summary()` of your `aov` model give you that?
+
+```{r}
+lm( dietdata )
+```
+**8.7% by gender and 94% by diet.**
+
+```{r}
+summary( fit.diet )
+```
+
+Since I asked the question, the answer is probably no. Why does it not do this? Probably for historical reasons, which are a bit of a pain in the backside. That being said, there are some `tidy` ways to fix this issue. I'm going to use the `broom` package which allows us to clean up (or tidy if you will) the model objects. This will take the model object and pull out *all* the ANOVA table stuff and put it into a `tibble`.
+
+```{r}
+library( broom ) 
+tidy_diet <- tidy( fit.diet )
+tidy_diet
+```
+
+Now, since it is all easily accessible, we can calculate the $R^2$ from the new model output.
+
+```{r}
+# Estimate the variance explained from the raw sums of squares
+r2_Diet <- tidy_diet$sumsq[1] / sum( tidy_diet$sumsq )
+r2_Diet 
+```
+
+*Gender:*
+
+The underlying linear model.
+
+$y_{ij} = \mu + \tau_{gender, i} + \epsilon_j$
+
+Independent of the diet, test the null hypothesis $H_O:$ *There is no difference in weight loss between genders* (e.g., \$\tau*{gender-0} =* \tau{gender-2} = 0.0 \$). Is there evidence for one gender being significantly different than another? How much of the variation is explained (another $R^2$ by gender)?
+
+```{r}
+dietdata$gender <- as.factor(dietdata$gender)
+
+fit.gen <- aov(WeightLoss ~ gender, data = dietdata)
+
+anova(fit.gen)
+```
+
+How do you interpret these results thus far?
+
+**Since the p-value is 0.8348, `gender` does not seem to significantly affect `WeightLoss`.**
+
+# Do genders respond differently to diets?
+
+$y_{ijk} = \mu + \tau_{Diet,i} + \tau_{gender,j} + \epsilon_k$
+
+So here we do something a bit different. We want to simultaneously ask the following questions:
+
+-   Do diets influence weight loss?
+-   Do genders influence weight loss?
+-   Is there an interaction where different genders respond differently to different diets?
+
+In $R$, this is done as:
+
+**(reusing code from above example)**
+
+```{r}
+tidy_diet <- tidy( fit.diet )
+tidy_diet
+```
+
+```{r}
+r2Diet <- tidy_diet$sumsq[1] / sum( tidy_diet$sumsq )
+r2Diet
+```
+
+```{r}
+tidy_gen <- tidy( fit.gen )
+tidy_gen
+```
+
+```{r}
+r2_gen <- tidy_gen$sumsq[1] / sum( tidy_gen$sumsq )
+r2_gen
+```
+
+```{r}
+fit.int <- aov( WeightLoss ~ Diet * gender, data = dietdata )
+
+anova_table <- anova( fit.int )
+
+tidy_int <- tidy( fit.int )
+tidy_int
+```
+
+What is the $R^2$ for this model?
+
+```{r}
+
+int <- anova_table["Diet:gender", "Sum Sq"]
+tot <- sum(anova_table[["Sum Sq"]])
+
+r2_int <- int / tot
+
+r2_int
+```
+
+# Which Model is Best?
+
+How would you compare the models you generated? How do you interpret the findings?
+
+**The `diet` model explains about 13% of the variation (as discussed after class today). The `gender` model explains about .6% of the variation, which is significantly less than `diet`. When the two variables interact, they explain about 7% of the variation. This shows that while `gender` may not affect much alone, when combined with `diet` it has an effect on the variation.**
