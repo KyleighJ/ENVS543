@@ -22,3 +22,4 @@ Documents in Repository:
  - [Correlation Homework](https://kyleighj.github.io/ENVS543/Markdown/corrhw.html)
  - [Regression Homework](https://kyleighj.github.io/ENVS543/Markdown/regress_hw.html)
  - [Analysis of Means Homework](https://kyleighj.github.io/ENVS543/Markdown/meanshw.html)
+ - [NonParametric Homework](https://kyleighj.github.io/ENVS543/Markdown/nonparhw.html)

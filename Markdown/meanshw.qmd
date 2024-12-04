@@ -98,15 +98,15 @@ Are they all significantly different? Try the `TukeyHSD()` Interpret the results
 tukey <- TukeyHSD( fit.diet )
 tukey
 ```
-**2-1 is not significant.**
-**3-1 is significant.**
-**3-2 is significant.**
+
+**2-1 is not significant.** **3-1 is significant.** **3-2 is significant.**
 
 How much of the variation is explained? If you notice when you do a summary from a `lm()` (regression) model, it gives you the $R^2$ values directly (remember $R^2 = \frac{SS_{model}}{SS_{Error}}$). Does `summary()` of your `aov` model give you that?
 
 ```{r}
 lm( dietdata )
 ```
+
 **8.7% by gender and 94% by diet.**
 
 ```{r}
@@ -135,7 +135,7 @@ The underlying linear model.
 
 $y_{ij} = \mu + \tau_{gender, i} + \epsilon_j$
 
-Independent of the diet, test the null hypothesis $H_O:$ *There is no difference in weight loss between genders* (e.g., \$\tau*{gender-0} =* \tau{gender-2} = 0.0 \$). Is there evidence for one gender being significantly different than another? How much of the variation is explained (another $R^2$ by gender)?
+Independent of the diet, test the null hypothesis $H_O:$ *There is no difference in weight loss between genders* (e.g., \$\tau*{gender-0} =\* \tau{gender-2} = 0.0 \$). Is there evidence for one gender being significantly different than another? How much of the variation is explained (another $R^2$ by gender)?
 
 ```{r}
 dietdata$gender <- as.factor(dietdata$gender)
