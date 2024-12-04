@@ -299,7 +299,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 34         D    81</code></pre>
 </div>
 </div>
-<p><strong>Question 1</strong> The FDA has suggested a change in a medication that has been shown to have detrimental side effects in half of the patients. A clinical trial was conducted with nineteen patients; only three reported side effects. Did the change make a significant difference?</p>
+<section id="question-1" class="level1">
+<h1><strong>Question 1</strong></h1>
+<p>The FDA has suggested a change in a medication that has been shown to have detrimental side effects in half of the patients. A clinical trial was conducted with nineteen patients; only three reported side effects. Did the change make a significant difference?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">19</span></span>
@@ -321,8 +323,10 @@ probability of success
              0.1578947 </code></pre>
 </div>
 </div>
-<p>Here the p value is statistically significant and we reject the null hypothesis. This verifies that the alteration in the medication had an effect on the outcome.</p>
-<p><strong>Question 2</strong></p>
+<p><strong>Here I used a binomial test because we know the expected success and we want to test proportions of success. The p value is statistically significant and we reject the null hypothesis. This verifies that the alteration in the medication had an effect on the outcome.</strong></p>
+</section>
+<section id="question-2" class="level1">
+<h1><strong>Question 2</strong></h1>
 <p>Two different environmental remediation treatments are evaluated for the impacts on turbidity (measured using the Nephelometric Turbidity Unit or NTU). For regulatory reasons, turbidity is binned into four groups based on NTU: 0-15 ntu, 16-22 ntu, 23-30 ntu, and 31+ ntu. Do both treatments have the same impact on turbidity? Explain.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ntudata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>( <span class="st">"ntu_data.csv"</span> )</span>
@@ -346,8 +350,10 @@ data:  contingtable
 X-squared = 17.286, df = 3, p-value = 0.0006172</code></pre>
 </div>
 </div>
-<p>Here we would reject the null hypothesis. There is strong evidence that the two treatments do not have the same impact on the distribution of the turbidity.</p>
-<p><strong>Question 3</strong></p>
+<p><strong>Here we used a chi-squared test because we are looking at two categorical treatment groups. We would reject the null hypothesis. There is strong evidence that the two treatments do not have the same impact on the distribution of the turbidity.</strong></p>
+</section>
+<section id="question-3" class="level1">
+<h1><strong>Question 3</strong></h1>
 <p>A dozen graduate students tried to determine if there was a relationship between their undergraduate GPA and their scores on the Graduate Records Examination. Look at these data and determine the extent to which they are related. Explain.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>graddata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>( <span class="st">"grad_school.csv"</span> )</span>
@@ -367,6 +373,10 @@ sample estimates:
 0.5845215 </code></pre>
 </div>
 </div>
+<p><strong>Here a spearman’s rank correlation was conducted to determine the relationship between GRE and GPA scores. We use this test because it does not assume normality and conducts a ranked based analysis. Since the rho value is about 0.58, and the p-value is about 0.046, this indicates a positive relationship of about 5% and we reject the null. This would suggest that higher GPAs yield higher GRE scores.</strong></p>
+</section>
+<section id="question-4" class="level1">
+<h1>Question 4</h1>
 <p>You are looking at fruit yield on dogwood. You designed an experiment with four different treatments and measured the total yield in germinated seeds. Are there differences in yield? Explain.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>fruitdata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>( <span class="st">"DogwoodSeeds.csv"</span> )</span>
@@ -382,6 +392,19 @@ data:  Seeds by Treatment
 Kruskal-Wallis chi-squared = 25.629, df = 3, p-value = 1.141e-05</code></pre>
 </div>
 </div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Seeds <span class="sc">~</span> Treatment, <span class="at">data =</span> fruitdata, <span class="at">main =</span> <span class="st">"Seed Yield by Treatment"</span>,</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"Treatment"</span>, <span class="at">ylab =</span> <span class="st">"Seed Yield"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="nonparhw_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Here a Kruskal-Wallis rank sum test was performed because you are comparing the means of groups. The chi-squared value indicates a 25.629 degree of difference with 3 degrees of freedom. The p-value is 1.141e-05 which means we reject the null and that there are significant differences between the seed yields across different treatments. The boxplot helps to visualize this.</strong></p>
+</section>
 
 </main>
 <!-- /main column -->

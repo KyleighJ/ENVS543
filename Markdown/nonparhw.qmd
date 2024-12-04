@@ -5,16 +5,19 @@ date: 12/3/24
 format: html
 editor: visual
 ---
-*This is my completion of the nonparametric and counting statistics homework.*
 
+*This is my completion of the nonparametric and counting statistics homework.*
 
 ```{r}
 read.csv( "ntu_data.csv" )
 read.csv( "grad_school.csv" )
 read.csv( "DogwoodSeeds.csv" )
 ```
-**Question 1**
-The FDA has suggested a change in a medication that has been shown to have detrimental side effects in half of the patients.  A clinical trial was conducted with nineteen patients; only three reported side effects.  Did the change make a significant difference?  
+
+# **Question 1** 
+
+The FDA has suggested a change in a medication that has been shown to have detrimental side effects in half of the patients. A clinical trial was conducted with nineteen patients; only three reported side effects. Did the change make a significant difference?
+
 ```{r}
 x <- 3
 n <- 19
@@ -23,11 +26,13 @@ binom.test( x, n, p = 0.5,
             alternative = c( "two.sided" ),
             conf.level = 0.95)
 ```
-Here the p value is statistically significant and we reject the null hypothesis. This verifies that the alteration in the medication had an effect on the outcome.
 
-**Question 2**
+**Here I used a binomial test because we know the expected success and we want to test proportions of success. The p value is statistically significant and we reject the null hypothesis. This verifies that the alteration in the medication had an effect on the outcome.**
 
-Two different environmental remediation treatments are evaluated for the impacts on turbidity (measured using the Nephelometric Turbidity Unit or NTU).  For regulatory reasons, turbidity is binned into four groups based on NTU: 0-15 ntu, 16-22 ntu, 23-30 ntu, and 31+ ntu.  Do both treatments have the same impact on turbidity?  Explain.
+# **Question 2**
+
+Two different environmental remediation treatments are evaluated for the impacts on turbidity (measured using the Nephelometric Turbidity Unit or NTU). For regulatory reasons, turbidity is binned into four groups based on NTU: 0-15 ntu, 16-22 ntu, 23-30 ntu, and 31+ ntu. Do both treatments have the same impact on turbidity? Explain.
+
 ```{r}
 ntudata <- read.csv( "ntu_data.csv" )
 
@@ -41,11 +46,13 @@ contingtable <- table( ntudata$Treatment, ntudata$bin )
 chisq.test( contingtable )
 
 ```
-Here we would reject the null hypothesis. There is strong evidence that the two treatments do not have the same impact on the distribution of the turbidity.
 
-**Question 3**
+**Here we used a chi-squared test because we are looking at two categorical treatment groups. We would reject the null hypothesis. There is strong evidence that the two treatments do not have the same impact on the distribution of the turbidity.**
 
-A dozen graduate students tried to determine if there was a relationship between their undergraduate GPA and their scores on the Graduate Records Examination.  Look at these data and determine the extent to which they are related.  Explain.
+# **Question 3**
+
+A dozen graduate students tried to determine if there was a relationship between their undergraduate GPA and their scores on the Graduate Records Examination. Look at these data and determine the extent to which they are related. Explain.
+
 ```{r}
 graddata <- read.csv( "grad_school.csv" )
 
@@ -54,8 +61,12 @@ spearman_cor <- cor.test( graddata$GPA, graddata$GRE, method = "spearman", exact
 print( spearman_cor )
 ```
 
+**Here a spearman's rank correlation was conducted to determine the relationship between GRE and GPA scores. We use this test because it does not assume normality and conducts a ranked based analysis. Since the rho value is about 0.58, and the p-value is about 0.046, this indicates a positive relationship of about 5% and we reject the null. This would suggest that higher GPAs yield higher GRE scores.**
 
-You are looking at fruit yield on dogwood.  You designed an experiment with four different treatments and measured the total yield in germinated seeds.  Are there differences in yield?  Explain.
+# Question 4
+
+You are looking at fruit yield on dogwood. You designed an experiment with four different treatments and measured the total yield in germinated seeds. Are there differences in yield? Explain.
+
 ```{r}
 
 fruitdata <- read.csv( "DogwoodSeeds.csv" )
@@ -66,18 +77,10 @@ print( ktest )
 
 ```
 
+```{r}
+boxplot(Seeds ~ Treatment, data = fruitdata, main = "Seed Yield by Treatment",
+        xlab = "Treatment", ylab = "Seed Yield")
 
+```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+**Here a Kruskal-Wallis rank sum test was performed because you are comparing the means of groups. The chi-squared value indicates a 25.629 degree of difference with 3 degrees of freedom. The p-value is 1.141e-05 which means we reject the null and that there are significant differences between the seed yields across different treatments. The boxplot helps to visualize this.**
