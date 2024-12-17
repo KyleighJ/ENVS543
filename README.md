@@ -23,3 +23,4 @@ Documents in Repository:
  - [Regression Homework](https://kyleighj.github.io/ENVS543/Markdown/regress_hw.html)
  - [Analysis of Means Homework](https://kyleighj.github.io/ENVS543/Markdown/meanshw.html)
  - [NonParametric Homework](https://kyleighj.github.io/ENVS543/Markdown/nonparhw.html)
+ - [Final]((https://kyleighj.github.io/ENVS543/Markdown/finalexam.html))
