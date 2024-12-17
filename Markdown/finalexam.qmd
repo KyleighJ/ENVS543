@@ -1,0 +1,330 @@
+---
+title: "The Extent of the Impact of Changing Climate on Sonora Desert Dark Beetle Sex Ratio Across Locations"
+author: "Kyleigh Johnson"
+format:
+  html:
+    echo: false
+    warning: false
+    message: false
+    error: false
+editor: visual
+date: 12/16/24
+---
+## Abstract
+Sonora Desert dark beetles (*Araptus attenuatus*) live inside of the plant Euphoria *lomelli*. This is my completion of the ENVS 543 Final Exam assignment examining the sex ratios of these beetles across locations.
+
+
+## Methods
+*Study Area and Data Collection*
+
+For this project, I used data from sampled beetle populations collected from various sites across the studied area. The sample locations were recorded using longitude and latitude. For each sample, the sex of the beetles (male or female) was recorded as well as two traits (Phenotype A and Phenotype B).
+
+*Sex Ratio Analysis*
+
+To determine if the beetle populations at different sites had different sex ratios I first calculated the sex ratio for each site by summarizing the number of males and females. The formula for this is:
+Sex Ratio = # of Males/# of Females
+Sites with no females were marked as NA.
+I then performed a chi-squared test for each site to assess whether the sex ratio deviated from the expected 1:1 ratio. Sites with a p-value less than 0.05 were considered significantly different.
+
+*Habitat Suitability and Sex Ratio*
+
+I then investigated whether there was a relationship between sex ratio and habitat suitability. Habitat suitability was extracted from the raster file `suitability_now.tif`. The raster had a resolution of 1.0 square kilometers and each sampling location was matched to a suitability value using spatial coordinates. I then merged the two data points into one column and sorted it by site. This resulted in a dataset for exploring potential correlations.
+
+*Phenotypic Data*
+
+In addition, phenotypic data was aggregated to calculate the mean values of both Phenotype A and Phenotype B. These averages were combined with the previous data to examine functional relationships.
+
+*Statistical Modeling*
+
+I used a linear model to assess the relationship between habitat suitability and sex ratio. The first model included only habitat and suitability while the second model included the phenotypic means. Both models were evaluated based on R-squared values and Akaike Information Criterion.
+
+*Past vs Present*
+
+I then investigated changes in habitat suitability over time using values from the Last Glacial Maximum (LGM). The LGM values were extracted from the `suitability_lgm.asc` raster file which represented data from 20,000 years ago.
+The change in suitability between the two time periods was calculated by subtracting the LGM suitability value from the current suitability value. Then, I performed a paired t-test to assess differences.
+
+*Prediction Model*
+
+I then applied a model used for current habitat suitability to LGM suitability to predict the historic sex ratio at each sampling location.
+
+*Visualization*
+
+I then created a map plot using `ggplot2` to display the predicted values.
+
+## Results
+
+```{r}
+library( forcats )
+library( tidyverse )
+library( dplyr )
+library( kableExtra )
+library( knitr )
+```
+
+
+```{r}
+read.csv( "Arapat_Samples.csv" ) -> sexdf
+```
+
+```{r}
+#| message: false
+#| warning: false 
+#| 
+sex_ratios <- sexdf %>%
+  group_by( Site ) %>%
+  summarize(
+    male_count = sum( Sex == "Male", na.rm = TRUE ),
+    female_count = sum( Sex == "Female", na.rm = TRUE ),
+    sex_ratio = ifelse( female_count > 0, male_count / female_count, NA)
+  )
+
+MFRatioCol <- sexdf %>%
+  left_join( sex_ratios %>% dplyr::select( Site, sex_ratio ), by = "Site" )
+
+```
+
+These results indicate that there is variation in sex ratios among the sampled sites, with some sites exhibiting male-biased ratios (e.g., Site 18 with a ratio of 2.23), while others have female-biased ratios (e.g., Site 14 with a ratio of 0.667). The differences in sex ratios suggest that sex distribution in these populations may be influenced by factors such as habitat suitability, environmental conditions, or other ecological variables.
+
+```{r}
+condtable <- sex_ratios %>%
+  dplyr::select( Site, sex_ratio ) %>%
+  arrange( Site )
+
+kable( condtable )|>
+  kable_paper()
+```
+*Table 1*
+
+Here, the significance column shows whether the results of the chi-squared test were significant or not. Significance indicates that the sex ratio for that site deviated from the 1:1 equal proportion of males to females.
+
+```{r}
+chisq <- sex_ratios %>%
+  rowwise() %>%
+  mutate(
+    chi_sq_test = list(
+      chisq.test( c( male_count, female_count ), p = c( 0.5, 0.5 ) )
+    ),
+    p_value = chi_sq_test$p.value,
+    significant = p_value < 0.05
+  ) %>%
+  dplyr::select( Site, male_count, female_count, sex_ratio, p_value, significant )
+
+
+kable( chisq )|>
+  kable_paper()
+
+```
+*Table 2*
+
+```{r}
+library( raster )
+
+raster( "suitability_now.tif" ) -> habitat_raster
+```
+
+A linear regression analysis was performed to examine the relationship between habitat suitability and mean sex ratio across sites. The analysis revealed a statistically significant relationship between habitat suitability and the mean sex ratio with habitat suitability explaining approximately 12% of the variance in the sex ratio (R² = 0.125).
+
+The relationship was negative, indicating that as habitat suitability decreases, the mean sex ratio at the sampling sites tends to decrease. This suggests that habitat suitability may influence the sex ratio in beetle populations.
+
+A scatter plot of habitat suitability against mean sex ratio (Figure 1) shows a clear trend, supporting the findings from the regression analysis.
+
+```{r}
+library(sf)        
+
+sampling_locations <- read.csv( "Arapat_Locations.csv" )
+
+sampling_locations_sf <- st_as_sf( sampling_locations, coords = c( "Longitude", "Latitude" ), crs = 4326)
+
+sampling_locations_sf <- st_transform( sampling_locations_sf, crs = crs( habitat_raster ) )
+
+habitat_values <- raster::extract( habitat_raster, st_coordinates(sampling_locations_sf ) )
+
+sampling_locations$habitat_suitability <- habitat_values
+
+collapsed_sex_ratios <- sex_ratios %>%
+  group_by( Site ) %>%
+  summarize( mean_sex_ratio = mean( sex_ratio, na.rm = TRUE ) )
+
+finaldata <- left_join( sampling_locations, collapsed_sex_ratios, by = "Site" )
+
+kable( finaldata )|>
+  kable_paper()
+
+
+```
+*Table 3*
+
+```{r}
+
+model <- lm( mean_sex_ratio ~ habitat_suitability, data = finaldata )
+
+```
+
+```{r}
+ggplot(finaldata, aes(x = habitat_suitability, y = mean_sex_ratio)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "blue") +
+  labs(title = "Relationship between Habitat Suitability and Mean Sex Ratio",
+       x = "Habitat Suitability", y = "Mean Sex Ratio")
+
+```
+*Figure 1*
+
+
+```{r}
+
+mean_phenotypes <- sexdf %>%
+  group_by( Site ) %>%
+  summarize(
+    mean_phenotype_A = mean( `PhenotypeA`, na.rm = TRUE ),
+    mean_phenotype_B = mean( `PhenotypeB`, na.rm = TRUE )
+  )
+
+finaltable <- finaldata %>%
+  left_join( mean_phenotypes, by = "Site" )
+
+kable( finaltable ) |>
+  kable_paper()
+
+```
+*Table 4*
+
+I then added the phenotypes into this model.
+
+```{r}
+model1 <- lm(mean_sex_ratio ~ habitat_suitability, data = finaltable)
+
+model2 <- lm(mean_sex_ratio ~ habitat_suitability + mean_phenotype_A + mean_phenotype_B, data = finaltable)
+
+comparison_results <- c(
+  `R-squared Model 1` = summary(model1)$r.squared,
+  `R-squared Model 2` = summary(model2)$r.squared,
+  `AIC Model 1` = AIC(model1),
+  `AIC Model 2` = AIC(model2)
+)
+
+kable( comparison_results )|>
+  kable_paper()
+
+```
+*Table 5*
+
+Including Phenotype A and Phenotype B improves the model, which is shown by the increase in the R-squared value, but this improvement is small. The inclusion of these phenotypic variables has a higher AIC, indicating that the more complex model (Model 2) does not provide a significantly better fit compared to the simpler Model 1. Therefore, habitat suitability alone is likely more influential in explaining the variation in sex ratios.
+
+
+```{r}
+library( ggplot2 )
+
+lgm_raster <- raster( "suitability_lgm.asc" )
+current_raster <- raster( "suitability_now.tif" )
+
+sampling_locations <- read.csv( "Arapat_Locations.csv" )
+sampling_locations_sf <- st_as_sf( sampling_locations, coords = c( "Longitude", "Latitude" ), crs = 4326 )
+sampling_locations_sf <- st_transform( sampling_locations_sf, crs = crs( lgm_raster ) )
+
+lgm_values <- raster::extract( lgm_raster, st_coordinates( sampling_locations_sf ) )
+current_values <- raster::extract( current_raster, st_coordinates( sampling_locations_sf ) )
+
+sampling_locations <- sampling_locations %>%
+  mutate(
+    suitability_lgm = lgm_values,
+    suitability_now = current_values,
+    change_in_suitability = suitability_now - suitability_lgm
+  )
+
+summary( sampling_locations$change_in_suitability )
+
+kable( sampling_locations ) |>
+  kable_paper()
+
+
+
+```
+*Table 6*
+
+```{r}
+ggplot( sampling_locations, aes( x = suitability_lgm, y = suitability_now ) ) +
+  geom_point() +
+  geom_abline( slope = 1, intercept = 0, linetype = "dashed", color = "red" ) +
+  labs(
+    title = "Change in Habitat Suitability",
+    x = "Suitability (LGM)",
+    y = "Suitability (Current)"
+  )
+
+t_test_result <- t.test( sampling_locations$suitability_now, sampling_locations$suitability_lgm, paired = TRUE )
+
+```
+*Figure 2*
+
+A paired t test was performed here and the results show a t-value of -1.234, with 29 degrees of freedom and a p-value of 0.2271. Since the p-value is greater than 0.05, we fail to reject the null hypothesis. This indicates that there is no statistically significant difference in habitat suitability between the two time periods (LGM and current).
+
+The mean difference in suitability between the two periods is -0.0276, suggesting a slight decrease in suitability from the LGM to the present. However, the 95% confidence interval for the difference in means ranges from -0.0733 to 0.0181, which includes zero.
+
+In summary, based on the results of the paired t-test, there is no significant change in habitat suitability at the sampled locations between the Last Glacial Maximum and the present.
+
+
+```{r}
+#| message: false
+#| warning: false 
+lgm_raster <- raster( "suitability_lgm.asc" )
+
+sampling_locations <- read.csv( "Arapat_Locations.csv" )
+
+sampling_locations_sf <- st_as_sf(
+  sampling_locations, 
+  coords = c( "Longitude", "Latitude" ), 
+  crs = 4326 
+)
+
+sampling_locations_sf <- st_transform( sampling_locations_sf, crs = crs( lgm_raster ) )
+
+lgm_values <- raster::extract( lgm_raster, st_coordinates( sampling_locations_sf ) )
+
+sampling_locations$habitat_suitability_lgm <- lgm_values
+
+sampling_locations <- sampling_locations %>%
+  filter( !is.na( habitat_suitability_lgm ) )
+
+str( sampling_locations )
+
+sampling_locations_selected <- sampling_locations %>%
+  dplyr::select( Site, habitat_suitability_lgm )
+
+finaltable <- finaltable %>%
+  left_join( sampling_locations, by = "Site" )
+
+model3 <- lm( mean_sex_ratio ~ habitat_suitability_lgm + mean_phenotype_A + mean_phenotype_B, data = finaltable )
+
+predicted_sex_ratio_lgm <- predict( model2, newdata = finaltable, type = "response" )
+
+finaltable$predicted_sex_ratio_lgm <- predicted_sex_ratio_lgm
+
+
+```
+
+```{r}
+#| message: false
+#| warning: false 
+ggplot( finaltable, aes( x = Longitude.x, y = Latitude.x, color = predicted_sex_ratio_lgm ) ) +
+  geom_point() +
+  labs( title = "Predicted Historical Sex Ratio (LGM Habitat Suitability)",
+        x = "Longitude", y = "Latitude", color = "Predicted Sex Ratio" )
+
+```
+*Figure 3*
+
+Variations in sex ratios appear to correlate with spacial distribution. Areas with higher suitability during the LGM tended to have higher predicted sex ratios. If habitat suitability is an indicator of climate, climate conditions may have had a significant role in shaping the distribution of sex ratios.
+
+
+
+
+
+
+
+
+
+
+
+
+
